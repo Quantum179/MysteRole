@@ -18,7 +18,10 @@ public class CameraFollow : MonoBehaviour {
         offset = transform.position - target.position;
         map = GameObject.Find("map0").GetComponent<TiledMap>();
 
+
+
         cameraCurr = GetComponent<Camera>();
+		Debug.Log (cameraCurr.aspect);
 	}
 	
 	// Update is called once per frame
@@ -28,13 +31,13 @@ public class CameraFollow : MonoBehaviour {
 
         Vector3 targetCamPos = target.position + offset;
 
-        if (target.position.x <= map.transform.position.x + cameraCurr.orthographicSize)
+        if (target.position.x <= map.transform.position.x + cameraCurr.orthographicSize * cameraCurr.aspect)
         {
-            targetCamPos.x = map.transform.position.x + cameraCurr.orthographicSize;
+			targetCamPos.x = map.transform.position.x + cameraCurr.orthographicSize * cameraCurr.aspect;
         }
-        if (target.position.x >= map.transform.position.x + 50 - cameraCurr.orthographicSize)
+		if (target.position.x >= map.transform.position.x + map.NumTilesWide - cameraCurr.orthographicSize * cameraCurr.aspect)
         {
-            targetCamPos.x = map.transform.position.x + 50 - cameraCurr.orthographicSize;
+			targetCamPos.x = map.transform.position.x + map.NumTilesWide - cameraCurr.orthographicSize * cameraCurr.aspect;
         }
 
         if (target.position.y >= map.transform.position.y - cameraCurr.orthographicSize)
@@ -42,9 +45,9 @@ public class CameraFollow : MonoBehaviour {
             targetCamPos.y = map.transform.position.y - cameraCurr.orthographicSize;
         }
 
-        if (target.position.y <= map.transform.position.y - 50 + cameraCurr.orthographicSize)
+		if (target.position.y <= map.transform.position.y - map.NumTilesHigh + cameraCurr.orthographicSize)
         {
-            targetCamPos.y = map.transform.position.y - 50 + cameraCurr.orthographicSize;
+			targetCamPos.y = map.transform.position.y - map.NumTilesHigh + cameraCurr.orthographicSize;
         }
 
 

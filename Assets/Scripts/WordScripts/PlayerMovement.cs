@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Tiled2Unity;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -9,12 +10,15 @@ public class PlayerMovement : MonoBehaviour {
     bool canMove = true;
     bool canEvent = false;
     Evenement evenement;
+	private TiledMap map;
+	private CameraFollow cf;
 
 	// Use this for initialization
 	void Start () {
 
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+		cf = GameObject.Find("Main Camera").GetComponent<CameraFollow>();
 	}
 	
 	// Update is called once per frame
@@ -40,7 +44,14 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetBool("isWalking", false);
         }
 
-        rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 5);
+		if (movement_vector.x <= cf.map.transform.position.x ||
+			movement_vector.x >= cf.map.transform.position.x + cf.map.NumTilesWide ||
+			movement_vector.y >= cf.map.transform.position.y ||
+			movement_vector.y <= cf.map.transform.position.y + cf.map.NumTilesHigh) {
+			
+		} else {
+			rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 5);		
+		}
 	}
 
 

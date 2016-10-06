@@ -20,7 +20,11 @@ public class Warp : MonoBehaviour {
 
         Camera.main.transform.position = warpTarget.position;
         System.Threading.Thread.Sleep(250);
+
+		Debug.Log (warpTarget.parent.parent);
         cf.map = warpTarget.parent.parent.GetComponent<TiledMap>();
+
+
         other.gameObject.transform.position = warpTarget.position;
         
         yield return StartCoroutine(sf.FadeToClear());

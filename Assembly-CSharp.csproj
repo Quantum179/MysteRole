@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\Données\Cible.cs" />
      <Compile Include="Assets\Scripts\Données\Competence.cs" />
      <Compile Include="Assets\Scripts\Données\Effet.cs" />
@@ -58,13 +57,14 @@
      <Compile Include="Assets\Scripts\Données\Stats.cs" />
      <Compile Include="Assets\Scripts\Données\Zone.cs" />
      <Compile Include="Assets\Scripts\Données\role.cs" />
-     <Compile Include="Assets\Scripts\Evenement.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
-     <Compile Include="Assets\Scripts\NpcEvent.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\ScreenFader.cs" />
      <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
-     <Compile Include="Assets\Scripts\Warp.cs" />
+     <Compile Include="Assets\Scripts\WordScripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\WordScripts\Evenement.cs" />
+     <Compile Include="Assets\Scripts\WordScripts\NpcEvent.cs" />
+     <Compile Include="Assets\Scripts\WordScripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\WordScripts\ScreenFader.cs" />
+     <Compile Include="Assets\Scripts\WordScripts\Warp.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SpriteDepthInMap.cs" />
