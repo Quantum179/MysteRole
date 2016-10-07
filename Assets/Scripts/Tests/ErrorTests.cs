@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿// Auteur : Jean-Michel
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using Mysterole;
 
 public class ErrorTests : MonoBehaviour {
+    int i = 0;
+    string[] noms = { "Switch01", "Testing" };
 	// Use this for initialization
 	void Start () {
         
@@ -16,18 +19,13 @@ public class ErrorTests : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(300, 50, 100, 25), "Test"))
+        if (GUI.Button(new Rect(300, 50, 100, 25), "Test déclencheurs"))
         {
-            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("unity"))
-            {
-                SceneManager.LoadScene("Test");
-                Erreurs.NouvelleErreur("LOADING NEXT SCENE : Test");
-            }
-            else
-            {
-                SceneManager.LoadScene("unity");
-                Erreurs.NouvelleErreur("LOADING NEXT SCENE : unity");
-            }
+            string message = "Inversion du déclencheur : " + noms[i % 2] + " (" + DonneesJeu.Declencheurs.Inverser(noms[i % 2]).ToString() + ")";
+            Erreurs.NouvelleErreur(message);
+            i++;
+            if (i == 3)
+                i = 0;
         }
     }
 }
