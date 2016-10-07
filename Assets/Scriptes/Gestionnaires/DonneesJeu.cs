@@ -9,7 +9,7 @@ public class DonneesJeu : MonoBehaviour
     private static DonneesJeu moi;
     private bool tested = false;
     private bool addTest = false;
-    public string FirstScene = "unity";
+    public string FirstScene = "JM_test";
     public EquipeJoueur _equipe { get; private set; }
 	// Use this for initialization
 	void Start()
