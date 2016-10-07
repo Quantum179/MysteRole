@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Animations\CurseurAnim\Script\CurseurAnim.cs" />
+     <Compile Include="Assets\Animations\PersonnageAnim\Script\PersonnageMouvement.cs" />
      <Compile Include="Assets\Scripts\Données\Cible.cs" />
      <Compile Include="Assets\Scripts\Données\Competence.cs" />
      <Compile Include="Assets\Scripts\Données\Effet.cs" />
@@ -57,7 +59,11 @@
      <Compile Include="Assets\Scripts\Données\Stats.cs" />
      <Compile Include="Assets\Scripts\Données\Zone.cs" />
      <Compile Include="Assets\Scripts\Données\role.cs" />
+     <Compile Include="Assets\Scripts\GenerateurGrid.cs" />
+     <Compile Include="Assets\Scripts\GestionCases.cs" />
+     <Compile Include="Assets\Scripts\GestionCombat.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
+     <Compile Include="Assets\Scripts\MenuControle.cs" />
      <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
      <Compile Include="Assets\Scripts\WordScripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\WordScripts\Evenement.cs" />
@@ -81,6 +87,7 @@
      <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
      <None Include="Assets\Préfabs\Unités\Unités.txt" />
      <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+     <None Include="Assets\Animations\Effets\Effets.txt" />
      <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
      <None Include="Assets\Pixies\Personnages\Personnages.txt" />
      <None Include="Assets\Images\Images.txt" />
@@ -93,6 +100,7 @@
      <None Include="Assets\Scripts\BD\BD.txt" />
      <None Include="Assets\Préfabs\Objets\Objets.txt" />
      <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\sans-titre.tiled2unity.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
