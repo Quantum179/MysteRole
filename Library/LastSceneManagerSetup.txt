@@ -5,6 +5,3 @@ sceneSetups:
 - path: "Assets/Sc\xE8nes/JM_Test.unity"
   isLoaded: 0
   isActive: 0
-- path: "Assets/Sc\xE8nes/JM_Test2.unity"
-  isLoaded: 0
-  isActive: 0
