@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Tiled2Unity;
+using System.Text;
 
 public class CameraFollow : MonoBehaviour {
 
@@ -16,12 +17,13 @@ public class CameraFollow : MonoBehaviour {
 
         transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
         offset = transform.position - target.position;
-        map = GameObject.Find("map0").GetComponent<TiledMap>();
+
+        string sb = "map" + (int)(target.position.x / 50) + (int)(target.position.y / -50);
+        map = GameObject.Find(sb).GetComponent<TiledMap>();
 
 
 
         cameraCurr = GetComponent<Camera>();
-		Debug.Log (cameraCurr.aspect);
 	}
 	
 	// Update is called once per frame

@@ -44,14 +44,20 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetBool("isWalking", false);
         }
 
-		if (movement_vector.x <= cf.map.transform.position.x ||
-			movement_vector.x >= cf.map.transform.position.x + cf.map.NumTilesWide ||
-			movement_vector.y >= cf.map.transform.position.y ||
-			movement_vector.y <= cf.map.transform.position.y + cf.map.NumTilesHigh) {
-			
-		} else {
-			rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 5);		
-		}
+
+        Debug.Log(cf.map.transform.position.x + 1);
+        Debug.Log(cf.map.transform.position.x + cf.map.NumTilesWide - 1);
+        Debug.Log(cf.map.transform.position.y - 1);
+        Debug.Log(cf.map.transform.position.y + cf.map.NumTilesHigh + 1);
+
+        if (rbody.position.x + movement_vector.x > cf.map.transform.position.x &&
+            rbody.position.x + movement_vector.x < cf.map.transform.position.x + cf.map.NumTilesWide &&
+            rbody.position.y + movement_vector.y < cf.map.transform.position.y &&
+            rbody.position.y + movement_vector.y > cf.map.transform.position.y - cf.map.NumTilesHigh)
+        {
+            rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 15);
+        }
+
 	}
 
 
