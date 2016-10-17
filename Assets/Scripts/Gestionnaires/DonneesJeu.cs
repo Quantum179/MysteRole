@@ -8,9 +8,6 @@ using System;
 public class DonneesJeu : MonoBehaviour
 {
     private static DonneesJeu moi;
-    private bool tested = false;
-    private bool addTest = false;
-    public string FirstScene;
     public EquipeJoueur _equipe { get; private set; }
 	// Use this for initialization
 	void Start()
@@ -19,7 +16,7 @@ public class DonneesJeu : MonoBehaviour
             throw new Exception("Ce système comporte déjà une instance de Donneesjeu.");
         moi = this;
         _equipe = CreerEquipe();
-        SceneManager.LoadScene(FirstScene, LoadSceneMode.Additive);
+        //SceneManager.LoadScene(FirstScene, LoadSceneMode.Additive);
 	}
 	
 	// Update is called once per frame
