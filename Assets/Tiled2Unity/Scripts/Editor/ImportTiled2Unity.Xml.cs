@@ -18,7 +18,7 @@ namespace Tiled2Unity
     // Concentrates on the Xml file being imported
     partial class ImportTiled2Unity
     {
-        public static readonly string ThisVersion = "1.0.7.8";
+        public static readonly string ThisVersion = "1.0.7.7";
 
         // Called when Unity detects the *.tiled2unity.xml file needs to be (re)imported
         public void ImportBegin(string xmlPath)
@@ -86,7 +86,7 @@ namespace Tiled2Unity
                 {
                     // We need to recreate the material every time because the Tiled Map may have changed
                     string materialPath = GetMaterialAssetPath(name);
-                    UnityEngine.Material material = CreateMaterialFromXml(tex);
+                    Material material = CreateMaterialFromXml(tex);
                     ImportUtils.ReadyToWrite(materialPath);
                     ImportUtils.CreateOrReplaceAsset(material, materialPath);
                 }
@@ -102,10 +102,10 @@ namespace Tiled2Unity
                 string materialPath = GetMaterialAssetPath(texAssetPath);
 
                 // Create our material
-                UnityEngine.Material material = CreateMaterialFromXml(tex);
+                Material material = CreateMaterialFromXml(tex);
 
                 // Assign to it the texture that is already internal to our Unity project
-                UnityEngine.Texture2D texture2d = AssetDatabase.LoadAssetAtPath(texAssetPath, typeof(UnityEngine.Texture2D)) as UnityEngine.Texture2D;
+                Texture2D texture2d = AssetDatabase.LoadAssetAtPath(texAssetPath, typeof(Texture2D)) as Texture2D;
                 material.SetTexture("_MainTex", texture2d);
 
                 // Write the material to our asset database
@@ -114,7 +114,7 @@ namespace Tiled2Unity
             }
         }
 
-        private UnityEngine.Material CreateMaterialFromXml(XElement xml)
+        private Material CreateMaterialFromXml(XElement xml)
         {
             // Does this material support alpha color key?
             string htmlColor = ImportUtils.GetAttributeAsString(xml, "alphaColorKey", "");
@@ -151,7 +151,7 @@ namespace Tiled2Unity
                 keyColor = new Color32(r, g, b, 255);
             }
 
-            UnityEngine.Material material = new UnityEngine.Material(UnityEngine.Shader.Find(shaderName));
+            Material material = new Material(Shader.Find(shaderName));
 
             if (keyColor.HasValue)
             {
