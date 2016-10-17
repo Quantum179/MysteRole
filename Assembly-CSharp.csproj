@@ -84,6 +84,7 @@
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
      <None Include="Assets\Tiled2Unity\Imported\map0.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map11.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map12.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map22.tiled2unity.xml" />
@@ -92,6 +93,7 @@
      <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
      <None Include="Assets\Animations\Effets\Effets.txt" />
      <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map32.tiled2unity.xml" />
      <None Include="Assets\Pixies\Personnages\Personnages.txt" />
      <None Include="Assets\Images\Images.txt" />
