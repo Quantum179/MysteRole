@@ -17,6 +17,7 @@ namespace Mysterole
         {
             Main = gameObject;
             tz = textZone;
+            gameObject.SetActive(false);
         }
         static public void NouvelleErreur(string message)
         {
