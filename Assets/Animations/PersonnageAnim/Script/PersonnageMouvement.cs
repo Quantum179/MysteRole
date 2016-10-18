@@ -13,7 +13,6 @@ public class PersonnageMouvement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
-		caseDepart = GameObject.Find ("CombatGrid/Colonne12/case2");
 		caseDepart.GetComponent<GestionCases> ().estOccupee = true;
 		transform.position = caseDepart.transform.position;
 		GetComponent<SpriteRenderer> ().sortingOrder = caseDepart.GetComponent<GestionCases> ().RangeeCalque;

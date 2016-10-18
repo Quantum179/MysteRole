@@ -2,3 +2,9 @@ sceneSetups:
 - path: "Assets/Sc\xE8nes/Init.unity"
   isLoaded: 1
   isActive: 1
+- path: "Assets/Sc\xE8nes/World.unity"
+  isLoaded: 0
+  isActive: 0
+- path: "Assets/Sc\xE8nes/Combat.unity"
+  isLoaded: 1
+  isActive: 0

@@ -6,25 +6,25 @@ using UnityEngine.EventSystems;
 public class GestionCombat : MonoBehaviour {
 
 	public GameObject curseurPrefab;
-	private GameObject personnage;
+	public GameObject Menu;
+	public GameObject personnagePrefab;
+	private GameObject joueur1;
 	private int personnageMove = 2;
-	private GameObject vilain;
 	private GameObject curseur;
 	private GameObject caseActuel;
-	public GameObject Menu;
 	private GameObject EventSystem;
 
 	public void instantierCurseur_Click(GameObject menu){
 		menu.SetActive (false);
-		caseActuel = personnage.GetComponent<PersonnageMouvement> ().caseActuel;
-		curseur = Instantiate(curseurPrefab,personnage.transform.position,Quaternion.identity) as GameObject;
+		caseActuel = joueur1.GetComponent<PersonnageMouvement> ().caseActuel;
+		curseur = Instantiate(curseurPrefab,joueur1.transform.position,Quaternion.identity) as GameObject;
 		curseur.GetComponent<SpriteRenderer> ().sortingOrder = 1;
 		curseur.GetComponent<CurseurAnim>().option = "Mouvement";
 		caseActuel.GetComponent<GestionCases> ().changeeMouvement (personnageMove,true);
 	}
 
 	public void Fuir_Click(){
-		UnityEngine.SceneManagement.SceneManager.LoadScene("Word");
+		GestScene.ProchaineScene ("World");
 	}
 
 	private void bougeCurseur(){
@@ -65,20 +65,17 @@ public class GestionCombat : MonoBehaviour {
 				}
 			}
 			if (Input.GetKeyUp (KeyCode.Space) && curseur.GetComponent<CurseurAnim> ().ClickAccepte) {
-				personnage.GetComponent<PersonnageMouvement> ().caseActuel.GetComponent<GestionCases>().changeeMouvement (personnageMove, false);
-				personnage.GetComponent<PersonnageMouvement> ().caseDestination = caseActuel;
+				joueur1.GetComponent<PersonnageMouvement> ().caseActuel.GetComponent<GestionCases>().changeeMouvement (personnageMove, false);
+				joueur1.GetComponent<PersonnageMouvement> ().caseDestination = caseActuel;
 				Destroy (curseur);
-			}
-			if (Input.GetKeyUp (KeyCode.LeftControl)) {
-				vilain.GetComponent<PersonnageMouvement> ().caseDestination = caseActuel;
 			}
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		personnage = GameObject.Find ("téléchargement_7");
-		vilain = GameObject.Find ("téléchargement_56");
+		joueur1 = Instantiate (personnagePrefab) as GameObject;
+		joueur1.GetComponent<PersonnageMouvement> ().caseDepart = GameObject.Find ("CombatGrid/Colonne2/case3");
 		EventSystem = GameObject.Find ("EventSystem");
 		Cursor.visible = false;
 		Menu.SetActive (false);
