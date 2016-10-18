@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CurseurAnim : MonoBehaviour {
 	private Animator animator;
+	public string option{ get; set; }
 	public bool ClickAccepte{ get; set; }
 	// Use this for initialization
 	void Start () {

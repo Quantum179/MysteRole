@@ -59,12 +59,11 @@
      <Compile Include="Assets\Scripts\Données\Stats.cs" />
      <Compile Include="Assets\Scripts\Données\Zone.cs" />
      <Compile Include="Assets\Scripts\Données\role.cs" />
-     <Compile Include="Assets\Scripts\GenerateurGrid.cs" />
-     <Compile Include="Assets\Scripts\GestionCases.cs" />
-     <Compile Include="Assets\Scripts\GestionCombat.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
-     <Compile Include="Assets\Scripts\MenuControle.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
+     <Compile Include="Assets\Scripts\Interface\GenerateurGrid.cs" />
      <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />
