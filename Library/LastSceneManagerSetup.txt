@@ -1,13 +1,4 @@
 sceneSetups:
-- path: "Assets/Sc\xE8nes/Init.unity"
-  isLoaded: 0
-  isActive: 0
-- path: "Assets/Sc\xE8nes/JM_Test.unity"
-  isLoaded: 0
-  isActive: 0
-- path: "Assets/Sc\xE8nes/Combat.unity"
-  isLoaded: 0
-  isActive: 0
 - path: "Assets/Sc\xE8nes/World.unity"
   isLoaded: 1
   isActive: 1

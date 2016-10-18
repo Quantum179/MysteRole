@@ -73,6 +73,7 @@
      <None Include="Assets\Animations\Effets\Effets.txt" />
      <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map32.tiled2unity.xml" />
      <None Include="Assets\Pixies\Personnages\Personnages.txt" />
      <None Include="Assets\Images\Images.txt" />
