@@ -16,6 +16,7 @@ public class ScreenFader : MonoBehaviour {
     {
         isFading = true;
         anim.SetTrigger("fadeIn");
+        anim.ResetTrigger("fadeOut");
 
         while (isFading)
             yield return null;
@@ -23,12 +24,12 @@ public class ScreenFader : MonoBehaviour {
 
     public IEnumerator FadeToBlack()
     {
-        isFading = false;
+        isFading = true;
         anim.SetTrigger("fadeOut");
+        anim.ResetTrigger("fadeIn");
 
         while (isFading)
             yield return null;
-
     }
 
     void AnimationComplete()

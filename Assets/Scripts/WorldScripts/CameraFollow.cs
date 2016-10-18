@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour {
         offset = transform.position - target.position;
 
         string sb = "map" + (int)(target.position.x / 50) + (int)(target.position.y / -50);
+        Debug.Log(sb);
         map = GameObject.Find(sb).GetComponent<TiledMap>();
         
 
