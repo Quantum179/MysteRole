@@ -30,7 +30,6 @@ public class ScreenFader : MonoBehaviour {
 
         while (isFading)
             yield return null;
-
     }
 
     void AnimationComplete()

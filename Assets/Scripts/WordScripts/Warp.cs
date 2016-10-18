@@ -15,11 +15,12 @@ public class Warp : MonoBehaviour {
     
     IEnumerator OnTriggerEnter2D(Collider2D other)
     {
-        ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
-        yield return StartCoroutine(sf.FadeToBlack());
+        //ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
+        yield return StartCoroutine(GestScene.FadeOut());
 
         Camera.main.transform.position = warpTarget.position;
-        System.Threading.Thread.Sleep(250);
+        //System.Threading.Thread.Sleep(250);
+        yield return new WaitForSeconds(3);
 
 		Debug.Log (warpTarget.parent.parent);
         cf.map = warpTarget.parent.parent.GetComponent<TiledMap>();
@@ -27,7 +28,7 @@ public class Warp : MonoBehaviour {
 
         other.gameObject.transform.position = warpTarget.position;
         
-        yield return StartCoroutine(sf.FadeToClear());
+        yield return StartCoroutine(GestScene.FadeIn());
 
 
     }
