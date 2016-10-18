@@ -58,6 +58,7 @@ public class GestScene : MonoBehaviour
                 SceneManager.LoadScene(scene, LoadSceneMode.Additive);
             }
             SceneActuelle = scene;
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
         }
         else
             return false;
