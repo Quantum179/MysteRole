@@ -44,12 +44,6 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetBool("isWalking", false);
         }
 
-
-        Debug.Log(cf.map.transform.position.x + 1);
-        Debug.Log(cf.map.transform.position.x + cf.map.NumTilesWide - 1);
-        Debug.Log(cf.map.transform.position.y - 1);
-        Debug.Log(cf.map.transform.position.y + cf.map.NumTilesHigh + 1);
-
         if (rbody.position.x + movement_vector.x > cf.map.transform.position.x &&
             rbody.position.x + movement_vector.x < cf.map.transform.position.x + cf.map.NumTilesWide &&
             rbody.position.y + movement_vector.y < cf.map.transform.position.y &&

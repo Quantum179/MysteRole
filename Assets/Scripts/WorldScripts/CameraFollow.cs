@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour {
 
         string sb = "map" + (int)(target.position.x / 50) + (int)(target.position.y / -50);
         map = GameObject.Find(sb).GetComponent<TiledMap>();
-
+        
 
 
         cameraCurr = GetComponent<Camera>();
