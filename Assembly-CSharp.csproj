@@ -51,7 +51,6 @@
      <Compile Include="Assets\Scripts\Données\Competence.cs" />
      <Compile Include="Assets\Scripts\Données\Effet.cs" />
      <Compile Include="Assets\Scripts\Données\Equipe.cs" />
-     <Compile Include="Assets\Scripts\Données\Erreurs.cs" />
      <Compile Include="Assets\Scripts\Données\Etat.cs" />
      <Compile Include="Assets\Scripts\Données\Inventaire.cs" />
      <Compile Include="Assets\Scripts\Données\Objet.cs" />
@@ -63,7 +62,10 @@
      <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
+     <Compile Include="Assets\Scripts\Interface\Debogueur.cs" />
+     <Compile Include="Assets\Scripts\Interface\Erreurs.cs" />
      <Compile Include="Assets\Scripts\Interface\GenerateurGrid.cs" />
+     <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
      <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />

@@ -5,8 +5,7 @@ using System.Collections;
 using Mysterole;
 
 public class ErrorTests : MonoBehaviour {
-    int i = 0;
-    string[] noms = { "Switch01", "Testing" };
+    public GameObject debug;
 	// Use this for initialization
 	void Start () {
         
@@ -19,13 +18,11 @@ public class ErrorTests : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(300, 50, 100, 25), "Test déclencheurs"))
+        if (GUI.Button(new Rect(300, 50, 100, 25), "Débogueur"))
         {
-            string message = "Inversion du déclencheur : " + noms[i % 2] + " (" + DonneesJeu.Declencheurs.Inverser(noms[i % 2]).ToString() + ")";
+            string message = "Changer valeur Déclencheur \"Test1\" : " + DonneesJeu.Declencheurs.EstActif("Test1").ToString();
             Erreurs.NouvelleErreur(message);
-            i++;
-            if (i == 3)
-                i = 0;
+            DonneesJeu.Declencheurs.Inverser("Test1");
         }
     }
 }

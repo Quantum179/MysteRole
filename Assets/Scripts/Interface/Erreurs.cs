@@ -12,6 +12,7 @@ namespace Mysterole
         static GameObject Main;
         public Text textZone;
         static Text tz;
+        static bool change = false;
         
         void Start()
         {
@@ -19,10 +20,19 @@ namespace Mysterole
             tz = textZone;
             gameObject.SetActive(false);
         }
+        void OnGUI()
+        {
+            if (change)
+            {
+                Main.GetComponentInChildren<Scrollbar>().value = 0;
+                change = false;
+            }
+        }
         static public void NouvelleErreur(string message)
         {
             tz.text += message + '\n';
             Main.SetActive(true);
+            change = true;
         }
 
         public void OnClick()
