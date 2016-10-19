@@ -8,7 +8,8 @@ using System;
 public class DonneesJeu : MonoBehaviour
 {
     private static DonneesJeu moi;
-    public EquipeJoueur _equipe { get; private set; }
+    private EquipeJoueur _equipe;
+    public GameObject Debogueur;
 	// Use this for initialization
 	void Start()
     {
@@ -22,6 +23,13 @@ public class DonneesJeu : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+        if (Input.GetKey("left alt"))
+        {
+            if (Input.GetKeyUp("f12"))
+            {
+                Debogueur.SetActive(true);
+            }
+        }
     }
     void OnGUI()
     {
@@ -83,6 +91,16 @@ public class DonneesJeu : MonoBehaviour
             Verifier(nom);
             _declencheurs[nom] = !_declencheurs[nom];
             return _declencheurs[nom];
+        }
+        static public Dictionary<string, bool> RecupererListe()
+        {
+            Dictionary<string, bool> retrun = new Dictionary<string, bool>();
+            Dictionary<string, bool>.Enumerator e = _declencheurs.GetEnumerator();
+            while(e.MoveNext())
+            {
+                retrun.Add(e.Current.Key, e.Current.Value);
+            }
+            return retrun;
         }
     }
 }
