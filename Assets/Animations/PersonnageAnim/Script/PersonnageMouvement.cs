@@ -6,6 +6,7 @@ public class PersonnageMouvement : MonoBehaviour {
 	public GameObject caseActuel{ get; set;}
 	public GameObject caseDepart{ get; set;}
 	public GameObject caseDestination{ get; set;}
+	public string modeleAnimator;
 	private Animator animator;
 	private Vector3 direction = new Vector3(0,0,0);
 	private int speed = 32;
@@ -13,6 +14,7 @@ public class PersonnageMouvement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
+		animator.runtimeAnimatorController = Resources.Load ("Animator/"+modeleAnimator) as RuntimeAnimatorController;
 		caseDepart.GetComponent<GestionCases> ().estOccupee = true;
 		transform.position = caseDepart.transform.position;
 		GetComponent<SpriteRenderer> ().sortingOrder = caseDepart.GetComponent<GestionCases> ().RangeeCalque;
