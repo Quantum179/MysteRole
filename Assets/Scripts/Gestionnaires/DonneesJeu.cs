@@ -8,20 +8,87 @@ using System;
 public class DonneesJeu : MonoBehaviour
 {
     private static DonneesJeu moi;
-    public EquipeJoueur _equipe { get; private set; }
-	// Use this for initialization
-	void Start()
+    private EquipeJoueur _equipe;
+    private Equipe _adversaires;
+    private Dictionary<int, Role> _roles = new Dictionary<int, Role>();
+    private Dictionary<int, Competence> _competences = new Dictionary<int, Competence>();
+    private Dictionary<int, Personnage> _monstres = new Dictionary<int, Personnage>();
+    private Dictionary<int, Equipe> _equipesMonstres = new Dictionary<int, Equipe>();
+    private Dictionary<int, Etat> _etats = new Dictionary<int, Etat>();
+    public GameObject Debogueur;
+    public Equipe Adversaires { get { return _adversaires; } set { _adversaires = value; } }
+    public Dictionary<int, Role> Roles { get { return _roles; } }
+    public Dictionary<int, Competence> Competences { get { return _competences; } }
+    public Dictionary<int, Personnage> Monstres { get { return _monstres; } }
+    public Dictionary<int, Equipe> EquipesMonstre { get { return _equipesMonstres; } }
+    public Dictionary<int, Etat> Etats { get { return _etats; } }
+
+    // Use this for initialization
+    void Start()
     {
         if (moi != null)
             throw new Exception("Ce système comporte déjà une instance de Donneesjeu.");
         moi = this;
         _equipe = CreerEquipe();
+        ChargerDonnees();
         //SceneManager.LoadScene(FirstScene, LoadSceneMode.Additive);
 	}
-	
-	// Update is called once per frame
-	void Update()
+
+    private void ChargerDonnees()
     {
+        ChargerEtats();
+        ChargerCompetences();
+        ChargerRoles();
+        ChargerMonstres();
+        ChargerEquipeMonstres();
+        _equipe.AjoutMembre(new Joueur("Maurice", _roles[0] as RoleJoueur, 1));
+    }
+
+    private void ChargerEquipeMonstres()
+    {
+        _equipesMonstres.Add(0, new Equipe("Monstres"));
+        _equipesMonstres[0].AjoutMembre(new Personnage(_monstres[0]));
+        _equipesMonstres[0].AjoutMembre(new Personnage(_monstres[1]));
+    }
+
+    private void ChargerEtats()
+    {
+        return;
+    }
+
+    private void ChargerMonstres()
+    {
+        _monstres.Add(0, new Personnage("Orque", _roles[1], 1));
+        _monstres.Add(1, new Personnage("Squelette", _roles[2], 1));
+        return;
+    }
+
+    private void ChargerCompetences()
+    {
+        Effet[] effets = { new Degats() };
+        _competences.Add(0, new Competence("Attaque (Épée)", new Cible(true, 1, 1, true, true, new ZonePoint()), true, true, effets));
+        _competences.Add(1, new Competence("Fausse Attaque", new Cible(true, 1, 1, true, true, new ZonePoint()), true, false, effets));
+        return;
+    }
+
+    private void ChargerRoles()
+    {
+        _roles.Add(0, new RoleJoueur("RoleJoueur", Stats.PUI, Stats.DEF, Stats.VIT, _competences[0], _competences[1]));
+        _roles.Add(1, new Role("Orque", 1, 1, 1,_competences[0], _competences[1]));
+        _roles.Add(2, new Role("Squelette", 1, 1, 1, _competences[0], _competences[1]));
+        return;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKey("left alt"))
+        {
+            if (Input.GetKeyUp("f12"))
+            {
+                Debogueur.SetActive(true);
+            }
+        }
     }
     void OnGUI()
     {
@@ -83,6 +150,16 @@ public class DonneesJeu : MonoBehaviour
             Verifier(nom);
             _declencheurs[nom] = !_declencheurs[nom];
             return _declencheurs[nom];
+        }
+        static public Dictionary<string, bool> RecupererListe()
+        {
+            Dictionary<string, bool> retrun = new Dictionary<string, bool>();
+            Dictionary<string, bool>.Enumerator e = _declencheurs.GetEnumerator();
+            while(e.MoveNext())
+            {
+                retrun.Add(e.Current.Key, e.Current.Value);
+            }
+            return retrun;
         }
     }
 }

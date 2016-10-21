@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Mysterole
 {
-    public abstract class Personnage
+    public class Personnage
     {
         public string Nom { get; private set; }
         public uint NIV { get; private set; }
@@ -30,7 +30,7 @@ namespace Mysterole
         {
             get
             {
-                return Math.Max((int)MPV + (int)DEF + (int)VIT + TrouverBonusEquipement(Stats.MPV) + tempModMPV, 5);
+                return Math.Max((int)DEF + (int)VIT + TrouverBonusEquipement(Stats.MPV) + tempModMPV, 5);
             }
             set
             {
@@ -135,7 +135,7 @@ namespace Mysterole
         public Objets.Equipement Arme { get; private set; }
         public Objets.Equipement Jambes { get; private set; }
         public Objets.EquipAnneau Anneau { get; private set; }
-        protected Personnage(string Nom, Role Role, uint Niveau)
+        public Personnage(string Nom, Role Role, uint Niveau)
         {
             bPUI = 0;
             bDEF = 0;
@@ -146,13 +146,32 @@ namespace Mysterole
             this.Role = Role;
             NIV = Math.Max(Niveau, 1);
             FinCombat();
+            Guerir();
         }
-        /*public List<uint> TrouverBonusEquipement() // TODO
+        public Personnage(Personnage perso)
         {
-            List<uint> retrun = new List<uint>();
+            bPUI = 0;
+            bDEF = 0;
+            bVIT = 0;
+            Nom = perso.Nom;
+            Role = perso.Role;
+            NIV = perso.NIV;
+            FinCombat();
+            Guerir();
+        }
 
-            return retrun;
-        }*/
+        public void Guerir()
+        {
+            PV = MPV;
+            PC = MPC;
+        }
+
+        /*public List<uint> TrouverBonusEquipement() // TODO
+{
+   List<uint> retrun = new List<uint>();
+
+   return retrun;
+}*/
         private int TrouverBonusEquipement(Stats Stat)
         {
             int retrun = 0;

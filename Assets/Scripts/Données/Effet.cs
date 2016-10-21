@@ -35,14 +35,14 @@ namespace Mysterole
     }
     public class Degats : EffetStat
     {
-        public Degats(uint Montant) : base(true, Stats.PV, Montant)
+        public Degats() : base(true, Stats.PV, 0)
         {
             
         }
     }
     public class Soins : EffetStat
     {
-        public Soins(uint Montant) : base(false, Stats.PV, Montant)
+        public Soins() : base(false, Stats.PV, 0)
         {
             
         }

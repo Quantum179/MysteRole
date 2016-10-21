@@ -14,7 +14,7 @@ namespace Mysterole
         public bool EnDiag { get; private set; }
         public bool EnLigne { get; private set; }
         public Zone Zone { get; private set; }
-        protected Cible(bool SurPersonne, int DistanceMin, int DistanceMax, bool Diag, bool Croix, Zone Zone)
+        public Cible(bool SurPersonne, int DistanceMin, int DistanceMax, bool Diag, bool Croix, Zone Zone)
         {
             CibleUnite = SurPersonne;
             if (DistanceMin > DistanceMax)
