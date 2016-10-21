@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Mysterole
 {
-    public abstract class Role
+    public class Role
     {
         private uint bPUI;
         private uint bDEF;
@@ -17,7 +17,7 @@ namespace Mysterole
         public string Nom { get; private set; }
         public Competence Base { get; private set; }
         public Competence Speciale { get; private set; }
-        protected Role(string Nom, uint PUI, uint DEF, uint VIT, Competence Base, Competence Speciale)
+        public Role(string Nom, uint PUI, uint DEF, uint VIT, Competence Base, Competence Speciale)
         {
             this.Nom = Nom;
             bPUI = PUI;
