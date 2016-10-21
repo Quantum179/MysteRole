@@ -7,8 +7,8 @@ public class GestionCombat : MonoBehaviour {
 
 	public GameObject curseurPrefab;
 	public GameObject Menu;
-	public GameObject personnagePrefab;
 	private GameObject joueur1;
+	public GameObject prefab;
 	private int personnageMove = 2;
 	private GameObject curseur;
 	private GameObject caseActuel;
@@ -74,8 +74,8 @@ public class GestionCombat : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		joueur1 = Instantiate (personnagePrefab) as GameObject;
-		joueur1.GetComponent<PersonnageMouvement> ().caseDepart = GameObject.Find ("CombatGrid/Colonne2/case3");
+		joueur1 = Instantiate (prefab) as GameObject;
+		joueur1.GetComponent<PersonnageMouvement> ().caseDepart = GameObject.Find ("CombatGrid/Colonne2/case2");
 		EventSystem = GameObject.Find ("EventSystem");
 		Cursor.visible = false;
 		Menu.SetActive (false);
