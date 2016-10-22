@@ -18,11 +18,10 @@ public class ErrorTests : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(300, 50, 100, 25), "Débogueur"))
+        if (GUI.Button(new Rect(300, 50, 100, 25), "Nom Joueur"))
         {
-            string message = "Changer valeur Déclencheur \"Test1\" : " + DonneesJeu.Declencheurs.EstActif("Test1").ToString();
+            string message = "Nom du joueur : " + DonneesJeu.Equipe.Membres[0].Nom;
             Erreurs.NouvelleErreur(message);
-            DonneesJeu.Declencheurs.Inverser("Test1");
         }
     }
 }

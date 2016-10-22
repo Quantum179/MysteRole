@@ -15,6 +15,7 @@ namespace Mysterole
         {
             this.Nom = Nom;
             Inventaire = new Inventaire();
+            Membres = new List<Personnage>();
         }
         public virtual void AjoutMembre(Personnage Personne)
         {
@@ -40,6 +41,8 @@ namespace Mysterole
         }
         public void AjoutMembre(Joueur Personne)
         {
+            if (Personne == null)
+                throw new ArgumentException("Le personnage n'existe pas.");
             bool trouve = false;
             foreach (Personnage p in Membres)
             {
