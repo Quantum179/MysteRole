@@ -20,17 +20,13 @@ namespace Mysterole
             set
             {
                 pv = (uint)Math.Max(Math.Min(MPV,value), 0);
-                if (pv == 0)
-                {
-                    ; // TODO Personnage ou Combat gère morts?
-                }
             }
         }
         public int MPV
         {
             get
             {
-                return Math.Max((int)DEF + (int)VIT + TrouverBonusEquipement(Stats.MPV) + tempModMPV, 5);
+                return Math.Max(DEF + VIT + TrouverBonusEquipement(Stats.MPV) + tempModMPV, 5);
             }
             set
             {
@@ -175,31 +171,36 @@ namespace Mysterole
         private int TrouverBonusEquipement(Stats Stat)
         {
             int retrun = 0;
-            Casque.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Armure.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Arme.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Jambes.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Anneau.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
+            if (Casque != null)
+                Casque.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Armure != null)
+                Armure.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Arme != null)
+                Arme.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Jambes != null)
+                Jambes.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Anneau != null)
+                Anneau.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
             return retrun;
         }
         public void FinCombat()
