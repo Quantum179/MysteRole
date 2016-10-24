@@ -45,8 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Animations\CurseurAnim\Script\CurseurAnim.cs" />
-     <Compile Include="Assets\Animations\PersonnageAnim\Script\PersonnageMouvement.cs" />
+     <Compile Include="Assets\Animations\Script\CurseurAnim.cs" />
+     <Compile Include="Assets\Animations\Script\PersonnageMouvement.cs" />
+     <Compile Include="Assets\GestionPersonnage.cs" />
      <Compile Include="Assets\Scripts\Données\Cible.cs" />
      <Compile Include="Assets\Scripts\Données\Competence.cs" />
      <Compile Include="Assets\Scripts\Données\Effet.cs" />
