@@ -34,7 +34,9 @@ public class GestionCases : MonoBehaviour {
 	}
 
 	public void changeeMouvement(int portee,bool modif){
-		estMouvement = modif;
+		if (!estOccupee) {
+			estMouvement = modif;
+		}
 		if (portee > 0) {
 			if (caseVoisineBas) {
 				caseVoisineBas.GetComponent<GestionCases> ().changeeMouvement (portee-1,modif);
