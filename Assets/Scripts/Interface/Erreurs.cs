@@ -15,29 +15,29 @@ namespace Mysterole
         static bool change = false;
         
         void Start()
-        {
+        {/*
             Main = gameObject;
             tz = textZone;
-            gameObject.SetActive(false);
+            gameObject.SetActive(false);*/
         }
         void OnGUI()
-        {
+        {/*
             if (change)
             {
                 Main.GetComponentInChildren<Scrollbar>().value = 0;
                 change = false;
-            }
+            }*/
         }
         static public void NouvelleErreur(string message)
-        {
+        {/*
             tz.text += message + '\n';
             Main.SetActive(true);
-            change = true;
+            change = true;*/
         }
 
         public void OnClick()
-        {
-            gameObject.SetActive(false);
+        {/*
+            gameObject.SetActive(false);*/
         }
     }
 }

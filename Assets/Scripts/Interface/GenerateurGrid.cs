@@ -11,7 +11,6 @@ public class GenerateurGrid : MonoBehaviour {
 	private GameObject caseClone;
 	private GameObject[,] listeCases;
 
-
 	// Use this for initialization
 	void Start () {
 		listeCases = new GameObject[LargeurGrid+1, HauteurGrid+1];
