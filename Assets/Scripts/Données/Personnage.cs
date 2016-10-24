@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Mysterole
 {
-    public abstract class Personnage
+    public class Personnage
     {
         public string Nom { get; private set; }
         public uint NIV { get; private set; }
@@ -20,17 +20,13 @@ namespace Mysterole
             set
             {
                 pv = (uint)Math.Max(Math.Min(MPV,value), 0);
-                if (pv == 0)
-                {
-                    ; // TODO Personnage ou Combat gère morts?
-                }
             }
         }
         public int MPV
         {
             get
             {
-                return Math.Max((int)MPV + (int)DEF + (int)VIT + TrouverBonusEquipement(Stats.MPV) + tempModMPV, 5);
+                return Math.Max(DEF + VIT + TrouverBonusEquipement(Stats.MPV) + tempModMPV, 5);
             }
             set
             {
@@ -135,7 +131,7 @@ namespace Mysterole
         public Objets.Equipement Arme { get; private set; }
         public Objets.Equipement Jambes { get; private set; }
         public Objets.EquipAnneau Anneau { get; private set; }
-        protected Personnage(string Nom, Role Role, uint Niveau)
+        public Personnage(string Nom, Role Role, uint Niveau)
         {
             bPUI = 0;
             bDEF = 0;
@@ -146,41 +142,65 @@ namespace Mysterole
             this.Role = Role;
             NIV = Math.Max(Niveau, 1);
             FinCombat();
+            Guerir();
         }
-        /*public List<uint> TrouverBonusEquipement() // TODO
+        public Personnage(Personnage perso)
         {
-            List<uint> retrun = new List<uint>();
+            bPUI = 0;
+            bDEF = 0;
+            bVIT = 0;
+            Nom = perso.Nom;
+            Role = perso.Role;
+            NIV = perso.NIV;
+            FinCombat();
+            Guerir();
+        }
 
-            return retrun;
-        }*/
+        public void Guerir()
+        {
+            PV = MPV;
+            PC = MPC;
+        }
+
+        /*public List<uint> TrouverBonusEquipement() // TODO
+{
+   List<uint> retrun = new List<uint>();
+
+   return retrun;
+}*/
         private int TrouverBonusEquipement(Stats Stat)
         {
             int retrun = 0;
-            Casque.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Armure.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Arme.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Jambes.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
-            Anneau.Effets.ToList().ForEach((EffetStat effet) =>
-            {
-                if (effet.Affecte == Stat)
-                    retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
-            });
+            if (Casque != null)
+                Casque.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Armure != null)
+                Armure.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Arme != null)
+                Arme.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Jambes != null)
+                Jambes.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
+            if (Anneau != null)
+                Anneau.Effets.ToList().ForEach((EffetStat effet) =>
+                {
+                    if (effet.Affecte == Stat)
+                        retrun += (int)effet.Montant * (effet.Negatif ? -1 : 1);
+                });
             return retrun;
         }
         public void FinCombat()

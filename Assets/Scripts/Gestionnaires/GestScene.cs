@@ -53,8 +53,12 @@ public class GestScene : MonoBehaviour
             if (SceneActuelle != null)
                 if (!SceneManager.UnloadScene(SceneActuelle))
                     return false;
-            SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+            if (!SceneManager.GetSceneByName(scene).isLoaded)
+            {
+                SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+            }
             SceneActuelle = scene;
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
         }
         else
             return false;
