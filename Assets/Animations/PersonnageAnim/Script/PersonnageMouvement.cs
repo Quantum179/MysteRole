@@ -6,16 +6,14 @@ public class PersonnageMouvement : MonoBehaviour {
 	public GameObject caseActuel{ get; set;}
 	public GameObject caseDepart{ get; set;}
 	public GameObject caseDestination{ get; set;}
-	public string modeleAnimator;
 	private Animator animator;
 	private Vector3 direction = new Vector3(0,0,0);
 	private int speed = 32;
 
 	// Use this for initialization
 	void Start () {
-		modeleAnimator = "GuerrierAC";
 		animator = GetComponent<Animator> ();
-		animator.runtimeAnimatorController = Resources.Load ("Animator/"+modeleAnimator) as RuntimeAnimatorController;
+		caseDepart = GameObject.Find ("CombatGrid/Colonne12/case2");
 		caseDepart.GetComponent<GestionCases> ().estOccupee = true;
 		transform.position = caseDepart.transform.position;
 		GetComponent<SpriteRenderer> ().sortingOrder = caseDepart.GetComponent<GestionCases> ().RangeeCalque;
@@ -24,7 +22,6 @@ public class PersonnageMouvement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (caseDestination) {
 			caseActuel.GetComponent<GestionCases> ().estOccupee = false;
 			animator.SetBool ("Neutre", false);
@@ -42,17 +39,12 @@ public class PersonnageMouvement : MonoBehaviour {
 			}
 		} else {
 			animator.SetBool ("Neutre", true);
-			if (direction.x != 0) {
-				animator.SetFloat ("faceDroite", direction.x);
+			if(direction.x !=0){
+				animator.SetFloat("faceDroite",direction.x);
 			}
 		}
+
 		animator.SetFloat ("x", direction.x);
 		animator.SetFloat ("y", direction.y);
-
-		if(Input.GetKeyUp(KeyCode.LeftControl))
-		{
-			animator.SetTrigger ("Attaque");
-		}
-
 	}
 }

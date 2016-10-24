@@ -45,8 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Animations\Script\CurseurAnim.cs" />
-     <Compile Include="Assets\Animations\Script\PersonnageMouvement.cs" />
+     <Compile Include="Assets\Animations\CurseurAnim\Script\CurseurAnim.cs" />
+     <Compile Include="Assets\Animations\PersonnageAnim\Script\PersonnageMouvement.cs" />
      <Compile Include="Assets\GestionPersonnage.cs" />
      <Compile Include="Assets\Scripts\Données\Cible.cs" />
      <Compile Include="Assets\Scripts\Données\Competence.cs" />
@@ -63,15 +63,22 @@
      <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
+     <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
      <Compile Include="Assets\Scripts\Interface\Debogueur.cs" />
      <Compile Include="Assets\Scripts\Interface\Erreurs.cs" />
      <Compile Include="Assets\Scripts\Interface\GenerateurGrid.cs" />
      <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
+     <Compile Include="Assets\Scripts\Interface\ListeScenesDebogueur.cs" />
+     <Compile Include="Assets\Scripts\Interface\ParamScenesDebogage.cs" />
      <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Deplacement.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Dialogue.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\EcranDialogue.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Npc.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Pnj.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\ScreenFader.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Warp.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
