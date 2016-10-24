@@ -41,7 +41,7 @@ public class DonneesJeu : MonoBehaviour
         ChargerRoles();
         ChargerMonstres();
         ChargerEquipeMonstres();
-        _equipe.AjoutMembre(new Joueur("Maurice", _roles[0], 1));
+		_equipe.AjoutMembre(new Joueur("Maurice", _roles[0], 1));
     }
 
     private void ChargerEquipeMonstres()
@@ -76,7 +76,7 @@ public class DonneesJeu : MonoBehaviour
 
     private void ChargerRoles()
     {
-        _roles.Add(0, new RoleJoueur("RoleJoueur", Stats.PUI, Stats.DEF, Stats.VIT, _competences[0], _competences[1]));
+        _roles.Add(0, new RoleJoueur("Guerrier", Stats.PUI, Stats.DEF, Stats.VIT, _competences[0], _competences[1]));
         return;
     }
 
@@ -113,6 +113,10 @@ public class DonneesJeu : MonoBehaviour
             }
         }
     }
+	public static Equipe EquipeMonstre
+	{
+		get{ return moi._equipesMonstres [0]; }
+	}
     private static EquipeJoueur CreerEquipe()
     {
         EquipeJoueur retrun = new EquipeJoueur();
