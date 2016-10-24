@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 class Erreurs : MonoBehaviour
 {
-    static GameObject Main;
+    static Erreurs Main;
     public Text textZone;
     static Text tz;
     static bool change = false;
         
     void Start()
     {
-        Main = gameObject;
+        Main = this;
         tz = textZone;
         gameObject.SetActive(false);
     }
@@ -30,7 +30,7 @@ class Erreurs : MonoBehaviour
     static public void NouvelleErreur(string message)
     {
         tz.text += message + '\n';
-        Main.SetActive(true);
+        Main.gameObject.SetActive(true);
         change = true;
     }
 
@@ -40,14 +40,14 @@ class Erreurs : MonoBehaviour
     }
     public static void Afficher()
     {
-        Main.SetActive(true);
+        Main.gameObject.SetActive(true);
     }
     public static void Cacher()
     {
-        Main.SetActive(false);
+        Main.gameObject.SetActive(false);
     }
     public static bool Visible()
     {
-        return Main.activeSelf;
+        return Main.gameObject.activeSelf;
     }
 }

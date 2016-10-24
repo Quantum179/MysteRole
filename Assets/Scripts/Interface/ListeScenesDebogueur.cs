@@ -21,10 +21,13 @@ public class ListeScenesDebogueur : MonoBehaviour {
             Dictionary<string, GestScene.TypeScene>.Enumerator e = GestScene.ScenesNoms.GetEnumerator();
             while (e.MoveNext())
             {
-                GameObject btn = Instantiate(PrefabScene, ZoneListe.transform) as GameObject;
-                btn.GetComponentInChildren<Text>().text = e.Current.Key;
-                btn.SetActive(true);
-                btn.SendMessage("initZone", ZoneParam);
+                if (e.Current.Value != GestScene.TypeScene.Initiale)
+                {
+                    GameObject btn = Instantiate(PrefabScene, ZoneListe.transform) as GameObject;
+                    btn.GetComponentInChildren<Text>().text = e.Current.Key;
+                    btn.SetActive(true);
+                    btn.SendMessage("initZone", ZoneParam);
+                }
             }
             firstTime = false;
         }

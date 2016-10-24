@@ -42,9 +42,9 @@ public class Pnj : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            RunEvent(true);
+            RunEvent(true); // StartCoroutine(RunEvent(true));
         }
-
+        
 
         if (dataPnj[index].GetTypeEvent().ToString() == "Dialogue")
         {
@@ -120,21 +120,28 @@ public class Pnj : MonoBehaviour {
         //}
         //else if(dataPnj[index])
 
+        // START EVENT
+        // Player Cannot Move
+        // PlayerMovement.canMove = false;
 
-       
+        // List<Evenement>.Enumerator e = dataPnj.GetEnumerator();
 
-        switch(dataPnj[index].GetTypeEvent().ToString())
+        switch (dataPnj[index].GetTypeEvent().ToString()) // while (e.MoveNext())
         {
+            // e.Current.RunEvent();
             case "Dialogue":
 
                 EcranDialogue.NewDialog(this.gameObject.name, ((Dialogue)dataPnj[index]).Message);
+
+                // yield return StartCoroutine(FUNCTION EVENT);
+                //dataPnj[index].RunEvent()
                 break;
             case "Deplacement":
                 isMoving = true;
                 break;
         }
 
-
+        // PlayerMovement.canMove = true;
     }
 
 }

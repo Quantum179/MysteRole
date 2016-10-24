@@ -112,7 +112,6 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
      <None Include="Assets\Tiled2Unity\License.txt" />
-     <None Include="Assets\Animations\Personnages\Personnages.txt" />
      <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
      <None Include="Assets\Scripts\BD\BD.txt" />
      <None Include="Assets\Préfabs\Objets\Objets.txt" />

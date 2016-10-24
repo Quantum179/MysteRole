@@ -22,6 +22,12 @@ namespace Mysterole
             return "Dialogue";
         }
 
+        /*public override IEnumerator RunEvent() {
+         * 
+         * //CALL Dialogue
+         * yield return AfficherProchaineLettre();
+         * 
+         * }*/
 
     }
 }

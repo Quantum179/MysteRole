@@ -15,7 +15,7 @@ namespace Mysterole
         }
 
         public abstract string GetTypeEvent();
-
+        //public abstract IEnumerator RunEvent();
 
 
 

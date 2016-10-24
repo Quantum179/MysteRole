@@ -6,6 +6,7 @@ public class PersonnageMouvement : MonoBehaviour {
 	public GameObject caseActuel{ get; set;}
 	public GameObject caseDepart{ get; set;}
 	public GameObject caseDestination{ get; set;}
+	public string modeleAnimator;
 	private Animator animator;
 	private Vector3 direction = new Vector3(0,0,0);
 	private Vector3 distance;
@@ -22,8 +23,8 @@ public class PersonnageMouvement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
-		caseDepart = GameObject.Find ("CombatGrid/Colonne12/case2");
-		caseDepart.GetComponent<GestionCases> ().estOccupee = true;
+		modeleAnimator = GetComponent<GestionPersonnage>().monPersonnage.Role.Nom+"AC";
+		animator.runtimeAnimatorController = Resources.Load ("Animator/"+modeleAnimator) as RuntimeAnimatorController;
 		transform.position = caseDepart.transform.position;
 		GetComponent<SpriteRenderer> ().sortingOrder = caseDepart.GetComponent<GestionCases> ().RangeeCalque;
 		caseActuel = caseDepart;
@@ -31,6 +32,8 @@ public class PersonnageMouvement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		// Si le personnage reçoit une case destination
 		if (caseDestination) {
 			caseActuel.GetComponent<GestionCases> ().SwitchOccupation (this.gameObject,false);
 			animator.SetBool ("Neutre", false);
@@ -49,12 +52,28 @@ public class PersonnageMouvement : MonoBehaviour {
 		} else {
 			finiMouvement = false;
 			animator.SetBool ("Neutre", true);
-			if(direction.x !=0){
-				animator.SetFloat("faceDroite",direction.x);
+			if (direction.x !=0) {
+				animator.SetFloat ("faceDroite", direction.x);
 			}
 		}
 
+		// Indique la direction ou le personnage doit agir ( mouvement ou attaque)
 		animator.SetFloat ("x", direction.x);
 		animator.SetFloat ("y", direction.y);
+	}
+
+	public bool GetFiniMouvement(){
+		return finiMouvement;
+	}
+
+	public void SetDirection(float Dirx){
+		direction.x = Dirx;
+	}
+
+	public void faitAttaque(GameObject curseur){
+		distance = transform.position - curseur.transform.position;
+		direction = -distance / distance.magnitude;
+		animator.SetTrigger ("Attaque");
+		finiMouvement = true;
 	}
 }

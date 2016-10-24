@@ -16,7 +16,7 @@ public class DonneesJeu : MonoBehaviour
     private Dictionary<int, Equipe> _equipesMonstres = new Dictionary<int, Equipe>();
     private Dictionary<int, Etat> _etats = new Dictionary<int, Etat>();
     public GameObject Debogueur;
-    public Equipe Adversaires { get { return _adversaires; } set { _adversaires = value; } }
+    public static Equipe Adversaires { get { return moi._adversaires; } set { moi._adversaires = value; } }
     public Dictionary<int, RoleJoueur> Roles { get { return _roles; } }
     public Dictionary<int, Competence> Competences { get { return _competences; } }
     public Dictionary<int, Role> Monstres { get { return _monstres; } }
@@ -113,9 +113,9 @@ public class DonneesJeu : MonoBehaviour
             }
         }
     }
-	public static Equipe EquipeMonstre
+	public static Dictionary<int, Equipe> EquipeMonstre
 	{
-		get{ return moi._equipesMonstres [0]; }
+		get{ return moi._equipesMonstres; }
 	}
     private static EquipeJoueur CreerEquipe()
     {

@@ -139,7 +139,7 @@ public class GestionCombat : MonoBehaviour {
 			listPersonnage.Add (j);
 			listJoueur.Add(j);
 		});
-		DonneesJeu.EquipeMonstre.Membres.ForEach (delegate(Personnage obj) {
+		DonneesJeu.EquipeMonstre[0].Membres.ForEach (delegate(Personnage obj) {
 			GameObject j;
 			j = Instantiate (Resources.Load ("Prefab/prefabPersonnage")) as GameObject;
 			j.GetComponent<GestionPersonnage> ().monPersonnage = obj;
