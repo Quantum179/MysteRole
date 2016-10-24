@@ -66,8 +66,6 @@
      <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map11.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map12.tiled2unity.xml" />
-     <None Include="Assets\Pr_fabs\Cartes\Cartes.txt" />
-     <None Include="Assets\Pr_fabs\Objets\Objets.txt" />
      <None Include="Assets\Tiled2Unity\Imported\map22.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
      <None Include="Assets\Préfabs\Unités\Unités.txt" />
@@ -86,7 +84,6 @@
      <None Include="Assets\Animations\Personnages\Personnages.txt" />
      <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
      <None Include="Assets\Scripts\BD\BD.txt" />
-     <None Include="Assets\Pr_fabs\Unit_s\Unit_s.txt" />
      <None Include="Assets\Préfabs\Objets\Objets.txt" />
      <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Imported\sans-titre.tiled2unity.xml" />

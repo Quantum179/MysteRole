@@ -16,7 +16,9 @@ public class GestScene : MonoBehaviour
     public enum TypeScene
     {
         Carte,
-        Combat
+        Combat,
+        Initiale,
+        Menu
     }
 
     // Use this for initialization
@@ -29,7 +31,10 @@ public class GestScene : MonoBehaviour
         _scenesNoms = new Dictionary<string, TypeScene>();
         _scenesNoms.Add("World", TypeScene.Carte);
         _scenesNoms.Add("Combat", TypeScene.Combat);
-        _prochaineScene(PremiereScene);
+        _scenesNoms.Add("Init", TypeScene.Initiale);
+        //_scenesNoms.Add("MenuPrincipal", TypeScene.Menu);
+        //_scenesNoms.Add("CreationPerso", TypeScene.Menu);
+        _prochaineSceneTransition(PremiereScene);
     }
 	
 	// Update is called once per frame
@@ -41,17 +46,25 @@ public class GestScene : MonoBehaviour
 
     private bool _prochaineScene(string scene)
     {
-        /*if (!ScenesNoms.Contains(scene)/* || ScenesInitiales.Contains(scene)/)
-        {
+        if (!_scenesNoms.ContainsKey(scene))
             throw new ArgumentException("Erreur load");
-            return false;
-        }*/
+        else if (_scenesNoms[scene] == TypeScene.Initiale)
+            throw new ArgumentException("Ne peut charger une scène initiale.");
 
         if (SceneActuelle == null || scene != SceneActuelle)
         {
             if (SceneActuelle != null)
+            {
+                if (_scenesNoms[scene] == TypeScene.Combat)
+                {
+                    // TODO : Trouver le Transform de l'avatar de l'équipe.
+                } else if (_scenesNoms[SceneActuelle] == TypeScene.Combat)
+                {
+                    // TODO : Appliquer le Transform à l'avatar de l'équipe.
+                }
                 if (!SceneManager.UnloadScene(SceneActuelle))
                     return false;
+            }
             if (!SceneManager.GetSceneByName(scene).isLoaded)
             {
                 SceneManager.LoadScene(scene, LoadSceneMode.Additive);
