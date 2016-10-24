@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour {
     Animator anim;
     bool canMove = true;
     bool canEvent = false;
-    Evenement evenement;
 	private TiledMap map;
 	private CameraFollow cf;
 
@@ -26,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.T) && canEvent)
         {
-            Debug.Log(evenement.Talk());
+            //Debug.Log(evenement.Talk());
 
         }
 
@@ -49,10 +48,10 @@ public class PlayerMovement : MonoBehaviour {
             rbody.position.y + movement_vector.y < cf.map.transform.position.y &&
             rbody.position.y + movement_vector.y > cf.map.transform.position.y - cf.map.NumTilesHigh)
         {
-            rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 15);
+            rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 25);
         }
 
-	}
+    }
 
 
     public void setMove()
@@ -72,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnCollisionStay2D(Collision2D other)
     {
-        evenement = other.transform.GetComponent<Evenement>();
+        //evenement = other.transform.GetComponent<Evenement>();
     }
 
     void OnCollisionExit2D()

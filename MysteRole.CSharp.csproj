@@ -83,10 +83,13 @@
     <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
     <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
     <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
+    <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
     <Compile Include="Assets\Scripts\Interface\Debogueur.cs" />
     <Compile Include="Assets\Scripts\Interface\Erreurs.cs" />
     <Compile Include="Assets\Scripts\Interface\GenerateurGrid.cs" />
     <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
+    <Compile Include="Assets\Scripts\Interface\ListeScenesDebogueur.cs" />
+    <Compile Include="Assets\Scripts\Interface\ParamScenesDebogage.cs" />
     <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
     <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />

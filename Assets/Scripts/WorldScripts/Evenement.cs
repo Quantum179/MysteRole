@@ -1,23 +1,27 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
 
-public class Evenement : MonoBehaviour {
-
-    private string message = "Salut à toi jeune aventurier";
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public string Talk()
+namespace Mysterole
+{
+    public abstract class Evenement
     {
-        return message;
-    }
 
+        public Evenement()
+        {
+            
+        }
+
+        public abstract string GetTypeEvent();
+
+
+
+
+
+
+        
+
+    }
 }
