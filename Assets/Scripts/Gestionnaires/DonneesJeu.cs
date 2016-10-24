@@ -90,6 +90,10 @@ public class DonneesJeu : MonoBehaviour
                 Debogueur.SetActive(true);
             }
         }
+        if (Debogueur.activeSelf || Erreurs.Visible())
+            Cursor.visible = true;
+        else
+            Cursor.visible = false;
     }
     void OnGUI()
     {

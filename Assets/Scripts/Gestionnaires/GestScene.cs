@@ -11,26 +11,25 @@ public class GestScene : MonoBehaviour
     public string PremiereScene;
     public GameObject Transition;
     private string SceneActuelle;
-    private List<string> ScenesNoms;
-    private List<string> ScenesChemins;
-    private List<string> ScenesInitiales;
-    //public Fader
+    private Dictionary<string, TypeScene> _scenesNoms;
+
+    public enum TypeScene
+    {
+        Carte,
+        Combat
+    }
 
     // Use this for initialization
     void Start() {
         if (moi != null)
             throw new Exception("Ce système comporte déjà une instance de GestScene.");
-        ScenesInitiales = new List<string>();
-        ScenesNoms = new List<string>();
-        ScenesChemins = new List<string>();
+
         moi = this;
-        for (int i=0; i < SceneManager.sceneCount; i++)
-        {
-            ScenesChemins.Add(SceneManager.GetSceneAt(i).path);
-            ScenesNoms.Add(SceneManager.GetSceneAt(i).name);
-            if (SceneManager.GetSceneAt(i).isLoaded)
-                ScenesInitiales.Add(SceneManager.GetSceneAt(i).name);
-        }
+
+        _scenesNoms = new Dictionary<string, TypeScene>();
+        _scenesNoms.Add("World", TypeScene.Carte);
+        _scenesNoms.Add("Combat", TypeScene.Combat);
+        _prochaineScene(PremiereScene);
     }
 	
 	// Update is called once per frame
@@ -67,13 +66,15 @@ public class GestScene : MonoBehaviour
     }
     private bool _prochaineSceneTransition(string scene)
     {
-        
+        FadeOut();
         bool ok = _prochaineScene(scene);
+        FadeIn();
         return ok;
     }
     public static IEnumerator FadeOut()
     {
         moi.Transition.SetActive(true);
+        yield return null;
         ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
         yield return moi.StartCoroutine(sf.FadeToBlack());
     }
@@ -91,4 +92,5 @@ public class GestScene : MonoBehaviour
     {
         return moi._prochaineSceneTransition(scene);
     }
+    public static Dictionary<string, TypeScene> ScenesNoms { get { return moi._scenesNoms; } }
 }
