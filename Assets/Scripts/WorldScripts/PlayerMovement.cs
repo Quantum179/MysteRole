@@ -24,11 +24,6 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(Input.GetKeyDown(KeyCode.T) && canEvent)
-        {
-            //Debug.Log(evenement.Talk());
-
-        }
 
         Vector2 movement_vector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         //GetComponent<SpriteRenderer>().sortingOrder = -(int)transform.position.y;
@@ -36,16 +31,16 @@ public class PlayerMovement : MonoBehaviour {
         if (movement_vector != Vector2.zero && _canMove)
         {
             anim.SetBool("isWalking", true);
+            GestionWorld.UpdateCoef(true);
             anim.SetFloat("input_x", movement_vector.x);
             anim.SetFloat("input_y", movement_vector.y);
         }
         else
         {
             anim.SetBool("isWalking", false);
+            GestionWorld.UpdateCoef(false);
         }
 
-
-        Debug.Log("test : " + _canMove.ToString());
         if (rbody.position.x + movement_vector.x > cf.map.transform.position.x &&
             rbody.position.x + movement_vector.x < cf.map.transform.position.x + cf.map.NumTilesWide &&
             rbody.position.y + movement_vector.y < cf.map.transform.position.y &&
@@ -53,6 +48,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 25);
         }
+
 
     }
 
