@@ -10,13 +10,13 @@ public class PersonnageMouvement : MonoBehaviour {
 	private Animator animator;
 	private Vector3 direction = new Vector3(0,0,0);
 	private Vector3 distance;
-	private int speed = 96;
+	private int speed = 32;
 	private bool finiMouvement = false;
 
 	public void AssocierCaseDepartRand(int minHauteur,int maxHauteur,int minLargeur,int maxLargeur){
 		do {
 			caseDepart = GameObject.Find ("CombatGrid/Colonne" + Random.Range(minLargeur,maxLargeur) + "/case" + Random.Range(minHauteur,maxHauteur));
-		} while(caseDepart.GetComponent<GestionCases> ().estOccupee);
+		} while(caseDepart.GetComponent<GestionCases> ().EstOccupee);
 		caseDepart.GetComponent<GestionCases> ().SwitchOccupation (this.gameObject,true);
 	}
 	
@@ -26,7 +26,7 @@ public class PersonnageMouvement : MonoBehaviour {
 		modeleAnimator = GetComponent<GestionPersonnage>().monPersonnage.Role.Nom+"AC";
 		animator.runtimeAnimatorController = Resources.Load ("Animator/"+modeleAnimator) as RuntimeAnimatorController;
 		transform.position = caseDepart.transform.position;
-		GetComponent<SpriteRenderer> ().sortingOrder = caseDepart.GetComponent<GestionCases> ().RangeeCalque;
+		GetComponent<SpriteRenderer> ().sortingOrder = caseDepart.GetComponent<GestionCases> ().PosY+1;
 		caseActuel = caseDepart;
 	}
 	
@@ -39,7 +39,7 @@ public class PersonnageMouvement : MonoBehaviour {
 			animator.SetBool ("Neutre", false);
 			distance = transform.position - caseDestination.transform.position;
 			direction = -distance / distance.magnitude;
-			GetComponent<SpriteRenderer> ().sortingOrder = caseDestination.GetComponent<GestionCases> ().RangeeCalque;
+			GetComponent<SpriteRenderer> ().sortingOrder = caseDestination.GetComponent<GestionCases> ().PosY+1;
 			if (distance.magnitude >= 1) {
 				transform.position += direction * speed * Time.deltaTime;
 			}else {
@@ -74,6 +74,5 @@ public class PersonnageMouvement : MonoBehaviour {
 		distance = transform.position - curseur.transform.position;
 		direction = -distance / distance.magnitude;
 		animator.SetTrigger ("Attaque");
-		finiMouvement = true;
 	}
 }
