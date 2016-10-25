@@ -11,8 +11,7 @@ public class GestionBtn : MonoBehaviour {
     }
     public void NouvellePartieBtn(string NouvellePartie)
     {
-        SceneManager.LoadScene(NouvellePartie);
-        //GestScene.ProchaineScene(NouvellePartie);
+        GestScene.ProchaineScene(NouvellePartie);
     }
 
     public void QuitterBtn()

@@ -32,8 +32,8 @@ public class GestScene : MonoBehaviour
         _scenesNoms.Add("World", TypeScene.Carte);
         _scenesNoms.Add("Combat", TypeScene.Combat);
         _scenesNoms.Add("Init", TypeScene.Initiale);
-        //_scenesNoms.Add("MenuPrincipal", TypeScene.Menu);
-        //_scenesNoms.Add("CreationPerso", TypeScene.Menu);
+        _scenesNoms.Add("Menu_Principal", TypeScene.Menu);
+        _scenesNoms.Add("Creation_personnage", TypeScene.Menu);
         _prochaineSceneTransition(PremiereScene);
     }
 	

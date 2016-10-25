@@ -18,11 +18,6 @@ public class ErrorTests : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(300, 50, 100, 25), "Débogueur"))
-        {
-            string message = "Changer valeur Déclencheur \"Test1\" : " + DonneesJeu.Declencheurs.EstActif("Test1").ToString();
-            Erreurs.NouvelleErreur(message);
-            DonneesJeu.Declencheurs.Inverser("Test1");
-        }
+        
     }
 }
