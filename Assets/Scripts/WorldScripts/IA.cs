@@ -45,6 +45,9 @@ namespace Mysterole
         private bool _isEvent = false;
         public bool IsEvent { get; set; }
 
+        private bool _isWalking = false;
+        private float tempsIdle = 5.0f;
+
 
         ////Constructeur
         //public IA(string nomPnj)
@@ -163,33 +166,44 @@ namespace Mysterole
             }
 
 
-
+            tempsIdle -= Time.deltaTime;
+            if (tempsIdle < 1)
+            {
+                _isWalking = true;
+            }
 
 
 
 
             if(_nomPnj == "Sage du village")
             {
-                if (_isEvent)
+                if (_isWalking)
                 {
                     offset = new Vector2(_deplacements[indexAuto].Destination.x - rbody.position.x, _deplacements[indexAuto].Destination.y - rbody.position.y);
 
                     anim.SetBool("isWalking", true);
                     anim.SetFloat("input_x", offset.x);
                     anim.SetFloat("input_y", offset.y);
+                    _canEvent = false;
 
                     //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
 
                     transform.position = Vector3.MoveTowards(transform.position, _deplacements[indexAuto].Destination, Time.deltaTime * 5);
+                    Debug.Log(_deplacements[indexAuto].ToString() + indexAuto.ToString());
+                    
                 }
 
-                if (rbody.position == _deplacements[indexAuto].Destination)
+                if (rbody.position == _deplacements[indexAuto].Destination && _canEvent)
                 {
-                    _isEvent = false;
+                    _isWalking = false;
                     _canEvent = true;
                     anim.SetBool("isWalking", false);
                     anim.SetFloat("input_x", -1);
-                    indexAuto == 0 ? index++: ;
+
+                    if (indexAuto == 0)
+                        indexAuto = 1;
+                    else
+                        indexAuto = 0;
                 }
 
             }
