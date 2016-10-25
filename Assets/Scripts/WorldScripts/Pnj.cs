@@ -12,7 +12,8 @@ public class Pnj : MonoBehaviour {
     private int velocity = 10;
     public string nomPNJ;
 
-    private List<Evenement> dataPnj;
+    private IA _ia;
+
     private int index = 0;
 
     private bool isMoving = false;
@@ -25,11 +26,11 @@ public class Pnj : MonoBehaviour {
         anim = GetComponent<Animator>();
 
 
-        dataPnj = new List<Evenement>();
+        //dataPnj = new Dictionary<string ,Evenement>();
 
-        dataPnj.Add(new Dialogue("Halte là !"));
-        dataPnj.Add(new Deplacement(115, -176));
-        dataPnj.Add(new Dialogue("Vous n'avez pas le droit d'entrer ici !"));
+        //dataPnj.Add("", new Dialogue("Halte là !"));
+        //dataPnj.Add("", new Deplacement(115, -176));
+        //dataPnj.Add("", new Dialogue("Vous n'avez pas le droit d'entrer ici !"));
 
 
         

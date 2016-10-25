@@ -74,7 +74,7 @@
      <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
-     <None Include="Assets\Tiled2Unity\Imported\map32.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map23.tiled2unity.xml" />
      <None Include="Assets\Pixies\Personnages\Personnages.txt" />
      <None Include="Assets\Images\Images.txt" />
      <None Include="Assets\Pixies\Tuiles\Tuiles.txt" />
@@ -119,10 +119,6 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{5FD4DD79-B6BB-98BD-BAD0-5A6305931588}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
