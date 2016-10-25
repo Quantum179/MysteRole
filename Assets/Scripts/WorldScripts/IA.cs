@@ -46,7 +46,7 @@ namespace Mysterole
         public bool IsEvent { get; set; }
 
         private bool _isWalking = false;
-        private float tempsIdle = 5.0f;
+        private float tempsIdle = 1.0f;
 
 
         ////Constructeur
@@ -94,7 +94,7 @@ namespace Mysterole
                     _evenements.Add(new Dialogue("Voici le papier t'autorisant à entrer dans la cité"));
 
                     _deplacements.Add(new Deplacement(34, -10));
-                    _deplacements.Add(new Deplacement(38, -10));
+                    //_deplacements.Add(new Deplacement(38, -10));
                     break;
                 case "Milicien":
 
@@ -115,10 +115,12 @@ namespace Mysterole
             //    StartCoroutine(TriggerEvent(true));
             //}
 
+            Erreurs.NouvelleErreur(index.ToString());
+
             if(index < _evenements.Count)
                 RunEvent();
 
-            if(index < _evenements.Count)
+            if(index < _evenements.Count && _isEvent)
             {
                 switch (_evenements[index].GetTypeEvent())
                 {
@@ -166,47 +168,86 @@ namespace Mysterole
             }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             tempsIdle -= Time.deltaTime;
             if (tempsIdle < 1)
             {
+                if(!_isWalking)
                 _isWalking = true;
+                tempsIdle = 2.0f;
             }
 
 
 
-
-            if(_nomPnj == "Sage du village")
+            if (indexAuto < _deplacements.Count)
             {
-                if (_isWalking)
+                if (_nomPnj == "Sage du village")
                 {
-                    offset = new Vector2(_deplacements[indexAuto].Destination.x - rbody.position.x, _deplacements[indexAuto].Destination.y - rbody.position.y);
 
-                    anim.SetBool("isWalking", true);
-                    anim.SetFloat("input_x", offset.x);
-                    anim.SetFloat("input_y", offset.y);
-                    _canEvent = false;
+                    if (_isWalking)
+                    {
+                        offset = new Vector2(_deplacements[indexAuto].Destination.x - rbody.position.x, _deplacements[indexAuto].Destination.y - rbody.position.y);
 
-                    //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
+                        anim.SetBool("isWalking", true);
+                        anim.SetFloat("input_x", offset.x);
+                        anim.SetFloat("input_y", offset.y);
+                        _canEvent = false;
 
-                    transform.position = Vector3.MoveTowards(transform.position, _deplacements[indexAuto].Destination, Time.deltaTime * 5);
-                    Debug.Log(_deplacements[indexAuto].ToString() + indexAuto.ToString());
-                    
-                }
+                        //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
 
-                if (rbody.position == _deplacements[indexAuto].Destination && _canEvent)
-                {
-                    _isWalking = false;
-                    _canEvent = true;
-                    anim.SetBool("isWalking", false);
-                    anim.SetFloat("input_x", -1);
+                        transform.position = Vector3.MoveTowards(transform.position, _deplacements[indexAuto].Destination, Time.deltaTime * 5);
+                    }
 
-                    if (indexAuto == 0)
-                        indexAuto = 1;
-                    else
-                        indexAuto = 0;
+
+
+
+                    if (rbody.position == _deplacements[indexAuto].Destination && _isWalking)
+                    {
+
+
+                        _isWalking = false;
+                        anim.SetBool("isWalking", false);
+                        //anim.SetFloat("input_x", -1);
+
+                        if (indexAuto == 0)
+                            indexAuto = 1;
+                        else
+                            indexAuto = 0;
+
+
+                        Erreurs.NouvelleErreur(_deplacements[indexAuto].Destination.ToString() + ";  "
+    + rbody.position + "; "
+    + indexAuto.ToString());
+
+                    }
+
                 }
 
             }
+
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Tiled2Unity;
+using Mysterole;
 
 public class GestionWorld : MonoBehaviour {
 
@@ -61,6 +62,11 @@ public class GestionWorld : MonoBehaviour {
 
         _isActive = isActive;
 
+    }
+
+    public static InfosWorld GetInfos()
+    {
+        return new InfosWorld("combat" + Random.Range(0,1), PlayerMovement.GetPlayer());
     }
 
 }
