@@ -4,7 +4,8 @@
 //using Mysterole;
 //using System.Text;
 
-//public class Pnj : MonoBehaviour {
+//public class Pnj : MonoBehaviour
+//{
 
 //    private Rigidbody2D rbody;
 //    private Animator anim;
@@ -19,9 +20,10 @@
 //    private bool isMoving = false;
 
 //    // Use this for initialization
-//    void Start () {
+//    void Start()
+//    {
 
-        
+
 //        rbody = GetComponent<Rigidbody2D>();
 //        anim = GetComponent<Animator>();
 
@@ -32,24 +34,25 @@
 //        //dataPnj.Add("", new Deplacement(115, -176));
 //        //dataPnj.Add("", new Dialogue("Vous n'avez pas le droit d'entrer ici !"));
 
+//        _ia = new IA("Chef Milicien");
 
-        
 
 //    }
-	
-//	// Update is called once per frame
-//	void Update () {
+
+//    // Update is called once per frame
+//    void Update()
+//    {
 
 
 //        if (Input.GetKeyDown(KeyCode.B))
 //        {
-//            RunEvent(true); // StartCoroutine(RunEvent(true));
+//            StartCoroutine(RunEvent(true));
 //        }
-        
+
 
 //        if (dataPnj[index].GetTypeEvent().ToString() == "Dialogue")
 //        {
-//            if(Input.GetKeyDown(KeyCode.T))
+//            if (Input.GetKeyDown(KeyCode.T))
 //            {
 //                EcranDialogue.closeDialog();
 
@@ -108,8 +111,8 @@
 
 
 
- 
-            
+
+
 
 //    }
 
@@ -127,20 +130,20 @@
 
 //        // List<Evenement>.Enumerator e = dataPnj.GetEnumerator();
 
-//        switch (dataPnj[index].GetTypeEvent().ToString()) // while (e.MoveNext())
-//        {
-//            // e.Current.RunEvent();
-//            case "Dialogue":
+//        //switch (dataPnj[index].GetTypeEvent().ToString()) // while (e.MoveNext())
+//        //{
+//        //    // e.Current.RunEvent();
+//        //    case "Dialogue":
 
-//                EcranDialogue.NewDialog(this.gameObject.name, ((Dialogue)dataPnj[index]).Message);
+//        //        EcranDialogue.NewDialog(this.gameObject.name, ((Dialogue)dataPnj[index]).Message);
 
-//                // yield return StartCoroutine(FUNCTION EVENT);
-//                //dataPnj[index].RunEvent()
-//                break;
-//            case "Deplacement":
-//                isMoving = true;
-//                break;
-//        }
+//        //        // yield return StartCoroutine(FUNCTION EVENT);
+//        //        //dataPnj[index].RunEvent()
+//        //        break;
+//        //    case "Deplacement":
+//        //        isMoving = true;
+//        //        break;
+//        //}
 
 //        // PlayerMovement.canMove = true;
 //    }

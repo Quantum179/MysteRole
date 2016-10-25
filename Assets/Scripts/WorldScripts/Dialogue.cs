@@ -9,7 +9,8 @@ namespace Mysterole
 {
     public class Dialogue : Evenement 
     {
-        public string Message;
+        private string _message;
+        public string Message { get; private set; }
 
 
         public Dialogue(string message) : base()

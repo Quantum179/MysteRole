@@ -7,6 +7,6 @@ namespace Mysterole
 {
     public class Quete
     {
-
+        //private List<Evenement> _
     }
 }
