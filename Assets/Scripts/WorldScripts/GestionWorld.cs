@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Tiled2Unity;
+using Mysterole;
+using System.Collections.Generic;
+
 
 public class GestionWorld : MonoBehaviour {
 
@@ -9,6 +12,15 @@ public class GestionWorld : MonoBehaviour {
     private TiledMap map;
     private int coefCombat = 10;
     public System.Random ran;
+
+    private List<Equipe> _monstres;
+
+
+    // List<Equipe> MONSTRES = new List<Equipe>();
+    // MONSTRES.Add(DonneesJeu.EquipesMonstre[0]);
+    //add
+    //add
+
 
     private static bool _isActive = false;
     private float tempsCombat = 30.0f;
@@ -21,7 +33,12 @@ public class GestionWorld : MonoBehaviour {
         string sb = "map" + (int)(player.position.x / 50) + (int)(player.position.y / -50);
         map = GameObject.Find(sb).GetComponent<TiledMap>();
 
+        //_monstres.Add(DonneesJeu.EquipesMonstres[0]);
+
         ran = new System.Random();
+
+
+
     }
 	
 	// Update is called once per frame
@@ -61,6 +78,16 @@ public class GestionWorld : MonoBehaviour {
 
         _isActive = isActive;
 
+    }
+
+    public static InfosWorld GetInfos()
+    {
+        // QUAND COMBAT :
+
+
+        //Equipe unGroupe = _monstres[Random.Range(0, _monstres.Count)];
+        //DonneesJeu.Adversaires = unGroupe;
+        return new InfosWorld("combat" + Random.Range(0,1), PlayerMovement.GetPlayer());
     }
 
 }
