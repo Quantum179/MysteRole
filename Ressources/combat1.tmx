@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="obj_misk_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
- </tileset>
- <tileset firstgid="1025" name="plant repack_0(1)" tilewidth="32" tileheight="32" tilecount="169" columns="13">
- </tileset>
- <tileset firstgid="1194" name="RPG_Maker_VX_RTP_Tileset_by_telles0808" tilewidth="32" tileheight="32" tilecount="2016" columns="32">
- </tileset>
- <tileset firstgid="3210" name="terrain" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
-  <image source="../Assets/Tiled2Unity/Textures/terrain.png" width="1024" height="1024"/>
+ <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="32" tileheight="32" nextobjectid="1">
+  <tileset firstgid="1" name="obj_misk_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="tilesets/obj_misk_atlas.png" width="1024" height="1024"/>
+  </tileset>
+  <tileset firstgid="1025" name="plant repack_0(1)" tilewidth="32" tileheight="32" tilecount="169" columns="13">
+  <image source="tilesets/plant repack_0(1).png" width="416" height="416"/>
+  </tileset>
+  <tileset firstgid="1194" name="RPG_Maker_VX_RTP_Tileset_by_telles0808" tilewidth="32" tileheight="32" tilecount="2016" columns="32">
+  <image source="tilesets/RPG_Maker_VX_RTP_Tileset_by_telles0808.png" width="1024" height="2016"/>
+  </tileset>
+  <tileset firstgid="3210" name="terrain" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+   <image source="../Assets/Tiled2Unity/Textures/terrain.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="4234" name="terrain_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="../Assets/Tiled2Unity/Textures/terrain_atlas.png" width="1024" height="1024"/>
@@ -19,17 +22,19 @@
   <image source="../Assets/Tiled2Unity/Textures/BlueTownv2_byLunarea.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="5556" name="colliders" tilewidth="32" tileheight="32" tilecount="432" columns="27">
-  <image source="../Assets/Tiled2Unity/Textures/colliders.png" width="864" height="540"/>
- </tileset>
- <tileset firstgid="5988" name="Hanzo-RuinsTown01VScopy" tilewidth="32" tileheight="32" tilecount="256" columns="16">
- </tileset>
- <tileset firstgid="6244" name="Hanzo-TownSet03VS" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../Assets/Tiled2Unity/Textures/Hanzo-TownSet03VS.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6500" name="LPC_Ancient_Greece_Architecture_0(1)" tilewidth="32" tileheight="32" tilecount="400" columns="20">
- </tileset>
- <layer name="grass" width="30" height="25">
-  <data encoding="csv">
+   <image source="../Assets/Tiled2Unity/Textures/colliders.png" width="864" height="540"/>
+  </tileset>
+  <tileset firstgid="5988" name="Hanzo-RuinsTown01VScopy" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="tilesets/Hanzo-RuinsTown01VScopy.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="6244" name="Hanzo-TownSet03VS" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+   <image source="../Assets/Tiled2Unity/Textures/Hanzo-TownSet03VS.png" width="512" height="512"/>
+  </tileset>
+  <tileset firstgid="6500" name="LPC_Ancient_Greece_Architecture_0(1)" tilewidth="32" tileheight="32" tilecount="400" columns="20">
+  <image source="tilesets/LPC_Ancient_Greece_Architecture_0(1).png" width="640" height="640"/>
+  </tileset>
+  <layer name="grass" width="30" height="25">
+   <data encoding="csv">
 3564,3564,3499,3565,3562,3563,3565,3566,3499,3562,3562,3499,3566,3566,3562,3564,3567,3566,3562,3566,3499,3567,3563,3566,3565,3563,3564,3563,3567,3562,
 3563,3565,3567,3562,3564,3563,3567,3566,3566,3562,3565,3499,3565,3564,3567,3567,3499,3567,3563,3562,3499,3566,3567,3563,3563,3499,3563,3567,3499,3562,
 3564,3567,3564,3564,3562,3563,3567,3567,3499,3565,3563,3564,3563,3565,3562,3566,3564,3567,3562,3567,3566,3562,3562,3566,3567,3562,3565,3563,3499,3564,
@@ -141,12 +146,13 @@
 4738,4739,4740,4738,4739,4740,4738,4739,4740,4738,4739,4740,4738,4739,4740,4738,4739,4740,4738,4739,4740,4738,4739,4740,4738,4739,4740,4738,4739,4740,
 4770,4771,4772,4770,4771,4772,4770,4771,4772,4770,4771,4772,4770,4771,4772,4770,4771,4772,4770,4771,4772,4770,4771,4772,4770,4771,4772,4770,4771,4772,
 4802,4803,4804,4802,4803,4804,4802,4803,4804,4802,4803,4804,4802,4803,4804,4802,4803,4804,4802,4803,4804,4802,4803,4804,4802,4803,4804,4802,4803,4804,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ </data>
+  </layer>
+ <layer name="Calque 2" width="30" height="25">
+   <data encoding="csv">
+ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,4729,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4729,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
