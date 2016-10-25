@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="obj_misk_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
-  <image source="../Assets/Tiled2Unity/Textures/obj_misk_atlas.png" width="1024" height="1024"/>
+  <image source="tilesets/obj_misk_atlas.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="1025" name="plant repack_0(1)" tilewidth="32" tileheight="32" tilecount="169" columns="13">
-  <image source="../Assets/Tiled2Unity/Textures/plant repack_0(1).png" width="416" height="416"/>
+  <image source="tilesets/plant repack_0(1).png" width="416" height="416"/>
  </tileset>
  <tileset firstgid="1194" name="RPG_Maker_VX_RTP_Tileset_by_telles0808" tilewidth="32" tileheight="32" tilecount="2016" columns="32">
-  <image source="../Assets/Tiled2Unity/Textures/RPG_Maker_VX_RTP_Tileset_by_telles0808.png" width="1024" height="2016"/>
+  <image source="tilesets/RPG_Maker_VX_RTP_Tileset_by_telles0808.png" width="1024" height="2016"/>
  </tileset>
  <tileset firstgid="3210" name="terrain" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="../Assets/Tiled2Unity/Textures/terrain.png" width="1024" height="1024"/>
@@ -25,13 +25,13 @@
   <image source="../Assets/Tiled2Unity/Textures/colliders.png" width="864" height="540"/>
  </tileset>
  <tileset firstgid="5988" name="Hanzo-RuinsTown01VScopy" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../Assets/Tiled2Unity/Textures/Hanzo-RuinsTown01VScopy.png" width="512" height="512"/>
+  <image source="tilesets/Hanzo-RuinsTown01VScopy.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="6244" name="Hanzo-TownSet03VS" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="../Assets/Tiled2Unity/Textures/Hanzo-TownSet03VS.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="6500" name="LPC_Ancient_Greece_Architecture_0(1)" tilewidth="32" tileheight="32" tilecount="400" columns="20">
-  <image source="../Assets/Tiled2Unity/Textures/LPC_Ancient_Greece_Architecture_0(1).png" width="640" height="640"/>
+  <image source="tilesets/LPC_Ancient_Greece_Architecture_0(1).png" width="640" height="640"/>
  </tileset>
  <layer name="grass" width="30" height="25">
   <data encoding="csv">

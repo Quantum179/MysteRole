@@ -1,0 +1,218 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+
+namespace Mysterole
+{
+    public class IA : MonoBehaviour
+    {
+        //private Dictionary<bool, Deplacement> _deplacements;
+        //public Dictionary<bool, Deplacement> Deplacements { get; private set; }
+
+        //private List<Quete> _quetes;
+        //public List<Quete> Quetes { get; private set; }
+
+        private Dictionary<string, Dialogue> _dialogues;
+        public Dictionary<bool, Dialogue> Dialogues { get; private set; }
+
+        private List<Evenement> _evenements;
+        public List<Evenement> Evenements { get; private set; }
+        
+
+        private string _nomPnj;
+        public string NomPnj { get; private set; }
+
+
+
+
+        //A optimiser
+        private Rigidbody2D rbody;
+        private Animator anim;
+        private Vector2 offset;
+        private GameObject player;
+        //private int velocity = 10;
+        private int index = 0;
+
+        private bool _canEvent = false;
+        public bool CanEvent { get; set; }
+        private bool _isEvent = false;
+        public bool IsEvent { get; set; }
+
+
+        ////Constructeur
+        //public IA(string nomPnj)
+        //{
+            
+        //}
+
+
+        //public IA()
+        void Start()
+        {
+            //Initialisation des données avec des requêtes SQL
+            //Hardcode
+
+            //Connexion au Game Object du pnj
+            //TODO : générer les dessins (sprites et collisions) automatiquement à partir des informations de la BD
+
+            rbody = GetComponent<Rigidbody2D>();
+            anim = GetComponent<Animator>();
+
+            _evenements = new List<Evenement>();
+
+
+            //dataPnj = new Dictionary<string ,Evenement>();
+
+            //dataPnj.Add("", new Dialogue("Halte là !"));
+            //dataPnj.Add("", new Deplacement(115, -176));
+            //dataPnj.Add("", new Dialogue("Vous n'avez pas le droit d'entrer ici !"));
+
+            _nomPnj = "Chef Milicien";
+
+
+
+
+            switch (_nomPnj)
+            {
+                case "Chef Milicien":
+                    _evenements.Add(new Dialogue("Halte là"));
+                    _evenements.Add(new Deplacement(131,-175));
+                    _evenements.Add(new Dialogue("Vous ne pouvez pas entrer dans la cité !"));
+                    break;
+                case "Sage Du Village":
+                    _evenements.Add(new Dialogue("Bonjour jeune aventurier."));
+                    _evenements.Add(new Dialogue("Voici le papier t'autorisant à entrer dans la cité"));
+                    break;
+                case "Milicien":
+
+                    break;
+            }
+        }
+
+
+
+
+
+
+
+        void Update()
+        {
+            //if (Input.GetKeyDown(KeyCode.B))
+            //{
+            //    StartCoroutine(TriggerEvent(true));
+            //}
+
+            if(index < _evenements.Count)
+                RunEvent();
+
+            if(index < _evenements.Count)
+            {
+                switch (_evenements[index].GetTypeEvent())
+                {
+                    case "Dialogue":
+
+                        if (Input.GetKeyDown(KeyCode.H) && _isEvent)
+                        {
+                            EcranDialogue.closeDialog();
+                            _isEvent = false;
+                            _canEvent = true;
+                            index++;
+                        }
+                        break;
+                    case "Deplacement":
+                        Deplacement unDeplacement = (Deplacement)_evenements[index];
+
+                        if (_isEvent)
+                        {
+                            offset = new Vector2(unDeplacement.Destination.x - rbody.position.x, unDeplacement.Destination.y - rbody.position.y);
+
+                            anim.SetBool("isWalking", true);
+                            anim.SetFloat("input_x", offset.x);
+                            anim.SetFloat("input_y", offset.y);
+
+                            //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
+
+                            transform.position = Vector3.MoveTowards(transform.position, unDeplacement.Destination, Time.deltaTime * 5);
+                        }
+
+                        if (rbody.position == unDeplacement.Destination)
+                        {
+                            _isEvent = false;
+                            _canEvent = true;
+                            anim.SetBool("isWalking", false);
+                            index++;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                if (index == _evenements.Count)
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = true;
+                    
+            }
+
+
+
+
+            //if (dataPnj[index].GetTypeEvent().ToString() == "Dialogue")
+            //{
+            //    if (Input.GetKeyDown(KeyCode.T) && isEvent)
+            //    {
+            //        EcranDialogue.closeDialog();
+
+            //        index++;
+            //    }
+            //}
+
+
+            //if (dataPnj[index].GetTypeEvent().ToString() == "Deplacement")
+            //{
+            //}
+        }
+
+
+        //Event
+        private void RunEvent()
+        {
+            if (!_isEvent && _canEvent && index < _evenements.Count())
+            {
+
+                _isEvent = true;
+
+                switch (_evenements[index].GetTypeEvent())
+                {
+                    case "Dialogue":
+                        
+                        Dialogue unDialogue = (Dialogue)_evenements[index];
+                        EcranDialogue.NewDialog(_nomPnj, unDialogue.Message);
+                        _canEvent = false;
+                        break;
+                    case "Deplacement":
+                        break;
+                    default:
+                        Debug.Log("erreur event, " + index.ToString());
+                        break;
+                }
+            }
+        }
+
+        public bool StartEvent()
+        {
+
+            _canEvent = true;
+            return true;
+
+        }
+
+        public static void SetEvent()
+        {
+
+        }
+
+
+    }
+}
