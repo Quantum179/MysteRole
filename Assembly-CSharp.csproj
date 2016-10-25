@@ -77,6 +77,7 @@
      <Compile Include="Assets\Scripts\WorldScripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\EcranDialogue.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\GestionWorld.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\IA.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Npc.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\PlayerMovement.cs" />
