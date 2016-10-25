@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Données\role.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestTransition.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
      <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
