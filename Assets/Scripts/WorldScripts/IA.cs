@@ -15,11 +15,14 @@ namespace Mysterole
         //private List<Quete> _quetes;
         //public List<Quete> Quetes { get; private set; }
 
-        private Dictionary<string, Dialogue> _dialogues;
-        public Dictionary<bool, Dialogue> Dialogues { get; private set; }
+        private List<Dialogue> _dialogues;
+        public List<Dialogue> Dialogues { get { return _dialogues; } private set { } }
+
+        private List<Deplacement> _deplacements;
+        public List<Deplacement> Deplacements { get { return _deplacements; } private set { } }
 
         private List<Evenement> _evenements;
-        public List<Evenement> Evenements { get; private set; }
+        public List<Evenement> Evenements { get { return _evenements; } private set { } }
         
 
         private string _nomPnj;
@@ -62,27 +65,26 @@ namespace Mysterole
             anim = GetComponent<Animator>();
 
             _evenements = new List<Evenement>();
+            _nomPnj = gameObject.name;
 
-
-            //dataPnj = new Dictionary<string ,Evenement>();
-
-            //dataPnj.Add("", new Dialogue("Halte là !"));
-            //dataPnj.Add("", new Deplacement(115, -176));
-            //dataPnj.Add("", new Dialogue("Vous n'avez pas le droit d'entrer ici !"));
-
-            _nomPnj = "Chef Milicien";
-
-
+            Debug.Log(_nomPnj);
 
 
             switch (_nomPnj)
             {
-                case "Chef Milicien":
+                case "Chef milicien":
                     _evenements.Add(new Dialogue("Halte là"));
                     _evenements.Add(new Deplacement(131,-175));
                     _evenements.Add(new Dialogue("Vous ne pouvez pas entrer dans la cité !"));
+                    _evenements.Add(new Dialogue("Revenez avec une autorisation"));
+                    _evenements.Add(new Deplacement(135, -175));
+
+
+                    _dialogues.Add(new Dialogue("Vous ne passerez pas tant que je ne verrai pas d'autorisation"));
+
+                    //ajouter quêtes
                     break;
-                case "Sage Du Village":
+                case "Sage du village":
                     _evenements.Add(new Dialogue("Bonjour jeune aventurier."));
                     _evenements.Add(new Dialogue("Voici le papier t'autorisant à entrer dans la cité"));
                     break;
@@ -143,6 +145,7 @@ namespace Mysterole
                             _isEvent = false;
                             _canEvent = true;
                             anim.SetBool("isWalking", false);
+                            anim.SetFloat("input_x", -1);
                             index++;
                         }
                         break;
