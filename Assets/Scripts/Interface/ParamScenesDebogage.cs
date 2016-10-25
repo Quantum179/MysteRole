@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ParamScenesDebogage : MonoBehaviour {
     public GameObject BoutonsCharger;
@@ -16,7 +17,21 @@ public class ParamScenesDebogage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if (GestTransition.EnTransition)
+        {
+            IEnumerator btn = BoutonsCharger.GetComponentsInChildren<Button>().GetEnumerator();
+            while(btn.MoveNext()) {
+                (btn.Current as Button).interactable = false;
+            }
+        }
+        else
+        {
+            IEnumerator btn = BoutonsCharger.GetComponentsInChildren<Button>().GetEnumerator();
+            while (btn.MoveNext())
+            {
+                (btn.Current as Button).interactable = true;
+            }
+        }
 	}
 
     public void SurClique(bool transition)
