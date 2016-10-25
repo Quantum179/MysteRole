@@ -113,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Animations\Effets\Effets.txt" />
-    <None Include="Assets\Animations\Personnages\Personnages.txt" />
     <None Include="Assets\Images\Images.txt" />
     <None Include="Assets\Pixies\Personnages\Personnages.txt" />
     <None Include="Assets\Pixies\Tuiles\Tuiles.txt" />
@@ -122,16 +121,16 @@
     <None Include="Assets\Préfabs\Unités\Unités.txt" />
     <None Include="Assets\Scripts\BD\BD.txt" />
     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
-    <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map0.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map00.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map01.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\map11.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\map12.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map13.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map21.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\map22.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map32.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\sans-titre.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map23.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\License.txt" />
     <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
     <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />

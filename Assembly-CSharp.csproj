@@ -1,12 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{5FD4DD79-B6BB-98BD-BAD0-5A6305931588}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -46,89 +45,89 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Animations\CurseurAnim\Script\CurseurAnim.cs" />
-    <Compile Include="Assets\Animations\PersonnageAnim\Script\PersonnageMouvement.cs" />
-    <Compile Include="Assets\GestionPersonnage.cs" />
-    <Compile Include="Assets\Scripts\Données\Cible.cs" />
-    <Compile Include="Assets\Scripts\Données\Competence.cs" />
-    <Compile Include="Assets\Scripts\Données\Effet.cs" />
-    <Compile Include="Assets\Scripts\Données\Equipe.cs" />
-    <Compile Include="Assets\Scripts\Données\Etat.cs" />
-    <Compile Include="Assets\Scripts\Données\Inventaire.cs" />
-    <Compile Include="Assets\Scripts\Données\Objet.cs" />
-    <Compile Include="Assets\Scripts\Données\Personnage.cs" />
-    <Compile Include="Assets\Scripts\Données\Stats.cs" />
-    <Compile Include="Assets\Scripts\Données\Zone.cs" />
-    <Compile Include="Assets\Scripts\Données\role.cs" />
-    <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
-    <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
-    <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
-    <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
-    <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
-    <Compile Include="Assets\Scripts\Interface\Debogueur.cs" />
-    <Compile Include="Assets\Scripts\Interface\Erreurs.cs" />
-    <Compile Include="Assets\Scripts\Interface\GenerateurGrid.cs" />
-    <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
-    <Compile Include="Assets\Scripts\Interface\ListeScenesDebogueur.cs" />
-    <Compile Include="Assets\Scripts\Interface\ParamScenesDebogage.cs" />
-    <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\Deplacement.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\Dialogue.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\EcranDialogue.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\IA.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\Npc.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\Pnj.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\Quete.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\ScreenFader.cs" />
-    <Compile Include="Assets\Scripts\WorldScripts\Warp.cs" />
-    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
-    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
-    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SpriteDepthInMap.cs" />
-    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
-    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledInitialShaderProperties.cs" />
-    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
-    <None Include="Assets\Préfabs\Cartes\Cartes.txt" />
-    <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
-    <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
-    <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
-    <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
-    <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
-    <None Include="Assets\Tiled2Unity\Imported\map0.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map11.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map12.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map22.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
-    <None Include="Assets\Préfabs\Unités\Unités.txt" />
-    <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
-    <None Include="Assets\Animations\Effets\Effets.txt" />
-    <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
-    <None Include="Assets\Tiled2Unity\Imported\map23.tiled2unity.xml" />
-    <None Include="Assets\Pixies\Personnages\Personnages.txt" />
-    <None Include="Assets\Images\Images.txt" />
-    <None Include="Assets\Pixies\Tuiles\Tuiles.txt" />
-    <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
-    <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
-    <None Include="Assets\Tiled2Unity\License.txt" />
-    <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
-    <None Include="Assets\Scripts\BD\BD.txt" />
-    <None Include="Assets\Préfabs\Objets\Objets.txt" />
-    <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
-    <None Include="Assets\Tiled2Unity\Imported\sans-titre.tiled2unity.xml" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\Animations\CurseurAnim\Script\CurseurAnim.cs" />
+     <Compile Include="Assets\Animations\PersonnageAnim\Script\PersonnageMouvement.cs" />
+     <Compile Include="Assets\GestionPersonnage.cs" />
+     <Compile Include="Assets\Scripts\Données\Cible.cs" />
+     <Compile Include="Assets\Scripts\Données\Competence.cs" />
+     <Compile Include="Assets\Scripts\Données\Effet.cs" />
+     <Compile Include="Assets\Scripts\Données\Equipe.cs" />
+     <Compile Include="Assets\Scripts\Données\Etat.cs" />
+     <Compile Include="Assets\Scripts\Données\Inventaire.cs" />
+     <Compile Include="Assets\Scripts\Données\Objet.cs" />
+     <Compile Include="Assets\Scripts\Données\Personnage.cs" />
+     <Compile Include="Assets\Scripts\Données\Stats.cs" />
+     <Compile Include="Assets\Scripts\Données\Zone.cs" />
+     <Compile Include="Assets\Scripts\Données\role.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
+     <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
+     <Compile Include="Assets\Scripts\Interface\Debogueur.cs" />
+     <Compile Include="Assets\Scripts\Interface\Erreurs.cs" />
+     <Compile Include="Assets\Scripts\Interface\GenerateurGrid.cs" />
+     <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
+     <Compile Include="Assets\Scripts\Interface\ListeScenesDebogueur.cs" />
+     <Compile Include="Assets\Scripts\Interface\ParamScenesDebogage.cs" />
+     <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Deplacement.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Dialogue.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\EcranDialogue.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\IA.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Npc.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Pnj.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Quete.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\ScreenFader.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\Warp.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SpriteDepthInMap.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledInitialShaderProperties.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
+     <None Include="Assets\Préfabs\Cartes\Cartes.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
+     <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
+     <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\map0.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map11.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map12.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map22.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
+     <None Include="Assets\Préfabs\Unités\Unités.txt" />
+     <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+     <None Include="Assets\Animations\Effets\Effets.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map23.tiled2unity.xml" />
+     <None Include="Assets\Pixies\Personnages\Personnages.txt" />
+     <None Include="Assets\Images\Images.txt" />
+     <None Include="Assets\Pixies\Tuiles\Tuiles.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
+     <None Include="Assets\Tiled2Unity\License.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
+     <None Include="Assets\Scripts\BD\BD.txt" />
+     <None Include="Assets\Préfabs\Objets\Objets.txt" />
+     <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\sans-titre.tiled2unity.xml" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -138,4 +137,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>

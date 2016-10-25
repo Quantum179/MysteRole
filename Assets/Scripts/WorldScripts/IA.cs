@@ -43,7 +43,7 @@ namespace Mysterole
             {
                 case "Chef milicien":
                     _evenements.Add(new Dialogue("Halte là"));
-                    _evenements.Add(new Deplacement())
+                    _evenements.Add(new Deplacement(100,100));
 
                     break;
                 case "Sage du village":

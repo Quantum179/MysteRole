@@ -175,7 +175,7 @@ namespace Tiled2Unity
             }
         }
 
-        private Material OnAssignMaterialModel(Material defaultMaterial, Renderer renderer)
+        private UnityEngine.Material OnAssignMaterialModel(Material defaultMaterial, Renderer renderer)
         {
             if (!UseThisImporter())
                 return null;
