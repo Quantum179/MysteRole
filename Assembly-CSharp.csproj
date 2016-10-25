@@ -38,16 +38,18 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>D:/unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>D:/unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Animations\CurseurAnim\Script\CurseurAnim.cs" />
      <Compile Include="Assets\Animations\PersonnageAnim\Script\PersonnageMouvement.cs" />
+     <Compile Include="Assets\EventTrigger.cs" />
      <Compile Include="Assets\GestionPersonnage.cs" />
+     <Compile Include="Assets\Scripts\BD\AccesBD.cs" />
      <Compile Include="Assets\Scripts\Données\Cible.cs" />
      <Compile Include="Assets\Scripts\Données\Competence.cs" />
      <Compile Include="Assets\Scripts\Données\Effet.cs" />
@@ -59,6 +61,7 @@
      <Compile Include="Assets\Scripts\Données\Stats.cs" />
      <Compile Include="Assets\Scripts\Données\Zone.cs" />
      <Compile Include="Assets\Scripts\Données\role.cs" />
+     <Compile Include="Assets\Scripts\GestionBtn.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
@@ -70,6 +73,7 @@
      <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
      <Compile Include="Assets\Scripts\Interface\ListeScenesDebogueur.cs" />
      <Compile Include="Assets\Scripts\Interface\ParamScenesDebogage.cs" />
+     <Compile Include="Assets\Scripts\MenuControle.cs" />
      <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Deplacement.cs" />
@@ -94,19 +98,19 @@
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\map21.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
-     <None Include="Assets\Tiled2Unity\Imported\map0.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map11.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map12.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map01.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map22.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
      <None Include="Assets\Préfabs\Unités\Unités.txt" />
      <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
      <None Include="Assets\Animations\Effets\Effets.txt" />
-     <None Include="Assets\Tiled2Unity\Imported\map1.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\map00.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
-     <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map23.tiled2unity.xml" />
      <None Include="Assets\Pixies\Personnages\Personnages.txt" />
      <None Include="Assets\Images\Images.txt" />
@@ -116,17 +120,20 @@
      <None Include="Assets\Tiled2Unity\License.txt" />
      <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
      <None Include="Assets\Scripts\BD\BD.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\map13.tiled2unity.xml" />
      <None Include="Assets\Préfabs\Objets\Objets.txt" />
      <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
-     <None Include="Assets\Tiled2Unity\Imported\sans-titre.tiled2unity.xml" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Data">
+ <HintPath>D:/GitHub/MysteRole/Assets/System.Data.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
