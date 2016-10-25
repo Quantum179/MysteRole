@@ -13,14 +13,22 @@ public class GenerateurGrid : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		int carteChoisi = 1;
+        int carteChoisi = Random.Range(0, 2) ;
 		if(carteChoisi==1){
 			Instantiate (GameObject.Find ("CartePrefab").GetComponent<Prefab> ().carteCombat1prefab);
 			LargeurGrid=20;
 			HauteurGrid=10;
 
 			transform.position = new Vector3 (125,-250,0);
-		}
+        }
+        else
+        {
+            Instantiate(GameObject.Find("CartePrefab").GetComponent<Prefab>().carteCombat2prefab);
+            LargeurGrid = 25;
+            HauteurGrid = 7;
+
+            transform.position = new Vector3(125, -250, 0);
+        }
 		listeCases = new GameObject[LargeurGrid+1, HauteurGrid+1];
 
 		for (var i = 1; i < LargeurGrid+1; i++) {

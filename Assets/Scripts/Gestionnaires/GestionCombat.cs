@@ -143,7 +143,7 @@ public class GestionCombat : MonoBehaviour {
 			listPersonnage.Add (j);
 			listJoueur.Add(j);
 		});
-		DonneesJeu.EquipeMonstre.Membres.ForEach (delegate(Personnage obj) {
+		DonneesJeu.Adversaires.Membres.ForEach (delegate(Personnage obj) {
 			GameObject j;
 			j = Instantiate (Resources.Load ("Prefab/prefabPersonnage")) as GameObject;
 			j.GetComponent<GestionPersonnage> ().monPersonnage = obj;
@@ -162,7 +162,7 @@ public class GestionCombat : MonoBehaviour {
 		listEnemi.RemoveAll (perso => perso == null);
 
 		if (listPersonnage.Count == 0) {
-			//GestScene.ProchaineScene ("");
+			GestScene.ProchaineScene ("Menu_Principal");
 		}
 		if (curseur) {
 			bougeCurseur ();
