@@ -37,7 +37,6 @@
   <image source="tilesets/celiannatilec.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="1281" name="RPG_Maker_VX_RTP_Tileset_by_telles0808" tilewidth="32" tileheight="32" tilecount="2016" columns="32">
-  <image source="tilesets/RPG_Maker_VX_RTP_Tileset_by_telles0808.png" width="1024" height="2016"/>
  </tileset>
  <tileset firstgid="3297" name="colliders" tilewidth="32" tileheight="32" tilecount="432" columns="27">
   <image source="../Assets/Tiled2Unity/Textures/colliders.png" width="864" height="540"/>

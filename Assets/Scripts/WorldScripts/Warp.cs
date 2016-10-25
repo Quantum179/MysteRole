@@ -16,7 +16,7 @@ public class Warp : MonoBehaviour {
     IEnumerator OnTriggerEnter2D(Collider2D other)
     {
         //ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
-        yield return StartCoroutine(GestScene.FadeOut());
+        //yield return StartCoroutine(GestScene.FadeOut());
 
         Camera.main.transform.position = warpTarget.position;
         //System.Threading.Thread.Sleep(250);
@@ -28,7 +28,7 @@ public class Warp : MonoBehaviour {
 
         other.gameObject.transform.position = warpTarget.position;
         
-        yield return StartCoroutine(GestScene.FadeIn());
+        //yield return StartCoroutine(GestScene.FadeIn());
 
 
     }
