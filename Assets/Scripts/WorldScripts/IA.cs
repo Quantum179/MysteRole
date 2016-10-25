@@ -94,7 +94,7 @@ namespace Mysterole
                     _evenements.Add(new Dialogue("Voici le papier t'autorisant à entrer dans la cité"));
 
                     _deplacements.Add(new Deplacement(34, -10));
-                    //_deplacements.Add(new Deplacement(38, -10));
+                    _deplacements.Add(new Deplacement(38, -10));
                     break;
                 case "Milicien":
 
@@ -115,7 +115,7 @@ namespace Mysterole
             //    StartCoroutine(TriggerEvent(true));
             //}
 
-            Erreurs.NouvelleErreur(index.ToString());
+
 
             if(index < _evenements.Count)
                 RunEvent();
@@ -197,7 +197,7 @@ namespace Mysterole
             {
                 if(!_isWalking)
                 _isWalking = true;
-                tempsIdle = 2.0f;
+                tempsIdle = 5.0f;
             }
 
 
@@ -224,10 +224,8 @@ namespace Mysterole
 
 
 
-                    if (rbody.position == _deplacements[indexAuto].Destination && _isWalking)
+                    if (rbody.position == _deplacements[indexAuto].Destination)
                     {
-
-
                         _isWalking = false;
                         anim.SetBool("isWalking", false);
                         //anim.SetFloat("input_x", -1);
@@ -238,16 +236,17 @@ namespace Mysterole
                             indexAuto = 0;
 
 
-                        Erreurs.NouvelleErreur(_deplacements[indexAuto].Destination.ToString() + ";  "
-    + rbody.position + "; "
-    + indexAuto.ToString());
+
+                        Erreurs.NouvelleErreur(indexAuto.ToString());
 
                     }
+
+
+                    Erreurs.NouvelleErreur(indexAuto.ToString());
 
                 }
 
             }
-
         }
 
 
