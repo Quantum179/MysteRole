@@ -82,8 +82,8 @@ public class GestTransition : MonoBehaviour {
     private void _faireAttenuation()
     {
         _enTransition = true;
-        TransparenceCible = TRANSPARENCE.VISIBLE;
         Attenuation.SetActive(true);
+        TransparenceCible = TRANSPARENCE.VISIBLE;
     }
 
     public static void DefaireAttenuationNoir(FinTransition rappel)

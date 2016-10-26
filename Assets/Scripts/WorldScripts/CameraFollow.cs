@@ -31,28 +31,36 @@ public class CameraFollow : MonoBehaviour {
 
 
 
-  //      Vector3 targetCamPos = target.position + offset;
+        Vector3 targetCamPos = target.position + offset;
 
-  //      if (target.position.x <= map.transform.position.x + cameraCurr.orthographicSize * cameraCurr.aspect)
-  //      {
-		//	targetCamPos.x = map.transform.position.x + cameraCurr.orthographicSize * cameraCurr.aspect;
-  //      }
-		//if (target.position.x >= map.transform.position.x + map.NumTilesWide - cameraCurr.orthographicSize * cameraCurr.aspect)
-  //      {
-		//	targetCamPos.x = map.transform.position.x + map.NumTilesWide - cameraCurr.orthographicSize * cameraCurr.aspect;
-  //      }
+        if (target.position.x <= map.transform.position.x + cameraCurr.orthographicSize * cameraCurr.aspect)
+        {
+            targetCamPos.x = map.transform.position.x + cameraCurr.orthographicSize * cameraCurr.aspect;
+        }
+        if (target.position.x >= map.transform.position.x + map.NumTilesWide - cameraCurr.orthographicSize * cameraCurr.aspect)
+        {
+            targetCamPos.x = map.transform.position.x + map.NumTilesWide - cameraCurr.orthographicSize * cameraCurr.aspect;
+        }
 
-  //      if (target.position.y >= map.transform.position.y - cameraCurr.orthographicSize)
-  //      {
-  //          targetCamPos.y = map.transform.position.y - cameraCurr.orthographicSize;
-  //      }
+        if (target.position.y >= map.transform.position.y - cameraCurr.orthographicSize)
+        {
+            targetCamPos.y = map.transform.position.y - cameraCurr.orthographicSize;
+        }
 
-		//if (target.position.y <= map.transform.position.y - map.NumTilesHigh + cameraCurr.orthographicSize)
-  //      {
-		//	targetCamPos.y = map.transform.position.y - map.NumTilesHigh + cameraCurr.orthographicSize;
-  //      }
+        if (target.position.y <= map.transform.position.y - map.NumTilesHigh + cameraCurr.orthographicSize)
+        {
+            targetCamPos.y = map.transform.position.y - map.NumTilesHigh + cameraCurr.orthographicSize;
+        }
 
 
-  //      transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
-	}
+        transform.position = Vector3.Lerp(transform.position, targetCamPos, GetSmoothing() * Time.deltaTime);
+    }
+
+    float GetSmoothing()
+    {
+        if (GestTransition.EnTransition)
+            return 9999.9f;
+        else
+            return smoothing;
+    }
 }

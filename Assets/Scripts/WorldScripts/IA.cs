@@ -93,6 +93,8 @@ namespace Mysterole
                     _evenements.Add(new Dialogue("Bonjour jeune aventurier."));
                     _evenements.Add(new Dialogue("Voici le papier t'autorisant à entrer dans la cité"));
 
+                    //_dialogues.Add(new Dialogue("salut"));
+
                     _deplacements.Add(new Deplacement(34, -10));
                     _deplacements.Add(new Deplacement(38, -10));
                     break;
@@ -117,8 +119,6 @@ namespace Mysterole
 
 
 
-            if(index < _evenements.Count)
-                RunEvent();
 
             if(index < _evenements.Count && _isEvent)
             {
@@ -126,11 +126,12 @@ namespace Mysterole
                 {
                     case "Dialogue":
 
-                        if (Input.GetKeyDown(KeyCode.H) && _isEvent)
+                        if (Input.GetButtonUp("Accepter") && _isEvent)
                         {
                             EcranDialogue.closeDialog();
                             _isEvent = false;
                             _canEvent = true;
+
                             index++;
                         }
                         break;
@@ -164,8 +165,30 @@ namespace Mysterole
                 }
 
                 if (index == _evenements.Count)
-                    GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = true;     
+                {
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = true;
+
+                    switch (_nomPnj)
+                    {
+                        case "Sage du village":
+                            Erreurs.NouvelleErreur("Quête terminée : obtenir l'autorisation");
+                            break;
+                        case "Chef milicien":
+                            Erreurs.NouvelleErreur("Nouvelle quête : obtenir l'autorisation");
+                            //GestionWorld.testQuete = true;
+                            DonneesJeu.Declencheurs.RendreActif("papier");
+                            break;
+                    }
+                    
+                }
+                else if (_nomPnj == "Sage du village" && DonneesJeu.Declencheurs.EstInactif("papier") && index == 1)
+                {
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = true;
+                }
+
             }
+            if (index < _evenements.Count)
+                RunEvent();
 
 
 
@@ -234,16 +257,7 @@ namespace Mysterole
                             indexAuto = 1;
                         else
                             indexAuto = 0;
-
-
-
-                        Erreurs.NouvelleErreur(indexAuto.ToString());
-
                     }
-
-
-                    Erreurs.NouvelleErreur(indexAuto.ToString());
-
                 }
 
             }
@@ -261,15 +275,25 @@ namespace Mysterole
                 switch (_evenements[index].GetTypeEvent())
                 {
                     case "Dialogue":
-                        
-                        Dialogue unDialogue = (Dialogue)_evenements[index];
-                        EcranDialogue.NewDialog(_nomPnj, unDialogue.Message);
-                        _canEvent = false;
+
+                        if (_nomPnj == "Sage du village" && DonneesJeu.Declencheurs.EstInactif("papier") && index == 1)
+                        {
+                            _isEvent = false;
+                            _canEvent = false;
+                            index = 0;
+                        }
+                        else
+                        {
+
+                            Dialogue unDialogue = (Dialogue)_evenements[index];
+                            EcranDialogue.NewDialog(_nomPnj, unDialogue.Message);
+                            _canEvent = false;
+                        }
                         break;
                     case "Deplacement":
                         break;
                     default:
-                        Debug.Log("erreur event, " + index.ToString());
+
                         break;
                 }
             }
@@ -283,10 +307,12 @@ namespace Mysterole
 
         }
 
-        public static void SetEvent()
+        public bool GetEvent()
         {
 
+            return !(index == _evenements.Count);
         }
+
 
 
     }
