@@ -35,8 +35,8 @@ public class ListeDeclencheursDebogage : MonoBehaviour {
         DonneesJeu.Declencheurs.RendreActif("Test19");
         DonneesJeu.Declencheurs.RendreInactif("Test20");
         DonneesJeu.Declencheurs.RendreActif("Test21");
-        DonneesJeu.Declencheurs.RendreInactif("Pouette");
-        DonneesJeu.Declencheurs.RendreActif("Anticonstitutionnellement");*/
+        DonneesJeu.Declencheurs.RendreInactif("Pouette");*/
+        DonneesJeu.Declencheurs.RendreActif("Anticonstitutionnellement");
         Interface = new Dictionary<string, GameObject>();
 
         Rafraichir();
