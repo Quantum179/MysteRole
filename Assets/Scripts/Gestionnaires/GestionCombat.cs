@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Mysterole;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GestionCombat : MonoBehaviour {
 
@@ -127,7 +128,8 @@ public class GestionCombat : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		menuCombat.SetActive (false);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Combat"));
+        menuCombat.SetActive (false);
 		EventSystem = GameObject.Find ("EventSystem");
 		// Aller chercher les données nécéssaire de la Grid générée.
 		CombatGrid = GameObject.Find ("CombatGrid");

@@ -100,6 +100,18 @@ public class GestScene : MonoBehaviour
                 if (!SceneManager.UnloadScene(SceneActuelle))
                     return false;
             }
+
+            Dictionary<string, TypeScene>.Enumerator e = _scenesNoms.GetEnumerator();
+
+            while(e.MoveNext())
+            {
+                if (e.Current.Key != scene && e.Current.Value != TypeScene.Initiale)
+                {
+                    if (SceneManager.GetSceneByName(e.Current.Key).isLoaded)
+                        SceneManager.UnloadScene(e.Current.Key);
+                }
+            }
+
             if (!SceneManager.GetSceneByName(scene).isLoaded)
             {
                 SceneManager.LoadScene(scene, LoadSceneMode.Additive);

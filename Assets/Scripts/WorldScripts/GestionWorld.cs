@@ -20,7 +20,7 @@ public class GestionWorld : MonoBehaviour {
 
 
     private static bool _isActive = false;
-    private float tempsCombat = 25.0f;
+    private float tempsCombat = 1.0f;
 
 
 	// Use this for initialization
@@ -30,7 +30,7 @@ public class GestionWorld : MonoBehaviour {
         string sb = "map" + (int)(player.position.x / 50) + (int)(player.position.y / -50);
         _map = GameObject.Find(sb).GetComponent<TiledMap>();
         
-        _monstres.Add(DonneesJeu.EquipesMonstres[0]);
+        _monstres.Add(DonneesJeu.EquipesMonstre[0]);
 
         ran = new System.Random();
 
