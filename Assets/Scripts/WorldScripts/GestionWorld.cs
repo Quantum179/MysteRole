@@ -30,7 +30,7 @@ public class GestionWorld : MonoBehaviour {
         string sb = "map" + (int)(player.position.x / 50) + (int)(player.position.y / -50);
         _map = GameObject.Find(sb).GetComponent<TiledMap>();
         
-        _monstres.Add(DonneesJeu.EquipesMonstres[0]);
+        _monstres.Add(DonneesJeu.EquipesMonstre[0]);
 
         ran = new System.Random();
 
