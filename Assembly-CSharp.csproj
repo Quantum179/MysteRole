@@ -38,17 +38,17 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>D:/unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>D:/unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Animations\CurseurAnim\Script\CurseurAnim.cs" />
-     <Compile Include="Assets\Animations\PersonnageAnim\Script\PersonnageMouvement.cs" />
+     <Compile Include="Assets\Animations\Script\CurseurAnim.cs" />
+     <Compile Include="Assets\Animations\Script\PersonnageMouvement.cs" />
      <Compile Include="Assets\EventTrigger.cs" />
-     <Compile Include="Assets\GestionPersonnage.cs" />
+     <Compile Include="Assets\Prefab.cs" />
      <Compile Include="Assets\Scripts\Données\Cible.cs" />
      <Compile Include="Assets\Scripts\Données\Competence.cs" />
      <Compile Include="Assets\Scripts\Données\Effet.cs" />
@@ -60,11 +60,13 @@
      <Compile Include="Assets\Scripts\Données\Stats.cs" />
      <Compile Include="Assets\Scripts\Données\Zone.cs" />
      <Compile Include="Assets\Scripts\Données\role.cs" />
+     <Compile Include="Assets\Scripts\GestionBtn.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestTransition.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestionPersonnage.cs" />
      <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
      <Compile Include="Assets\Scripts\Interface\Debogueur.cs" />
      <Compile Include="Assets\Scripts\Interface\Erreurs.cs" />
@@ -72,6 +74,7 @@
      <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
      <Compile Include="Assets\Scripts\Interface\ListeScenesDebogueur.cs" />
      <Compile Include="Assets\Scripts\Interface\ParamScenesDebogage.cs" />
+     <Compile Include="Assets\Scripts\MenuControle.cs" />
      <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Deplacement.cs" />
@@ -127,13 +130,16 @@
      <None Include="Assets\Préfabs\Objets\Objets.txt" />
      <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Data">
+ <HintPath>D:/GitHub/MysteRole/Assets/System.Data.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
