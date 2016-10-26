@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Tiled2Unity;
+using Mysterole;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class PlayerMovement : MonoBehaviour {
     bool canEvent = false;
 	private TiledMap map;
 	private CameraFollow cf;
+    private GameObject pnjProche;
+
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +28,17 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 
 
+        if (Input.GetButtonUp("Accepter") && _canMove)
+        {
+            if (pnjProche != null && pnjProche.GetComponent<IA>().GetEvent())
+            {
+                _canMove = !pnjProche.GetComponent<IA>().StartEvent();
+            }
+            
+        }
+
+
+        
         Vector2 movement_vector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         //GetComponent<SpriteRenderer>().sortingOrder = -(int)transform.position.y;
 
@@ -46,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {
             rbody.position.y + movement_vector.y < cf.map.transform.position.y &&
             rbody.position.y + movement_vector.y > cf.map.transform.position.y - cf.map.NumTilesHigh && _canMove)
         {
-            rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 25);
+            rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 40);
         }
 
 
@@ -55,20 +69,23 @@ public class PlayerMovement : MonoBehaviour {
 
 
 
-    void OnCollisionEnter2D()
+
+
+    void OnCollisionEnter2D(Collision2D other)
     {
         canEvent = true;
     }
 
     void OnCollisionStay2D(Collision2D other)
     {
-        //evenement = other.transform.GetComponent<Evenement>();
+        pnjProche = other.gameObject;
     }
 
-    void OnCollisionExit2D()
+    void OnCollisionExit2D(Collision2D other)
     {
         canEvent = false;
     }
+
 
     public static GameObject GetPlayer()
     {

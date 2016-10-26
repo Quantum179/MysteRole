@@ -21,9 +21,10 @@ public class GestScene : MonoBehaviour
         {
             /*if (*/
             _prochaineScene(TransitionScene);//)
+            TransitionScene = null;
             //{
                 GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationDefait);
-                GestTransition.DefaireAttenuationNoir(rappel);
+                GestTransition.DefaireAttenuationNoir(rappel, GestTransition.VITESSE.NORMAL);
             //}
             /*else
             {
@@ -113,8 +114,9 @@ public class GestScene : MonoBehaviour
     private void _prochaineSceneTransition(string scene)
     {
         //Debug.Log("Début transition");
+        TransitionScene = scene;
         GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationFait);
-        GestTransition.FaireAttenuationNoir(rappel);
+        GestTransition.FaireAttenuationNoir(rappel, GestTransition.VITESSE.NORMAL);
     }
     /*public static IEnumerator FadeOut()
     {

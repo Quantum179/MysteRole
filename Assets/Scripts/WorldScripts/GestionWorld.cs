@@ -9,21 +9,18 @@ public class GestionWorld : MonoBehaviour {
 
 
     private Transform player;
-    private TiledMap map;
+    private static TiledMap _map;
     private int coefCombat = 10;
     public System.Random ran;
 
-    private List<Equipe> _monstres;
+    private List<Equipe> _monstres = new List<Equipe>();
 
 
-    // List<Equipe> MONSTRES = new List<Equipe>();
-    // MONSTRES.Add(DonneesJeu.EquipesMonstre[0]);
-    //add
-    //add
+    public static bool testQuete = false;
 
 
     private static bool _isActive = false;
-    private float tempsCombat = 30.0f;
+    private float tempsCombat = 25.0f;
 
 
 	// Use this for initialization
@@ -31,9 +28,9 @@ public class GestionWorld : MonoBehaviour {
         player = GameObject.Find("Player").GetComponent<Transform>();
 
         string sb = "map" + (int)(player.position.x / 50) + (int)(player.position.y / -50);
-        map = GameObject.Find(sb).GetComponent<TiledMap>();
-
-        //_monstres.Add(DonneesJeu.EquipesMonstres[0]);
+        _map = GameObject.Find(sb).GetComponent<TiledMap>();
+        
+        _monstres.Add(DonneesJeu.EquipesMonstres[0]);
 
         ran = new System.Random();
 
@@ -43,6 +40,10 @@ public class GestionWorld : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
+
+            
 
         //int x = ran.Next(0, coefCombat);
         //int y = ran.Next(0, 1);
@@ -59,13 +60,25 @@ public class GestionWorld : MonoBehaviour {
         
 
         //Uniformiser les données de map pour qu'elles permettent de gérer le déclenchement des combats et des quêtes
-        switch(map.gameObject.name)
+        switch(_map.gameObject.name)
         {
             case "map00":
             case "map23":
-
+                _isActive = false;
                 break;
             default:
+
+                if (_isActive)
+                    tempsCombat -= Time.deltaTime;
+
+                Debug.Log(tempsCombat);
+                if (tempsCombat < 1 && !GestTransition.EnTransition)
+                {
+                    Equipe unGroupe = _monstres[Random.Range(0, _monstres.Count)];
+                    DonneesJeu.Adversaires = unGroupe;
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = false;
+                    GestScene.ProchaineSceneTransition("Combat");
+                }
 
                 break;
         }
@@ -82,12 +95,12 @@ public class GestionWorld : MonoBehaviour {
 
     public static InfosWorld GetInfos()
     {
-        // QUAND COMBAT :
-
-
-        //Equipe unGroupe = _monstres[Random.Range(0, _monstres.Count)];
-        //DonneesJeu.Adversaires = unGroupe;
         return new InfosWorld("combat" + Random.Range(0,1), PlayerMovement.GetPlayer());
+    }
+
+    public static void UpdateMap(TiledMap map)
+    {
+        _map = map;
     }
 
 }
