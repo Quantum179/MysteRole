@@ -20,7 +20,7 @@ public class GestionWorld : MonoBehaviour {
 
 
     private static bool _isActive = false;
-    private float tempsCombat = 25.0f;
+    private float tempsCombat = 60.0f;
 
 
 	// Use this for initialization

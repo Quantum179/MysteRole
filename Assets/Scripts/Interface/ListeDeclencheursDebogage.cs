@@ -14,7 +14,7 @@ public class ListeDeclencheursDebogage : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        DonneesJeu.Declencheurs.RendreInactif("Test1");
+        /*DonneesJeu.Declencheurs.RendreInactif("Test1");
         DonneesJeu.Declencheurs.RendreActif("Test2");
         DonneesJeu.Declencheurs.RendreInactif("Test4");
         DonneesJeu.Declencheurs.RendreActif("Test3");
@@ -36,7 +36,7 @@ public class ListeDeclencheursDebogage : MonoBehaviour {
         DonneesJeu.Declencheurs.RendreInactif("Test20");
         DonneesJeu.Declencheurs.RendreActif("Test21");
         DonneesJeu.Declencheurs.RendreInactif("Pouette");
-        DonneesJeu.Declencheurs.RendreActif("Anticonstitutionnellement");
+        DonneesJeu.Declencheurs.RendreActif("Anticonstitutionnellement");*/
         Interface = new Dictionary<string, GameObject>();
 
         Rafraichir();
