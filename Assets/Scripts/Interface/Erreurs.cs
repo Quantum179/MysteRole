@@ -23,13 +23,12 @@ class Erreurs : MonoBehaviour
         if (change)
         {
             change = false;
-            new WaitForEndOfFrame();
             GetComponentInChildren<Scrollbar>().value = 0;
         }
     }
     static public void NouvelleErreur(string message)
     {
-        tz.text += message + '\n';
+        tz.text += DateTime.Now.ToString() + message + '\n';
         Main.gameObject.SetActive(true);
         change = true;
     }

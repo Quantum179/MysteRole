@@ -14,6 +14,8 @@ public class GestScene : MonoBehaviour
     private string TransitionScene;
     private Dictionary<string, TypeScene> _scenesNoms;
 
+    private static InfosWorld Infos;
+
     private void AttenuationFait(bool ok)
     {
         //Debug.Log("Mi-transition");
@@ -87,14 +89,13 @@ public class GestScene : MonoBehaviour
 
         if (SceneActuelle == null || scene != SceneActuelle)
         {
+            GUI.FocusControl("");
             if (SceneActuelle != null)
             {
-                if (_scenesNoms[scene] == TypeScene.Combat)
+                if (_scenesNoms[scene] == TypeScene.Combat && _scenesNoms[SceneActuelle] == TypeScene.Carte)
                 {
                     // TODO : Trouver le Transform de l'avatar de l'équipe.
-                } else if (_scenesNoms[SceneActuelle] == TypeScene.Combat)
-                {
-                    // TODO : Appliquer le Transform à l'avatar de l'équipe.
+                    Infos = GestionWorld.GetInfos();
                 }
                 if (!SceneManager.UnloadScene(SceneActuelle))
                     return false;
@@ -103,6 +104,13 @@ public class GestScene : MonoBehaviour
             {
                 SceneManager.LoadScene(scene, LoadSceneMode.Additive);
             }
+            if (_scenesNoms[scene] == TypeScene.Carte && Infos != null)
+            {
+                GameObject.Find("Player").transform.position = Infos.player.transform.position;
+                // TODO : Carte nom
+                Infos = null;
+            }
+
             SceneActuelle = scene;
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
         }
@@ -116,7 +124,8 @@ public class GestScene : MonoBehaviour
         //Debug.Log("Début transition");
         TransitionScene = scene;
         GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationFait);
-        GestTransition.FaireAttenuationNoir(rappel, GestTransition.VITESSE.NORMAL);
+        TransitionScene = scene;
+        GestTransition.FaireAttenuationNoir(rappel);
     }
     /*public static IEnumerator FadeOut()
     {
