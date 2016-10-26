@@ -132,10 +132,6 @@ namespace Mysterole
                             _isEvent = false;
                             _canEvent = true;
 
-
-
-                            Debug.Log("Close Dialog : Curr Index = " + index.ToString());
-
                             index++;
                         }
                         break;
@@ -280,7 +276,6 @@ namespace Mysterole
                 {
                     case "Dialogue":
 
-                        Debug.Log("Next dialog at index " + index.ToString() + " for npc " + _nomPnj);
                         if (_nomPnj == "Sage du village" && DonneesJeu.Declencheurs.EstInactif("papier") && index == 1)
                         {
                             _isEvent = false;
@@ -298,7 +293,7 @@ namespace Mysterole
                     case "Deplacement":
                         break;
                     default:
-                        Debug.Log("erreur event, " + index.ToString());
+
                         break;
                 }
             }

@@ -71,7 +71,7 @@ public class GestionWorld : MonoBehaviour {
                 if (_isActive)
                     tempsCombat -= Time.deltaTime;
 
-                Debug.Log(tempsCombat);
+
                 if (tempsCombat < 1 && !GestTransition.EnTransition)
                 {
                     Equipe unGroupe = _monstres[Random.Range(0, _monstres.Count)];
