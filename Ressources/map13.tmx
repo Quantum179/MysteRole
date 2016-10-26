@@ -14,52 +14,52 @@
  </tileset>
  <tileset firstgid="3610" name="terrain" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="../Assets/Tiled2Unity/Textures/terrain.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="4634" name="terrain_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
-  <image source="../Assets/Tiled2Unity/Textures/terrain_atlas.png" width="1024" height="1024"/>
-  <terraintypes>
-   <terrain name="path" tile="-1"/>
-   <terrain name="water" tile="-1"/>
-  </terraintypes>
-  <tile id="16" terrain="0,0,0,"/>
-  <tile id="17" terrain="0,0,,0"/>
-  <tile id="48" terrain="0,,0,0"/>
-  <tile id="49" terrain=",0,0,0"/>
-  <tile id="79" terrain=",,,0"/>
-  <tile id="80" terrain=",,0,0"/>
-  <tile id="81" terrain=",,0,"/>
-  <tile id="111" terrain=",0,,0"/>
-  <tile id="112" terrain="0,0,0,0"/>
-  <tile id="113" terrain="0,,0,"/>
-  <tile id="143" terrain=",0,,"/>
-  <tile id="144" terrain="0,0,,"/>
-  <tile id="145" terrain="0,,,"/>
-  <tile id="298" terrain="1,1,1,"/>
-  <tile id="299" terrain="1,1,,1"/>
-  <tile id="330" terrain="1,,1,1"/>
-  <tile id="331" terrain=",1,1,1"/>
-  <tile id="361" terrain=",,,1"/>
-  <tile id="362" terrain=",,1,1"/>
-  <tile id="363" terrain=",,1,"/>
-  <tile id="393" terrain=",1,,1"/>
-  <tile id="394" terrain="1,1,1,1"/>
-  <tile id="395" terrain="1,,1,"/>
-  <tile id="425" terrain=",1,,"/>
-  <tile id="426" terrain="1,1,,"/>
-  <tile id="427" terrain="1,,,"/>
- </tileset>
- <tileset firstgid="5658" name="A5-TownVS03" tilewidth="32" tileheight="32" tilecount="42" columns="7">
-  <image source="../Assets/Tiled2Unity/Textures/A5-TownVS03.png" width="224" height="192"/>
- </tileset>
- <tileset firstgid="5700" name="BlueTownv2_byLunarea" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../Assets/Tiled2Unity/Textures/BlueTownv2_byLunarea.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="5956" name="colliders" tilewidth="32" tileheight="32" tilecount="432" columns="27">
-  <image source="../Assets/Tiled2Unity/Textures/colliders.png" width="864" height="540"/>
-  <tile id="28">
-   <objectgroup draworder="index">
-    <object id="1" x="0.0625" y="0" width="31.8125" height="32"/>
-   </objectgroup>
+</tileset>
+<tileset firstgid="4634" name="terrain_atlas" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+ <image source="../Assets/Tiled2Unity/Textures/terrain_atlas.png" width="1024" height="1024"/>
+ <terraintypes>
+  <terrain name="path" tile="-1"/>
+  <terrain name="water" tile="-1"/>
+ </terraintypes>
+ <tile id="16" terrain="0,0,0,"/>
+ <tile id="17" terrain="0,0,,0"/>
+ <tile id="48" terrain="0,,0,0"/>
+ <tile id="49" terrain=",0,0,0"/>
+ <tile id="79" terrain=",,,0"/>
+ <tile id="80" terrain=",,0,0"/>
+ <tile id="81" terrain=",,0,"/>
+ <tile id="111" terrain=",0,,0"/>
+ <tile id="112" terrain="0,0,0,0"/>
+ <tile id="113" terrain="0,,0,"/>
+ <tile id="143" terrain=",0,,"/>
+ <tile id="144" terrain="0,0,,"/>
+ <tile id="145" terrain="0,,,"/>
+ <tile id="298" terrain="1,1,1,"/>
+ <tile id="299" terrain="1,1,,1"/>
+ <tile id="330" terrain="1,,1,1"/>
+ <tile id="331" terrain=",1,1,1"/>
+ <tile id="361" terrain=",,,1"/>
+ <tile id="362" terrain=",,1,1"/>
+ <tile id="363" terrain=",,1,"/>
+ <tile id="393" terrain=",1,,1"/>
+ <tile id="394" terrain="1,1,1,1"/>
+ <tile id="395" terrain="1,,1,"/>
+ <tile id="425" terrain=",1,,"/>
+ <tile id="426" terrain="1,1,,"/>
+ <tile id="427" terrain="1,,,"/>
+</tileset>
+<tileset firstgid="5658" name="A5-TownVS03" tilewidth="32" tileheight="32" tilecount="42" columns="7">
+ <image source="../Assets/Tiled2Unity/Textures/A5-TownVS03.png" width="224" height="192"/>
+</tileset>
+<tileset firstgid="5700" name="BlueTownv2_byLunarea" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+ <image source="../Assets/Tiled2Unity/Textures/BlueTownv2_byLunarea.png" width="512" height="512"/>
+</tileset>
+<tileset firstgid="5956" name="colliders" tilewidth="32" tileheight="32" tilecount="432" columns="27">
+ <image source="../Assets/Tiled2Unity/Textures/colliders.png" width="864" height="540"/>
+ <tile id="28">
+  <objectgroup draworder="index">
+   <object id="1" x="0.0625" y="0" width="31.8125" height="32"/>
+  </objectgroup>
   </tile>
  </tileset>
  <tileset firstgid="6388" name="Hanzo-RuinsTown01VScopy" tilewidth="32" tileheight="32" tilecount="256" columns="16">

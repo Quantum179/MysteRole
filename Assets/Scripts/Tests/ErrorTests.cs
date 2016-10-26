@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Mysterole;
 
 public class ErrorTests : MonoBehaviour {
-    public string message;
+    //public GameObject debug;
 	// Use this for initialization
 	void Start () {
         /*Dictionary<string, string>[] retour = { };
@@ -32,6 +32,12 @@ public class ErrorTests : MonoBehaviour {
 
     void OnGUI()
     {
-        //GUI.Label(new Rect(0, 0, 200, 400), message);
+        /*if (GUI.Button(new Rect(300, 50, 100, 25), "Débogueur"))
+        {
+            string message = "Changer valeur Déclencheur \"Test1\" : " + DonneesJeu.Declencheurs.EstActif("Test1").ToString();
+            Erreurs.NouvelleErreur(message);
+            DonneesJeu.Declencheurs.Inverser("Test1");
+        }
+        GUI.Label(new Rect(300, 200, 200, 40), "En Transition : " + GestTransition.EnTransition.ToString());*/
     }
 }

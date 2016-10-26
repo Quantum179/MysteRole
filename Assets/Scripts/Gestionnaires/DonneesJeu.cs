@@ -41,7 +41,7 @@ public class DonneesJeu : MonoBehaviour
         ChargerRoles();
         ChargerMonstres();
         ChargerEquipeMonstres();
-		_equipe.AjoutMembre(new Joueur("Maurice", _roles[0], 1));
+		_equipe.AjoutMembre(new Joueur("Maurice", _roles[0], 5));
     }
 
     private void ChargerEquipeMonstres()
@@ -61,8 +61,8 @@ public class DonneesJeu : MonoBehaviour
 
     private void ChargerMonstres()
     {
-        _monstres.Add(0, new Role("Orque", 1, 1, 1, _competences[0], _competences[1]));
-        _monstres.Add(1, new Role("Squelette", 1, 1, 1, _competences[0], _competences[1]));
+        _monstres.Add(0, new Role("Orque", 5, 5, 5, _competences[0], _competences[1]));
+        _monstres.Add(1, new Role("Squelette", 5, 5, 5, _competences[0], _competences[1]));
         return;
     }
 
@@ -87,7 +87,7 @@ public class DonneesJeu : MonoBehaviour
         {
             if (Input.GetKeyUp("f12"))
             {
-                Debogueur.SetActive(true);
+                Debogueur.SetActive(!Debogueur.activeSelf);
             }
         }
         if (Debogueur.activeSelf || Erreurs.Visible())

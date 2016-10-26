@@ -9,9 +9,37 @@ public class GestScene : MonoBehaviour
 {
     private static GestScene moi;
     public string PremiereScene;
-    public GameObject Transition;
     private string SceneActuelle;
+    private bool PremiereFois = true;
+    private string TransitionScene;
     private Dictionary<string, TypeScene> _scenesNoms;
+
+    private void AttenuationFait(bool ok)
+    {
+        //Debug.Log("Mi-transition");
+        if (ok)
+        {
+            /*if (*/
+            _prochaineScene(TransitionScene);//)
+            //{
+                GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationDefait);
+                GestTransition.DefaireAttenuationNoir(rappel);
+            //}
+            /*else
+            {
+                Erreurs.NouvelleErreur("La scène \"" + TransitionScene + "\" ne fut pas chargée : Une erreure est survenue.");
+            }*/
+        }
+        else
+            Erreurs.NouvelleErreur("La scène \"" + TransitionScene + "\" ne fut pas chargée : La transition a échoué.");
+    }
+
+    private void AttenuationDefait(bool ok)
+    {
+        //Debug.Log("Fin");
+        if (!ok)
+            Erreurs.NouvelleErreur("Une erreur est survenue lors de la fin de la transition vers \"" + TransitionScene + "\".");
+    }
 
     public enum TypeScene
     {
@@ -34,14 +62,19 @@ public class GestScene : MonoBehaviour
         _scenesNoms.Add("Init", TypeScene.Initiale);
         _scenesNoms.Add("Menu_Principal", TypeScene.Menu);
         _scenesNoms.Add("Creation_personnage", TypeScene.Menu);
-        _prochaineSceneTransition(PremiereScene);
+        //_prochaineSceneTransition(PremiereScene);
+        TransitionScene = PremiereScene;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (SceneActuelle == null)
-            if (!_prochaineScene(PremiereScene))
-                Erreurs.NouvelleErreur("Pas loadé");
+        if (PremiereFois)
+        {
+            AttenuationFait(true);
+            PremiereFois = false;
+            /*else
+                FadeIn();*/
+        }
     }
 
     private bool _prochaineScene(string scene)
@@ -77,33 +110,32 @@ public class GestScene : MonoBehaviour
 
         return true;
     }
-    private bool _prochaineSceneTransition(string scene)
+    private void _prochaineSceneTransition(string scene)
     {
-        FadeOut();
-        bool ok = _prochaineScene(scene);
-        FadeIn();
-        return ok;
+        //Debug.Log("Début transition");
+        GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationFait);
+        GestTransition.FaireAttenuationNoir(rappel);
     }
-    public static IEnumerator FadeOut()
+    /*public static IEnumerator FadeOut()
     {
-        moi.Transition.SetActive(true);
+        ScreenFader sf = moi.Transition.GetComponent<ScreenFader>();
+        sf.gameObject.SetActive(true);
         yield return null;
-        ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
         yield return moi.StartCoroutine(sf.FadeToBlack());
     }
     public static IEnumerator FadeIn()
     {
-        ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
+        ScreenFader sf = moi.Transition.GetComponent<ScreenFader>();
         yield return moi.StartCoroutine(sf.FadeToClear());
-        moi.Transition.SetActive(false);
-    }
-    public static bool ProchaineScene(string scene)
+        sf.gameObject.SetActive(false);
+    }*/
+    public static void ProchaineScene(string scene)
     {
-        return moi._prochaineScene(scene);
+        moi._prochaineScene(scene);
     }
-    public static bool ProchaineSceneTransition(string scene)
+    public static void ProchaineSceneTransition(string scene)
     {
-        return moi._prochaineSceneTransition(scene);
+        moi._prochaineSceneTransition(scene);
     }
     public static Dictionary<string, TypeScene> ScenesNoms { get { return moi._scenesNoms; } }
 }

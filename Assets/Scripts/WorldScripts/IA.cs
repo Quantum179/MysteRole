@@ -15,11 +15,14 @@ namespace Mysterole
         //private List<Quete> _quetes;
         //public List<Quete> Quetes { get; private set; }
 
-        private Dictionary<string, Dialogue> _dialogues;
-        public Dictionary<bool, Dialogue> Dialogues { get; private set; }
+        private List<Dialogue> _dialogues;
+        public List<Dialogue> Dialogues { get { return _dialogues; } private set { } }
+
+        private List<Deplacement> _deplacements;
+        public List<Deplacement> Deplacements { get { return _deplacements; } private set { } }
 
         private List<Evenement> _evenements;
-        public List<Evenement> Evenements { get; private set; }
+        public List<Evenement> Evenements { get { return _evenements; } private set { } }
         
 
         private string _nomPnj;
@@ -35,6 +38,7 @@ namespace Mysterole
         private GameObject player;
         //private int velocity = 10;
         private int index = 0;
+        private int indexAuto = 0;
 
         private bool _canEvent = false;
         public bool CanEvent { get; set; }
@@ -62,29 +66,32 @@ namespace Mysterole
             anim = GetComponent<Animator>();
 
             _evenements = new List<Evenement>();
-
-
-            //dataPnj = new Dictionary<string ,Evenement>();
-
-            //dataPnj.Add("", new Dialogue("Halte là !"));
-            //dataPnj.Add("", new Deplacement(115, -176));
-            //dataPnj.Add("", new Dialogue("Vous n'avez pas le droit d'entrer ici !"));
-
-            _nomPnj = "Chef Milicien";
-
+            _dialogues = new List<Dialogue>();
+            _deplacements = new List<Deplacement>();
+            _nomPnj = gameObject.name;
 
 
 
             switch (_nomPnj)
             {
-                case "Chef Milicien":
+                case "Chef milicien":
                     _evenements.Add(new Dialogue("Halte là"));
                     _evenements.Add(new Deplacement(131,-175));
                     _evenements.Add(new Dialogue("Vous ne pouvez pas entrer dans la cité !"));
+                    _evenements.Add(new Dialogue("Revenez avec une autorisation"));
+                    _evenements.Add(new Deplacement(135, -175));
+
+
+                    _dialogues.Add(new Dialogue("Vous ne passerez pas tant que je ne verrai pas d'autorisation"));
+
+                    //ajouter quêtes
                     break;
-                case "Sage Du Village":
+                case "Sage du village":
                     _evenements.Add(new Dialogue("Bonjour jeune aventurier."));
                     _evenements.Add(new Dialogue("Voici le papier t'autorisant à entrer dans la cité"));
+
+                    _deplacements.Add(new Deplacement(34, -10));
+                    _deplacements.Add(new Deplacement(38, -10));
                     break;
                 case "Milicien":
 
@@ -143,6 +150,7 @@ namespace Mysterole
                             _isEvent = false;
                             _canEvent = true;
                             anim.SetBool("isWalking", false);
+                            anim.SetFloat("input_x", -1);
                             index++;
                         }
                         break;
@@ -151,27 +159,40 @@ namespace Mysterole
                 }
 
                 if (index == _evenements.Count)
-                    GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = true;
-                    
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().CanMove = true;     
             }
 
 
 
 
-            //if (dataPnj[index].GetTypeEvent().ToString() == "Dialogue")
-            //{
-            //    if (Input.GetKeyDown(KeyCode.T) && isEvent)
-            //    {
-            //        EcranDialogue.closeDialog();
-
-            //        index++;
-            //    }
-            //}
 
 
-            //if (dataPnj[index].GetTypeEvent().ToString() == "Deplacement")
-            //{
-            //}
+
+            if(_nomPnj == "Sage du village")
+            {
+                if (_isEvent)
+                {
+                    offset = new Vector2(_deplacements[indexAuto].Destination.x - rbody.position.x, _deplacements[indexAuto].Destination.y - rbody.position.y);
+
+                    anim.SetBool("isWalking", true);
+                    anim.SetFloat("input_x", offset.x);
+                    anim.SetFloat("input_y", offset.y);
+
+                    //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
+
+                    transform.position = Vector3.MoveTowards(transform.position, _deplacements[indexAuto].Destination, Time.deltaTime * 5);
+                }
+
+                if (rbody.position == _deplacements[indexAuto].Destination)
+                {
+                    _isEvent = false;
+                    _canEvent = true;
+                    anim.SetBool("isWalking", false);
+                    anim.SetFloat("input_x", -1);
+                    indexAuto == 0 ? index++: ;
+                }
+
+            }
         }
 
 

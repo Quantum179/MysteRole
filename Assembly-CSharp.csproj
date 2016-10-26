@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\GestionBtn.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
+     <Compile Include="Assets\Scripts\Gestionnaires\GestTransition.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
      <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
      <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\Scripts\WorldScripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\EcranDialogue.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Evenement.cs" />
+     <Compile Include="Assets\Scripts\WorldScripts\GestionWorld.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\IA.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\Npc.cs" />
      <Compile Include="Assets\Scripts\WorldScripts\PlayerMovement.cs" />
@@ -97,7 +99,9 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\combat2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\map21.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
      <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
