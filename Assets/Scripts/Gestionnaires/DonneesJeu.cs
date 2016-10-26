@@ -95,7 +95,7 @@ public class DonneesJeu : MonoBehaviour
         if (Debogueur.activeSelf || Erreurs.Visible())
             Cursor.visible = true;
         else
-            Cursor.visible = false;
+            Cursor.visible = true;
     }
     void OnGUI()
     {
