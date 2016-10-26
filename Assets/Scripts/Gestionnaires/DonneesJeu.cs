@@ -43,7 +43,7 @@ public class DonneesJeu : MonoBehaviour
         ChargerRoles();
         ChargerMonstres();
         ChargerEquipeMonstres();
-		_equipe.AjoutMembre(new Joueur("Maurice", _roles[0], 5));
+		//_equipe.AjoutMembre(new Joueur("Maurice", _roles[0], 5));
     }
 
     private void ChargerEquipeMonstres()

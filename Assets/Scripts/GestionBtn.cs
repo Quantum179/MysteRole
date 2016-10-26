@@ -11,8 +11,7 @@ public class GestionBtn : MonoBehaviour {
     }
     public void NouvellePartieBtn(string NouvellePartie)
     {
-        
-        GestScene.ProchaineScene(NouvellePartie);
+        GestScene.ProchaineSceneTransition(NouvellePartie);
     }
 
     public void QuitterBtn()
@@ -20,7 +19,7 @@ public class GestionBtn : MonoBehaviour {
         Application.Quit();
     }
 
-    public void CreerPersonnage(UnityEngine.UI.Text nom)
+    public void CreerPersonnage(UnityEngine.UI.InputField nom)
     {
         Joueur perso = new Joueur(nom.text, DonneesJeu.Roles[0], 5);
         DonneesJeu.Equipe.AjoutMembre(perso);
