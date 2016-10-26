@@ -5,7 +5,7 @@ using Tiled2Unity;
 public class PlayerMovement : MonoBehaviour {
 
 
-    Rigidbody2D rbody;
+    private static Rigidbody2D rbody;
     Animator anim;
     private bool _canMove = true;
     public bool CanMove { get { return _canMove; } set { _canMove = value; } }
@@ -68,5 +68,10 @@ public class PlayerMovement : MonoBehaviour {
     void OnCollisionExit2D()
     {
         canEvent = false;
+    }
+
+    public static GameObject GetPlayer()
+    {
+        return rbody.gameObject;
     }
 }

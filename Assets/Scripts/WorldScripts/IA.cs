@@ -45,6 +45,9 @@ namespace Mysterole
         private bool _isEvent = false;
         public bool IsEvent { get; set; }
 
+        private bool _isWalking = false;
+        private float tempsIdle = 1.0f;
+
 
         ////Constructeur
         //public IA(string nomPnj)
@@ -112,10 +115,12 @@ namespace Mysterole
             //    StartCoroutine(TriggerEvent(true));
             //}
 
+
+
             if(index < _evenements.Count)
                 RunEvent();
 
-            if(index < _evenements.Count)
+            if(index < _evenements.Count && _isEvent)
             {
                 switch (_evenements[index].GetTypeEvent())
                 {
@@ -168,28 +173,77 @@ namespace Mysterole
 
 
 
-            if(_nomPnj == "Sage du village")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            tempsIdle -= Time.deltaTime;
+            if (tempsIdle < 1)
             {
-                if (_isEvent)
+                if(!_isWalking)
+                _isWalking = true;
+                tempsIdle = 5.0f;
+            }
+
+
+
+            if (indexAuto < _deplacements.Count)
+            {
+                if (_nomPnj == "Sage du village")
                 {
-                    offset = new Vector2(_deplacements[indexAuto].Destination.x - rbody.position.x, _deplacements[indexAuto].Destination.y - rbody.position.y);
 
-                    anim.SetBool("isWalking", true);
-                    anim.SetFloat("input_x", offset.x);
-                    anim.SetFloat("input_y", offset.y);
+                    if (_isWalking)
+                    {
+                        offset = new Vector2(_deplacements[indexAuto].Destination.x - rbody.position.x, _deplacements[indexAuto].Destination.y - rbody.position.y);
 
-                    //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
+                        anim.SetBool("isWalking", true);
+                        anim.SetFloat("input_x", offset.x);
+                        anim.SetFloat("input_y", offset.y);
+                        _canEvent = false;
 
-                    transform.position = Vector3.MoveTowards(transform.position, _deplacements[indexAuto].Destination, Time.deltaTime * 5);
-                }
+                        //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
 
-                if (rbody.position == _deplacements[indexAuto].Destination)
-                {
-                    _isEvent = false;
-                    _canEvent = true;
-                    anim.SetBool("isWalking", false);
-                    anim.SetFloat("input_x", -1);
-                    indexAuto == 0 ? index++: ;
+                        transform.position = Vector3.MoveTowards(transform.position, _deplacements[indexAuto].Destination, Time.deltaTime * 5);
+                    }
+
+
+
+
+                    if (rbody.position == _deplacements[indexAuto].Destination)
+                    {
+                        _isWalking = false;
+                        anim.SetBool("isWalking", false);
+                        //anim.SetFloat("input_x", -1);
+
+                        if (indexAuto == 0)
+                            indexAuto = 1;
+                        else
+                            indexAuto = 0;
+
+
+
+                        Erreurs.NouvelleErreur(indexAuto.ToString());
+
+                    }
+
+
+                    Erreurs.NouvelleErreur(indexAuto.ToString());
+
                 }
 
             }

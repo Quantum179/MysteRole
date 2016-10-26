@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Mysterole;
 using System;
 
+
+
 public class DonneesJeu : MonoBehaviour
 {
     private static DonneesJeu moi;
@@ -17,11 +19,11 @@ public class DonneesJeu : MonoBehaviour
     private Dictionary<int, Etat> _etats = new Dictionary<int, Etat>();
     public GameObject Debogueur;
     public static Equipe Adversaires { get { return moi._adversaires; } set { moi._adversaires = value; } }
-    public Dictionary<int, RoleJoueur> Roles { get { return _roles; } }
-    public Dictionary<int, Competence> Competences { get { return _competences; } }
-    public Dictionary<int, Role> Monstres { get { return _monstres; } }
-    public Dictionary<int, Equipe> EquipesMonstre { get { return _equipesMonstres; } }
-    public Dictionary<int, Etat> Etats { get { return _etats; } }
+    public static Dictionary<int, RoleJoueur> Roles { get { return moi._roles; } }
+    public static Dictionary<int, Competence> Competences { get { return moi._competences; } }
+    public static Dictionary<int, Role> Monstres { get { return moi._monstres; } }
+    public static Dictionary<int, Equipe> EquipesMonstre { get { return moi._equipesMonstres; } }
+    public static Dictionary<int, Etat> Etats { get { return moi._etats; } }
 
     // Use this for initialization
     void Start()
