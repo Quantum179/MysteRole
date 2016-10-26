@@ -164,7 +164,10 @@ public class GestionCombat : MonoBehaviour {
 		listEnemi.RemoveAll (perso => perso == null);
 
 		if (listPersonnage.Count == 0) {
-			GestScene.ProchaineScene ("Menu_Principal");
+            return;
+		}
+		if (listJoueur.Count == 0) {
+            GestScene.ProchaineScene("Menu_Principal");
 		}
 		if (curseur) {
 			bougeCurseur ();

@@ -17,7 +17,7 @@ public class GenerateurGrid : MonoBehaviour {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("Combat"));
         int carteChoisi = Random.Range(0, 2) ;
 		if(carteChoisi==1){
-			Instantiate (GameObject.Find ("CartePrefab").GetComponent<Prefab> ().carteCombat1prefab);
+			Instantiate (GameObject.Find ("CartePrefab").GetComponent<Prefab> ().carteCombat1prefab, GameObject.Find("Carte").transform);
 			LargeurGrid=20;
 			HauteurGrid=10;
 

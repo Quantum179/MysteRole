@@ -116,15 +116,16 @@ public class GestScene : MonoBehaviour
             {
                 SceneManager.LoadScene(scene, LoadSceneMode.Additive);
             }
+
+            SceneActuelle = scene;
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
+
             if (_scenesNoms[scene] == TypeScene.Carte && Infos != null)
             {
                 GameObject.Find("Player").transform.position = Infos.player.transform.position;
                 // TODO : Carte nom
                 Infos = null;
             }
-
-            SceneActuelle = scene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
         }
         else
             return false;
