@@ -135,7 +135,7 @@ public class GestionCombat : MonoBehaviour {
 		int hauteurGrid = CombatGrid.GetComponent<GenerateurGrid> ().HauteurGrid;
 
 		// Instantier les joueur avec un foreach ensuite les monstre avec un autre foreach et les mettre dans une list de joueur sur le plateau présent.
-		DonneesJeu.Equipe.Membres.ForEach (delegate(Personnage obj) {
+		DonneesJeu.Equipe.Membres.ForEach ((Personnage obj) => {
 			GameObject j;
 			j = Instantiate (Resources.Load ("Prefab/prefabPersonnage")) as GameObject;
 			j.GetComponent<GestionPersonnage>().monPersonnage = obj;
@@ -143,7 +143,7 @@ public class GestionCombat : MonoBehaviour {
 			listPersonnage.Add (j);
 			listJoueur.Add(j);
 		});
-		DonneesJeu.Adversaires.Membres.ForEach (delegate(Personnage obj) {
+		DonneesJeu.Adversaires.Membres.ForEach ((Personnage obj) => {
 			GameObject j;
 			j = Instantiate (Resources.Load ("Prefab/prefabPersonnage")) as GameObject;
 			j.GetComponent<GestionPersonnage> ().monPersonnage = obj;
