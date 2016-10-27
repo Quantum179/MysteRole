@@ -11,6 +11,7 @@ public class GestScene : MonoBehaviour
     public string PremiereScene;
     private string SceneActuelle;
     private bool PremiereFois = true;
+    private bool PlacerJoueur = false;
     private string TransitionScene;
     private Dictionary<string, TypeScene> _scenesNoms;
 
@@ -78,6 +79,43 @@ public class GestScene : MonoBehaviour
             /*else
                 FadeIn();*/
         }
+        if (PlacerJoueur)
+        {
+            Debug.Log("Active scene : " + SceneManager.GetActiveScene().name);
+            if (SceneActuelle == SceneManager.GetActiveScene().name)
+            {
+                if (GameObject.Find("Player") != null)
+                {
+                    Debug.Log("\"Player\".transform : " + GameObject.Find("Player").transform.ToString());
+                    try
+                    {
+                        /*GameObject.Find("Player").transform.position = Infos.player.transform.position;
+                        GameObject.Find("MainCamera").transform.position = Infos.player.transform.position;*/
+                    }
+                    catch (MissingReferenceException e)
+                    {
+                        Erreurs.NouvelleErreur("Une erreur est survenu en replaçant le joueur sur la carte. (" + e.GetType().ToString() + ") " + e.Message);
+                    }
+                    finally
+                    {
+                        PlacerJoueur = false;
+                        UnityEngine.Object.DestroyObject(Infos.player);
+                        Infos = null;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Player is Null. Cancelling replacement.");
+                    PlacerJoueur = false;
+                    UnityEngine.Object.DestroyObject(Infos.player);
+                    Infos = null;
+                }
+            }
+            else
+            {
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
+            }
+        }
     }
 
     private bool _prochaineScene(string scene)
@@ -116,15 +154,26 @@ public class GestScene : MonoBehaviour
             {
                 SceneManager.LoadScene(scene, LoadSceneMode.Additive);
             }
-            if (_scenesNoms[scene] == TypeScene.Carte && Infos != null)
-            {
-                GameObject.Find("Player").transform.position = Infos.player.transform.position;
-                // TODO : Carte nom
-                Infos = null;
-            }
 
             SceneActuelle = scene;
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
+
+            if (_scenesNoms[SceneActuelle] == TypeScene.Carte && Infos != null)
+            {
+                Debug.Log("Active scene : " + SceneManager.GetActiveScene().name);
+                if (SceneManager.GetActiveScene().name == SceneActuelle)
+                {
+                    /*GameObject.Find("Player").transform.position = Infos.player.transform.position;
+                    GameObject.Find("MainCamera").transform.position = Infos.player.transform.position;*/
+                    // TODO : Carte nom
+                    UnityEngine.Object.DestroyObject(Infos.player);
+                    Infos = null;
+                }
+                else
+                {
+                    PlacerJoueur = true;
+                }
+            }
         }
         else
             return false;

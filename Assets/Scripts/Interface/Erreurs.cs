@@ -28,7 +28,8 @@ class Erreurs : MonoBehaviour
     }
     static public void NouvelleErreur(string message)
     {
-        tz.text += DateTime.Now.ToString() + message + '\n';
+        tz.text += "--------------" + '\n';
+        tz.text += "  * " + DateTime.Now.ToString() + " - " + message + '\n';
         Main.gameObject.SetActive(true);
         change = true;
     }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GenerateurGrid : MonoBehaviour {
 
@@ -13,9 +14,10 @@ public class GenerateurGrid : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Combat"));
         int carteChoisi = Random.Range(0, 2) ;
 		if(carteChoisi==1){
-			Instantiate (GameObject.Find ("CartePrefab").GetComponent<Prefab> ().carteCombat1prefab);
+			Instantiate (GameObject.Find ("CartePrefab").GetComponent<Prefab> ().carteCombat1prefab, GameObject.Find("Carte").transform);
 			LargeurGrid=20;
 			HauteurGrid=10;
 
