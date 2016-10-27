@@ -14,7 +14,7 @@ namespace Mysterole
         public InfosWorld(string c, GameObject p)
         {
             carte = c;
-            player = p;
+            player = UnityEngine.Object.Instantiate(p);
         }
 
     }

@@ -48,7 +48,7 @@ public class GestionCombat : MonoBehaviour {
 	}
 
 	public void Fuir_Click(){
-		GestScene.ProchaineScene ("World");
+		GestScene.ProchaineSceneTransition("World");
 	}
 
 	public void Attaquer_Click(){
