@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{9580ECD7-9172-ADC6-7D2F-DCD72E11E8A1}") = "Mysterole", "Assembly-CSharp.csproj", "{5A90EECA-7FF2-41AD-9C8C-30FFE98E80D7}"
+EndProject
+Project("{9580ECD7-9172-ADC6-7D2F-DCD72E11E8A1}") = "Mysterole", "Assembly-CSharp-Editor.csproj", "{79D4AF08-70E1-E2CA-21C6-719073F99B7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A90EECA-7FF2-41AD-9C8C-30FFE98E80D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A90EECA-7FF2-41AD-9C8C-30FFE98E80D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A90EECA-7FF2-41AD-9C8C-30FFE98E80D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A90EECA-7FF2-41AD-9C8C-30FFE98E80D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D4AF08-70E1-E2CA-21C6-719073F99B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D4AF08-70E1-E2CA-21C6-719073F99B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D4AF08-70E1-E2CA-21C6-719073F99B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D4AF08-70E1-E2CA-21C6-719073F99B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
