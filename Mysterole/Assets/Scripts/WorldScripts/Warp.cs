@@ -1,54 +1,70 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Tiled2Unity;
+using Mysterole;
+
 
 public class Warp : MonoBehaviour {
 
     public Transform warpTarget;
-    private CameraFollow cf;
-    GameObject player;
+    public JoueurMonde perso;
 
 
     void Start()
     {
-        cf = GameObject.Find("Main Camera").GetComponent<CameraFollow>();
+        //cf = GameObject.Find("Main Camera").GetComponent<CameraFollow>();
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        player = other.gameObject;
+        perso = other.gameObject.GetComponent<JoueurMonde>();
+        //Debug.Log(gameObject.transform.parent.parent.name);
+        JoueurMonde.PeutAgir = false;
 
-        //player.GetComponent<PlayerMovement>().CanMove = false;
-
-
-
-        //ScreenFader sf = GameObject.FindGameObjectWithTag("Fader").GetComponent<ScreenFader>();
         GestTransition.FinTransition rappel = new GestTransition.FinTransition(FaireWarp);
-        GestTransition.FaireAttenuationNoir(rappel, GestTransition.VITESSE.TRES_RAPIDE);
-        
+        GestTransition.FaireAttenuationNoir(rappel, GestTransition.VITESSE.RAPIDE);
+
     }
 
 
     public void FaireWarp(bool ok)
     {
 
+        JoueurMonde.PeutAgir = false;
+        //Debug.Log (warpTarget.parent.parent);
 
-		//Debug.Log (warpTarget.parent.parent);
-        cf.map = warpTarget.parent.parent.GetComponent<TiledMap>();
-        GestionWorld.UpdateMap(cf.map);
-        
-        player.transform.position = warpTarget.position;
-        Camera.main.transform.position = warpTarget.position;
+        if (GestionMonde.CarteActive.GetComponent<Carte>().Zone != warpTarget.parent.parent.gameObject.GetComponent<Carte>().Zone)
+        {
+            Bandeau.NouveauBandeau(warpTarget.parent.parent.gameObject.GetComponent<Carte>().Zone);
 
+            if(warpTarget.parent.parent.gameObject.name == "" && DonneesJeu.Declencheurs.EstActif("première fois" + warpTarget.parent.parent.gameObject.name))
+            {
+
+            }
+        }
+        GestionMonde.CarteActive = warpTarget.parent.parent.gameObject;
+        GestionMonde.Timer = UnityEngine.Random.Range(0, 15);
+        ;
+
+
+        //GestionWorld.UpdateMap(cf.map);
+        GestionMonde.CarteActive = warpTarget.parent.parent.gameObject;
+        perso.transform.position = warpTarget.position;
+        //Camera.main.transform.position = warpTarget.position;
         GestTransition.FinTransition rappel = new GestTransition.FinTransition(FinWarp);
-        GestTransition.DefaireAttenuationNoir(rappel, GestTransition.VITESSE.TRES_RAPIDE);
+        GestTransition.DefaireAttenuationNoir(rappel, GestTransition.VITESSE.RAPIDE);
+
+
 
 
     }
 
     public void FinWarp(bool ok)
     {
-        //player.GetComponent<PlayerMovement>().CanMove = true;
+        JoueurMonde.PeutAgir = true;
+
+
     }
 
 }

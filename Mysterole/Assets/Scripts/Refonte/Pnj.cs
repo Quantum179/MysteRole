@@ -1,15 +1,155 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+using Tiled2Unity;
 
 namespace Mysterole
 {
-	public class Pnj
+	public class Pnj : MonoBehaviour
 	{
         //Attributs
+        protected int _id;
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
         protected string _nom;
-        protected List<Quete> _quetes;
-        //protected List<Objectif> _objectifs;
-        protected Dictionary<TypeEvenement , Dictionary<int, Evenement>> _evenements;
+        public string Nom
+        {
+            get { return _nom; }
+        }
+
+        protected Vector2 _coor;
+        public Vector2 Coor
+        {
+            get { return _coor; }
+            set { _coor = value; }
+        }
+
+        protected GameObject _carteActuelle;
+        public GameObject CarteActuelle
+        {
+            get { return _carteActuelle; }
+        }
+
+        protected Personnage _personnagePnj;
+        public Personnage PersonnagePnj
+        {
+            get { return _personnagePnj; }
+        }
+
+
+
+        protected Animator _anim;
+        public Animator Anim
+        {
+            get { return _anim; }
+            set { _anim = value; }
+        }
+        protected Rigidbody2D _rbody;
+
+
+        protected EtatPnj _etat;
+        public EtatPnj Etat
+        {
+            get { return _etat; }
+            set { _etat = value; }
+        }
+
+        //Attribut d'event 
+        protected bool _seDeplace = false;
+        public bool SeDeplace
+        {
+            get { return _seDeplace; }
+            set { _seDeplace = value; }
+        }
+        protected bool _discute = false;
+        public bool Discute
+        {
+            get { return _discute; }
+            set { _discute = value; }
+        }
+
+        protected bool _faitPause = false;
+        public bool FaitPause
+        {
+            get { return _faitPause; }
+            set { _faitPause = value; }
+        }
+        //protected bool _faitPattern = false;
+        //public bool FaitPattern
+        //{
+        //    get { return _faitPattern; }
+        //    set { _faitPattern = value; }
+        //}
+        //protected bool _faitCinematique;
+        //public bool FaitCinematique
+        //{
+        //    get { return _faitCinematique; }
+        //    set { _faitCinematique = value; }
+        //}
+        protected bool _peutEvent = false;
+        public bool PeutEvent
+        {
+            get { return _peutEvent; }
+            set { _peutEvent = value; }
+        }
+
+
+        protected List<Evenement> _evenementsPassifs;
+        public List<Evenement> EvenementsPassifs
+        {
+            get { return _evenementsPassifs; }
+        }
+        protected List<Evenement> _evenementsActifs;
+        public List<Evenement> EvenementsActifs
+        {
+            get { return _evenementsActifs; }
+        }
+        protected Evenement _evenementActuel;
+        public Evenement EvenementActuel
+        {
+            get { return _evenementActuel; }
+            set { _evenementActuel = value; }
+        }
+
+
+        private Vector2 _deplacementPattern;
+        private bool dec = false;
+
+
+        private int _indexPattern = 0;
+        protected int _indexQuete;
+        public int IndexQuete
+        {
+            get { return _indexQuete; }
+        }
+        protected int _indexObjectif;
+        public int IndexObjectif
+        {
+            get { return _indexObjectif; }
+        }
+        protected int _indexEvenement;
+        public int IndexEvenement
+        {
+            get { return _indexEvenement; }
+        }
+        //private int _idCinematique;
+        //public int IDCinematique
+        //{
+        //    get { return _idCinematique; }
+        //    set { _idCinematique = value; }
+        //}
+        //private int _idEtape;
+        //public int IDEtape
+        //{
+        //    get { return _idEtape; }
+        //    set { _idEtape = value; }
+        //}
+
+        protected Vector2 _positionInitiale;
 
 
         /*
@@ -18,138 +158,273 @@ namespace Mysterole
             protected isEvent;
         */
 
-        //Propriétés
-        public string Nom
+
+
+
+
+        protected virtual void Awake()
         {
-            get { return _nom; }
-            private set { }
 
-        }
-        public List<Quete> Quetes
-        {
-            get { return _quetes; }
-            private set { }
-        }
-        /*
-        public List<Objectif> Objectifs
-        {
-            get { return _objectifs;}
-            private set { }
-        }
-        */
-		public Dictionary<TypeEvenement, Dictionary<int, Evenement>> Evenements 
-		{
-			get { return _evenements; }
-            private set { _evenements = value; }
-
-		}
-
-        //Constructeurs
-		public Pnj ()
-		{
-            _nom = null;
-            _quetes = new List<Quete>();
-            _evenements = new Dictionary<TypeEvenement, Dictionary<int, Evenement>>();
-		}
-        public Pnj(string n)
-        {
-            _nom = n;
-            //Faire la requête pour récupérer les quêtes reliées au pnj
-            //En déduire la requête pour récupérer les événements liés aux quêtes du pnj
-        }
-             
-        //public Pnj(string n, List<Quete> lq, Dictionary<string, Dictionary<TypeEvenement, Evenement>>)
+            gameObject.name = gameObject.name.Replace("(Clone)", "");
+            _nom = gameObject.name;
+            _id = AccesBD.TrouverIdPnj(_nom);
 
 
+            _anim = GetComponent<Animator>();
+            _rbody = GetComponent<Rigidbody2D>();
+
+            //On initialise la position initiale du pnj
+            _positionInitiale = new Vector2(transform.position.x, transform.position.y);
 
 
+            //On récupère les événements passifs du pnj dans la BD et on initialise l'événement à effectuer par défaut
+            _evenementsPassifs = AccesBD.TrouverEvenementsPassifs(this);
 
-        //Méthodes
-        private void InitialiserDonnees()
-        {
-           //requêtes à la BD
+
+            if (_evenementsPassifs.Count > 0)
+                _evenementActuel = _evenementsPassifs[0];
+
+
+            _evenementsActifs = AccesBD.TrouverEvenementsActifs(this);
+
+
+            _indexQuete = 0;
+            _indexObjectif = 0;
+            _indexEvenement = 0;
+
+            _deplacementPattern = Vector2.zero;
+            _coor = transform.position;
+            _etat = EtatPnj.Pattern;
         }
 
-        public void VerifierAvanceeQuete()
+        protected virtual void Start()
         {
-            List<Quete>.Enumerator enumQuete = _quetes.GetEnumerator();
+            
 
-            while(enumQuete.MoveNext())
+        }
+
+
+        protected virtual void FixedUpdate()
+        {
+
+        }
+
+        protected virtual void Update()
+        {
+
+            if (_nom != "Sage du village" && _nom != "Père")
+                return;
+
+            if ((_rbody != null) && _rbody.IsSleeping())
+                _rbody.WakeUp();
+
+            if (_seDeplace)
             {
-                //TODO : Diviser tout ces blocs en switch si possible
-                //TODO : rajouter la gestion d'ordre des quêtes (bloquer les quêtes indisponibles)
-                
-                
-                //Démarrage de la quête par le responsable 
-                if(enumQuete.Current.ResponsableDebut == _nom && enumQuete.Current.Etat == EtatQuete.Disponible)
+                EffectuerDeplacement();
+
+
+                if ((Vector2)_rbody.transform.position == _deplacementPattern)
                 {
-                    //Démarrer la quête aussi bien dans la liste de quete que dans la gestion des événements
-                    enumQuete.Current.DemarrerQuete();
-                    DeclencherEvenements();
-                    //_evenements[TypeEvenement.Quete].GetEnumerator().MoveNext(); //TODO : gérer les événements à l'activation
+                    _seDeplace = false;
+                    _anim.SetBool("isWalking", false);
+                    _evenementActuel.Etat = EtatEvenement.Fini;
+                }
+                else if ((Vector2)_rbody.transform.position == ((Deplacement)_evenementActuel).Destination)
+                {
+                    _seDeplace = false;
+                    _anim.SetBool("isWalking", false);
+                    _evenementActuel.Etat = EtatEvenement.Fini;
+                }
+            }
+
+            if (_faitPause)
+            {
+                _evenementActuel.Decompte -= Time.deltaTime;
+
+                if (_evenementActuel.Decompte < 0)
+                    _evenementActuel.Etat = EtatEvenement.Fini;
+            }
+
+
+            switch (_etat)
+            {
+                case EtatPnj.Inactif:
+
+
+
+
+
                     break;
-                }
-                
-                //Validation de l'avanceée de la quête 
-                if(enumQuete.Current.Etat == EtatQuete.EnCours)
-                {
-                    List<Objectif>.Enumerator enumObjectif = enumQuete.Current.Objectifs.GetEnumerator();
-
-                    /*if(!enumObjectif.Current)
+                case EtatPnj.Actif:
+                    //Debug.Log("actif" + _nom);
+                    switch (_evenementActuel.Etat)
                     {
-                        //On démarre les objectifs de la quête
+                        case EtatEvenement.EnAttente:
+                            _evenementActuel.DeclencherEvenement(this);
+                            break;
+                        case EtatEvenement.EnCours:
+                            //Debug.Log("lol");
+                            if (Input.GetKeyDown(KeyCode.E) && _evenementActuel.Type == TypeEvenement.Dialogue)
+                                _evenementActuel.Etat = EtatEvenement.Fini;
+                            break;
+                        case EtatEvenement.Fini:
 
-                    }*/
+                            if (_evenementActuel.Type == TypeEvenement.Dialogue)
+                                EcranDialogue.FermerDialogue();
 
-                     if(enumObjectif.Current.Responsable == _nom)
-                     {
-                         //On vérifie que tous les pré-requis sont validés
-                         if(enumObjectif.Current.ValiderObjectif())
-                         {
-                             enumObjectif.MoveNext();
-                             //Pop-up d'objectif validé
-                         }
-                         else
-                         {
-                             //TODO : gérer le pattern du pnj à adopter selon l'avancée des quêtes qui le concerne
-                         }
-                     }     
-                }
+                            if(_indexQuete == -1)
+                            {
+                                _evenementActuel.Etat = EtatEvenement.EnAttente;
+                                _evenementActuel = null;
+                            }
+
+                            _indexEvenement++;
+                            if(!ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement))
+                                JoueurMonde.PeutAgir = true;
+                            break;
+                    }
+
+
+
+                    break;
+                case EtatPnj.Cinematique:
+
+
+
+                    //switch (_evenementActuel.Etat)
+                    //{
+                    //    case EtatEvenement.EnAttente:
+                    //        _evenementActuel.DeclencherEvenement(this);
+                    //        break;
+                    //    case EtatEvenement.EnCours:
+                    //        if (_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
+                    //            _evenementActuel.Etat = EtatEvenement.Fini;
+                    //        break;
+                    //    case EtatEvenement.Fini:
+                    //        if(_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
+                    //            EcranDialogue.FermerDialogue();
+
+                    //        break;
+                    //    default:
+                    //        break;
+                    //}
+
+
+
+                    break;
+                case EtatPnj.Pattern:
+
+                    //_evenementActuel = _evenementsPassifs[_indexPattern];
+                    //Debug.Log(_evenementActuel);
+
+
+
+                    //switch (_evenementActuel.Etat)
+                    //{
+                    //    case EtatEvenement.EnAttente:
+                    //        _evenementActuel.DeclencherEvenement(this);
+                    //        break;
+                    //    case EtatEvenement.Fini:
+
+                    //        if(_evenementActuel.Type == TypeEvenement.Attente)
+                    //        {
+                    //            _faitPause = false;
+                    //            _evenementActuel.Decompte = ((Attente)_evenementActuel).Temps;
+                    //            Debug.Log("test");
+                    //        }
+                    //        //if(_evenementActuel.Type == TypeEvenement.Deplacement)
+                    //        //{
+                    //        //    _seDeplace
+                    //        //}
+
+                    //        _evenementActuel.Etat = EtatEvenement.EnAttente;
+
+                    //        if (_indexPattern == 0)
+                    //            _indexPattern = 1;
+                    //        else
+                    //            _indexPattern = 0;
+
+                    //        if (_evenementActuel.Type == TypeEvenement.Deplacement)
+                    //        {
+                    //            dec = false;
+                    //            Debug.Log("sdfdsfdsfdsfsf");
+                    //        }
+
+                    //        break;
+                    //}
+                    break;
             }
         }
 
 
-
-
-        public void DeclencherEvenements()
-        {
-            Dictionary<int, Evenement>.Enumerator enumEventQuete = _evenements[TypeEvenement.Quete].GetEnumerator();
-
-            enumEventQuete.MoveNext();
-
-
-            
-
-                
-                
-                //TODO : gérer les événements à l'activation*
-
-
-            //ELSE : Evenements par défaut
-            
-
-
-        }
-
-        private void DeclencherEvenement(Evenement e)
+        protected virtual void Interagir()
         {
 
         }
 
+        public void EffectuerDeplacement()
+        {
+            //Debug.Log(_id);
+            //Debug.Log(_evenementActuel);
+            Vector2 offset = new Vector2(((Deplacement)_evenementActuel).Destination.x - _rbody.position.x, ((Deplacement)_evenementActuel).Destination.y - _rbody.position.y);
+
+            _anim.SetBool("isWalking", true);
+            _anim.SetFloat("input_x", offset.x);
+            _anim.SetFloat("input_y", offset.y);
 
 
+            if(!dec)
+            {
+                bool dx = (UnityEngine.Random.Range(0, 2) == 0);
+                bool dy = (UnityEngine.Random.Range(0, 2) == 0);
+
+
+                float x = (dx ? UnityEngine.Random.Range(Coor.x - ((Deplacement)_evenementActuel).Destination.x, Coor.x)
+                : UnityEngine.Random.Range(Coor.x + ((Deplacement)_evenementActuel).Destination.x, Coor.x)
+                );
+
+                float y = (dy ? UnityEngine.Random.Range(Coor.y - ((Deplacement)_evenementActuel).Destination.y, Coor.y)
+                : UnityEngine.Random.Range(Coor.y + ((Deplacement)_evenementActuel).Destination.y, Coor.y)
+                );
+
+
+                _deplacementPattern = new Vector2(x, y);
+                dec = true;
+            }
+
+
+            if (_etat == EtatPnj.Pattern)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _deplacementPattern, Time.deltaTime * 5);
+            }
+            else
+                transform.position = Vector3.MoveTowards(transform.position, ((Deplacement)_evenementActuel).Destination, Time.deltaTime * 5);
+        }
+
+        public void Teleporter(int id, float x, float y)
+        {
+            transform.position = new Vector2(x, y);
+            _carteActuelle = GestionMonde.TrouverCarte(id);
+        }
+
+        public bool ActualiserEvenement(int iq, int io, int ie)
+        {
+            foreach (Evenement e in _evenementsActifs)
+            {
+                if (e.IDQuete == iq && e.IDObjectif == io && e.IndexEvenement == ie)
+                {
+                    _evenementActuel = e;
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
     }
+
+
+
 }
 
 
@@ -157,163 +432,115 @@ namespace Mysterole
 
 
 
-
-
-
-
-///////////////////////////////////////////////////////////
-
-
-
-
-//using UnityEngine;
-//using System.Collections;
-//using System.Collections.Generic;
-//using Mysterole;
-//using System.Text;
-
-//public class Pnj : MonoBehaviour
+//if (FaitCinematique && _peutEvent)
 //{
-
-//    private Rigidbody2D rbody;
-//    private Animator anim;
-//    private Vector2 offset;
-//    private int velocity = 10;
-//    public string nomPNJ;
-
-//    private IA _ia;
-
-//    private int index = 0;
-
-//    private bool isMoving = false;
-
-//    // Use this for initialization
-//    void Start()
+//    if(_faitPattern)
 //    {
-
-
-//        rbody = GetComponent<Rigidbody2D>();
-//        anim = GetComponent<Animator>();
-
-
-//        //dataPnj = new Dictionary<string ,Evenement>();
-
-//        //dataPnj.Add("", new Dialogue("Halte là !"));
-//        //dataPnj.Add("", new Deplacement(115, -176));
-//        //dataPnj.Add("", new Dialogue("Vous n'avez pas le droit d'entrer ici !"));
-
-//        _ia = new IA("Chef Milicien");
-
-
+//        _seDeplace = false;
+//        _anim.SetBool("isWalking", false);
 //    }
 
-//    // Update is called once per frame
-//    void Update()
+//    _faitPause = false;
+//    _faitPattern = false;
+
+//    if (_seDeplace)
+//        EffectuerDeplacement();
+
+//    Debug.Log(_destinationActuelle + "   " + _nom);
+//    Debug.Log(transform.position + "   " + _nom);
+//    Debug.Log(_faitPause);
+
+//    if ((Vector2)_rbody.transform.position == _destinationActuelle && !_faitPause)
 //    {
+//        Debug.Log("test1" + _nom);
+//        _seDeplace = false;
+//        _anim.SetBool("isWalking", false);
+//    }
 
 
-//        if (Input.GetKeyDown(KeyCode.B))
-//        {
-//            StartCoroutine(RunEvent(true));
-//        }
 
 
-//        if (dataPnj[index].GetTypeEvent().ToString() == "Dialogue")
-//        {
-//            if (Input.GetKeyDown(KeyCode.T))
+
+//    switch (_evenementsCinematique[_idCinematique][_idEtape].Etat)
+//    {
+//        case EtatEvenement.EnAttente:
+
+
+//            //Debug.Log(_idCinematique);
+//            //Debug.Log(_idEtape);
+//            //Debug.Log(_evenementsCinematique[_idCinematique][_idEtape].Etat);
+
+
+
+
+
+//            _evenementsCinematique[_idCinematique][_idEtape].DeclencherEvenement(this);
+
+//            break;
+//        case EtatEvenement.EnCours:
+//            if (Input.GetKeyDown(KeyCode.T) && _evenementsCinematique[_idCinematique][_idEtape].GetType() == typeof(Dialogue)) //Bouton ok pour les dialogues
+//            {
+//                _evenementsCinematique[_idCinematique][_idEtape].Etat = EtatEvenement.Fini;    
+//            }
+
+//            if (_evenementsCinematique[_idCinematique][_idEtape].GetType() == typeof(Deplacement) && !_seDeplace)
+//            {
+//                _evenementsCinematique[_idCinematique][_idEtape].Etat = EtatEvenement.Fini;
+//            }
+//            break;
+//        case EtatEvenement.Fini:
+
+//            if (_evenementsCinematique[_idCinematique][_idEtape].GetType() == typeof(Dialogue))
 //            {
 //                EcranDialogue.closeDialog();
-
-//                index++;
+//                _dialogueActuel = null;
+//                JoueurMonde.CanMove = true;
 //            }
-//        }
-
-
-//        if (dataPnj[index].GetTypeEvent().ToString() == "Deplacement")
-//        {
-//            if (Input.GetKeyDown(KeyCode.E))
-//            {
-//                isMoving = true;
-//            }
-
-//            //if (Input.GetKeyDown(KeyCode.B))
-//            //{
-//            //    Debug.Log(rbody.position);
-//            //    //Debug.Log(((Deplacement)dataPnj[index]).Destination);
-//            //    //Debug.Log(rbody.position - ((Deplacement)dataPnj[index]).Destination);
-
-//            //}
-
-
-//            if (isMoving)
-//            {
-
-//                offset = new Vector2(((Deplacement)dataPnj[index]).Destination.x - rbody.position.x,
-//                          ((Deplacement)dataPnj[index]).Destination.y - rbody.position.y
-//                        );
-
-
-//                //Debug.Log(rbody.position.x);
-//                //Debug.Log(((Deplacement)dataPnj[index]).Destination);
-//                anim.SetBool("isWalking", true);
-//                anim.SetFloat("input_x", offset.x);
-//                anim.SetFloat("input_y", offset.y);
-
-//                //rbody.MovePosition(rbody.position + offset * 10 * Time.deltaTime);
-
-//                transform.position = Vector3.MoveTowards(transform.position, ((Deplacement)dataPnj[index]).Destination, Time.deltaTime * 5);
-
-
-
-
-//            }
-
-//            if (rbody.position == ((Deplacement)dataPnj[index]).Destination)
-//            {
-//                isMoving = false;
-//                anim.SetBool("isWalking", false);
-//                index++;
-
-//            }
-//        }
-
-
-
-
-
-
+//            GestionMonde.Cinematiques[_idCinematique].Etapes[_idEtape].ActualiserActeur(_nom);
+//            break;
+//        default:
+//            break;
 //    }
+//}
+//else
+//{
 
-//    public void RunEvent(bool canEvent)
+//    //On actualise la destination actuelle du Pnj 
+//    if (_destinationActuelle != _evenementsPattern[0][_indexPattern].Destination && !_faitPause && !_seDeplace)
 //    {
-//        //if(dataPnj[index].GetType() == typeof(Dialogue))
-//        //{
-
-//        //}
-//        //else if(dataPnj[index])
-
-//        // START EVENT
-//        // Player Cannot Move
-//        // PlayerMovement.canMove = false;
-
-//        // List<Evenement>.Enumerator e = dataPnj.GetEnumerator();
-
-//        //switch (dataPnj[index].GetTypeEvent().ToString()) // while (e.MoveNext())
-//        //{
-//        //    // e.Current.RunEvent();
-//        //    case "Dialogue":
-
-//        //        EcranDialogue.NewDialog(this.gameObject.name, ((Dialogue)dataPnj[index]).Message);
-
-//        //        // yield return StartCoroutine(FUNCTION EVENT);
-//        //        //dataPnj[index].RunEvent()
-//        //        break;
-//        //    case "Deplacement":
-//        //        isMoving = true;
-//        //        break;
-//        //}
-
-//        // PlayerMovement.canMove = true;
+//        _evenementsPattern[0][_indexPattern].DeclencherEvenement(this);
 //    }
 
+//    if ((_rbody != null) && _rbody.IsSleeping())
+//        _rbody.WakeUp();
+
+//    if (_seDeplace)
+//        EffectuerDeplacement();
+
+//    if ((Vector2)_rbody.transform.position == _destinationActuelle && !_faitPause)
+//    {
+//        _faitPause = true;
+//        _seDeplace = false;
+//        _anim.SetBool("isWalking", false);
+//    }
+
+
+
+
+
+//    if (_faitPause)
+//    {
+//        pause -= Time.deltaTime;
+
+//        if (pause < 0)
+//        {
+//            _faitPause = false;
+//            pause = 2.0f;
+
+//            if (_indexPattern == 0)
+//                _indexPattern = 1;
+//            else
+//                _indexPattern = 0;
+//        }
+//    }
 //}

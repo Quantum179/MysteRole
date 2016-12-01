@@ -9,9 +9,13 @@ namespace Mysterole
     public abstract class Gain
     {
         //Attributs
-        protected TypeGain _type;
+        protected string _description;
+        public string Description
+        {
+            get { return _description; }
+        }
 
-        //Propriétés
+        protected TypeGain _type;
         public TypeGain Type 
         {
             get { return _type; }
@@ -21,6 +25,11 @@ namespace Mysterole
         public Gain()
         {
 
+        }
+
+        public Gain(string d)
+        {
+            _description = d;
         }
     }
 }

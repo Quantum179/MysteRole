@@ -11,28 +11,25 @@ public class GestScene : MonoBehaviour
     public string PremiereScene;
     private string SceneActuelle;
     private bool PremiereFois = true;
-    private bool PlacerJoueur = false;
+    //private Vector2 PlacerJoueur = Vector2.zero;
     private string TransitionScene;
     private Dictionary<string, TypeScene> _scenesNoms;
 
-    private static InfosWorld Infos;
-
+    private void _prochaineSceneTransition(string scene)
+    {
+        TransitionScene = scene;
+        GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationFait);
+        GestTransition.FaireAttenuationNoir(rappel);
+    }
     private void AttenuationFait(bool ok)
     {
         //Debug.Log("Mi-transition");
         if (ok)
         {
-            /*if (*/
-            _prochaineScene(TransitionScene);//)
+            _prochaineScene(TransitionScene);
             TransitionScene = null;
-            //{
-                GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationDefait);
-                GestTransition.DefaireAttenuationNoir(rappel, GestTransition.VITESSE.NORMAL);
-            //}
-            /*else
-            {
-                Erreurs.NouvelleErreur("La scène \"" + TransitionScene + "\" ne fut pas chargée : Une erreure est survenue.");
-            }*/
+            GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationDefait);
+            GestTransition.DefaireAttenuationNoir(rappel);
         }
         else
             Erreurs.NouvelleErreur("La scène \"" + TransitionScene + "\" ne fut pas chargée : La transition a échoué.");
@@ -54,24 +51,23 @@ public class GestScene : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start() {
+    void Awake() {
         if (moi != null)
             throw new Exception("Ce système comporte déjà une instance de GestScene.");
 
         moi = this;
 
         _scenesNoms = new Dictionary<string, TypeScene>();
-        _scenesNoms.Add("World", TypeScene.Carte);
+        _scenesNoms.Add("Monde", TypeScene.Carte);
         _scenesNoms.Add("Combat", TypeScene.Combat);
         _scenesNoms.Add("Init", TypeScene.Initiale);
         _scenesNoms.Add("Menu_Principal", TypeScene.Menu);
-        _scenesNoms.Add("Creation_personnage", TypeScene.Menu);
-        //_prochaineSceneTransition(PremiereScene);
         TransitionScene = PremiereScene;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+        checkActive();
         if (PremiereFois)
         {
             AttenuationFait(true);
@@ -79,49 +75,23 @@ public class GestScene : MonoBehaviour
             /*else
                 FadeIn();*/
         }
-        if (PlacerJoueur)
+    }
+
+    void checkActive()
+    {
+        Scene actu = SceneManager.GetSceneByName(SceneActuelle);
+        //Debug.Log("Scene actuelle : " + (actu.name == null ? "[null]" : actu.name) + " // Scène active : " + SceneManager.GetActiveScene().name);
+        if (actu.name != null && SceneManager.GetActiveScene() != actu)
         {
-            Debug.Log("Active scene : " + SceneManager.GetActiveScene().name);
-            if (SceneActuelle == SceneManager.GetActiveScene().name)
-            {
-                if (GameObject.Find("Player") != null)
-                {
-                    Debug.Log("\"Player\".transform : " + GameObject.Find("Player").transform.ToString());
-                    try
-                    {
-                        /*GameObject.Find("Player").transform.position = Infos.player.transform.position;
-                        GameObject.Find("MainCamera").transform.position = Infos.player.transform.position;*/
-                    }
-                    catch (MissingReferenceException e)
-                    {
-                        Erreurs.NouvelleErreur("Une erreur est survenu en replaçant le joueur sur la carte. (" + e.GetType().ToString() + ") " + e.Message);
-                    }
-                    finally
-                    {
-                        PlacerJoueur = false;
-                        UnityEngine.Object.DestroyObject(Infos.player);
-                        Infos = null;
-                    }
-                }
-                else
-                {
-                    Debug.Log("Player is Null. Cancelling replacement.");
-                    PlacerJoueur = false;
-                    UnityEngine.Object.DestroyObject(Infos.player);
-                    Infos = null;
-                }
-            }
-            else
-            {
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
-            }
+            //Debug.Log("PROBLÈME : La scène actuelle \"" + actu.name + "\" est différente de la scène active \"" + SceneManager.GetActiveScene().name + "\"... Activation de la bonne scène.");
+            SceneManager.SetActiveScene(actu);
         }
     }
 
     private bool _prochaineScene(string scene)
     {
         if (!_scenesNoms.ContainsKey(scene))
-            throw new ArgumentException("Erreur load");
+            throw new ArgumentException("Erreur load : Scène manquante... (" + scene + ")");
         else if (_scenesNoms[scene] == TypeScene.Initiale)
             throw new ArgumentException("Ne peut charger une scène initiale.");
 
@@ -130,13 +100,13 @@ public class GestScene : MonoBehaviour
             GUI.FocusControl("");
             if (SceneActuelle != null)
             {
-                if (_scenesNoms[scene] == TypeScene.Combat && _scenesNoms[SceneActuelle] == TypeScene.Carte)
-                {
-                    // TODO : Trouver le Transform de l'avatar de l'équipe.
-                    Infos = GestionWorld.GetInfos();
-                }
+                /*bool ReplaceJoueur = false;
+                if (SceneActuelle == "Monde" && scene == "Combat")
+                    ReplaceJoueur = true;*/
                 if (!SceneManager.UnloadScene(SceneActuelle))
                     return false;
+                /*if (ReplaceJoueur)
+                    PlacerJoueur = new Vector2(JoueurMonde.Coor.x, JoueurMonde.Coor.y);*/
             }
 
             Dictionary<string, TypeScene>.Enumerator e = _scenesNoms.GetEnumerator();
@@ -153,54 +123,24 @@ public class GestScene : MonoBehaviour
             if (!SceneManager.GetSceneByName(scene).isLoaded)
             {
                 SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+                /*if (scene == "Monde" && SceneActuelle == "Combat")
+                {
+                    if (PlacerJoueur != Vector2.zero)
+                    {
+                        JoueurMonde.Coor = PlacerJoueur;
+                        PlacerJoueur = Vector2.zero;
+                    }
+                }*/
             }
 
             SceneActuelle = scene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneActuelle));
-
-            if (_scenesNoms[SceneActuelle] == TypeScene.Carte && Infos != null)
-            {
-                Debug.Log("Active scene : " + SceneManager.GetActiveScene().name);
-                if (SceneManager.GetActiveScene().name == SceneActuelle)
-                {
-                    /*GameObject.Find("Player").transform.position = Infos.player.transform.position;
-                    GameObject.Find("MainCamera").transform.position = Infos.player.transform.position;*/
-                    // TODO : Carte nom
-                    UnityEngine.Object.DestroyObject(Infos.player);
-                    Infos = null;
-                }
-                else
-                {
-                    PlacerJoueur = true;
-                }
-            }
+            checkActive();
         }
         else
             return false;
 
         return true;
     }
-    private void _prochaineSceneTransition(string scene)
-    {
-        //Debug.Log("Début transition");
-        TransitionScene = scene;
-        GestTransition.FinTransition rappel = new GestTransition.FinTransition(AttenuationFait);
-        TransitionScene = scene;
-        GestTransition.FaireAttenuationNoir(rappel);
-    }
-    /*public static IEnumerator FadeOut()
-    {
-        ScreenFader sf = moi.Transition.GetComponent<ScreenFader>();
-        sf.gameObject.SetActive(true);
-        yield return null;
-        yield return moi.StartCoroutine(sf.FadeToBlack());
-    }
-    public static IEnumerator FadeIn()
-    {
-        ScreenFader sf = moi.Transition.GetComponent<ScreenFader>();
-        yield return moi.StartCoroutine(sf.FadeToClear());
-        sf.gameObject.SetActive(false);
-    }*/
     public static void ProchaineScene(string scene)
     {
         moi._prochaineScene(scene);
@@ -210,4 +150,12 @@ public class GestScene : MonoBehaviour
         moi._prochaineSceneTransition(scene);
     }
     public static Dictionary<string, TypeScene> ScenesNoms { get { return moi._scenesNoms; } }
+    public static bool SurCarte()
+    {
+        return moi._scenesNoms[moi.SceneActuelle] == TypeScene.Carte;
+    }
+    public static bool EnCombat()
+    {
+        return moi._scenesNoms[moi.SceneActuelle] == TypeScene.Combat;
+    }
 }

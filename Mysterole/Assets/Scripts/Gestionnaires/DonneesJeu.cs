@@ -17,6 +17,7 @@ public class DonneesJeu : MonoBehaviour
     private Dictionary<int, Role> _monstres = new Dictionary<int, Role>();
     private Dictionary<int, Equipe> _equipesMonstres = new Dictionary<int, Equipe>();
     private Dictionary<int, Etat> _etats = new Dictionary<int, Etat>();
+    private ListeOptions _options = new ListeOptions();
     public GameObject Debogueur;
     public static Equipe Adversaires { get { return moi._adversaires; } set { moi._adversaires = value; } }
     public static Dictionary<int, RoleJoueur> Roles { get { return moi._roles; } }
@@ -24,81 +25,123 @@ public class DonneesJeu : MonoBehaviour
     public static Dictionary<int, Role> Monstres { get { return moi._monstres; } }
     public static Dictionary<int, Equipe> EquipesMonstre { get { return moi._equipesMonstres; } }
     public static Dictionary<int, Etat> Etats { get { return moi._etats; } }
+    public static ListeOptions Options { get { return moi._options; } }
 
     // Use this for initialization
-    void Start()
+
+    void Awake()
     {
         if (moi != null)
             throw new Exception("Ce système comporte déjà une instance de Donneesjeu.");
         moi = this;
         _equipe = CreerEquipe();
+        //Erreurs.NouvelleErreur("TEST");
         ChargerDonnees();
-        //SceneManager.LoadScene(FirstScene, LoadSceneMode.Additive);
 	}
+
+    public static void Vider()
+    {
+        moi._equipe = CreerEquipe();
+        Declencheurs.Vider();
+        Options.Defaut();
+        JoueurMonde.Coor = Vector2.zero;
+        GestionMonde.Reinitialiser();
+    }
 
     private void ChargerDonnees()
     {
         ChargerEtats();
         ChargerCompetences();
+        ChargerObjets();
         ChargerRoles();
         ChargerMonstres();
         ChargerEquipeMonstres();
-		//_equipe.AjoutMembre(new Joueur("Maurice", _roles[0], 5));
+    }
+
+    private void ChargerObjets()
+    {
+        Objets.Charger();
     }
 
     private void ChargerEquipeMonstres()
     {
-        Personnage monstre;
+        /*Personnage monstre;
         _equipesMonstres.Add(0, new Equipe("Monstres"));
-        monstre = new Personnage(_monstres[0].Nom, _monstres[0], 1);
-        _equipesMonstres[0].AjoutMembre(monstre);
         monstre = new Personnage(_monstres[1].Nom, _monstres[1], 1);
         _equipesMonstres[0].AjoutMembre(monstre);
+        monstre = new Personnage(_monstres[2].Nom, _monstres[2], 1);
+        _equipesMonstres[0].AjoutMembre(monstre);*/
+        _equipesMonstres = AccesBD.TrouverEquipesMonstres();
     }
 
     private void ChargerEtats()
     {
+        _etats = AccesBD.TrouverEtats();
         return;
     }
 
     private void ChargerMonstres()
     {
-        _monstres.Add(0, new Role("Orque", 5, 5, 5, _competences[0], _competences[1]));
-        _monstres.Add(1, new Role("Squelette", 5, 5, 5, _competences[0], _competences[1]));
+        /*_monstres.Add(1, new Role(1, "Orque", 5, 5, 5, _competences[0], _competences[1]));
+        _monstres.Add(2, new Role(2, "Squelette", 5, 5, 5, _competences[0], _competences[1]));*/
+        _monstres = AccesBD.TrouverMonstres();
         return;
     }
 
     private void ChargerCompetences()
     {
-        Effet[] effets = { new Degats() };
-        _competences.Add(0, new Competence("Attaque (Épée)", new Cible(true, 1, 1, true, true, new ZonePoint()), true, true, effets));
-        _competences.Add(1, new Competence("Fausse Attaque", new Cible(true, 1, 1, true, true, new ZonePoint()), true, false, effets));
+        /*Effet[] effets = { new Degats() };
+        _competences.Add(0, new Competence("Attaque (Épée)", new Portee(true, 1, 1, true, true, new ZonePoint()), true, true, effets));
+		_competences.Add(1, new Competence("Fausse Attaque", new Portee(true, 1, 1, true, true, new ZoneLigne(3,3)), true, false, effets));
+        */
+        _competences = AccesBD.TrouverComps();
         return;
     }
 
     private void ChargerRoles()
     {
-        _roles.Add(0, new RoleJoueur("Guerrier", Stats.PUI, Stats.DEF, Stats.VIT, _competences[0], _competences[1]));
+        //_roles.Add( new RoleJoueur(0, "Guerrier", Stats.PUI, Stats.DEF, Stats.VIT, _competences[0], _competences[1]));
+        _roles = AccesBD.TrouverRoles();
         return;
+    }
+
+    public bool Sauvegarde(int ID)
+    {
+        bool complet = false;
+        //bool existe = AccesBD.SauveExiste(ID);
+
+        // Sauvegarde équipe et position
+
+        // Sauvegarde personnages
+
+        // Sauvegarde inventaire
+
+        // Sauvegarde variables
+
+        // Sauvegarde quêtes
+
+        return complet;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("left alt"))
+        if (Input.GetButtonUp("Debogage") && Options.Debogage && ((JoueurMonde.PeutAgir && GestScene.SurCarte()) || !GestScene.SurCarte() || Debogueur.activeSelf))
         {
-            if (Input.GetKeyUp("f12"))
-            {
-                Debogueur.SetActive(!Debogueur.activeSelf);
-            }
+            Debogueur.SetActive(!Debogueur.activeSelf);
         }
+        else if (!Options.Debogage && Debogueur.activeSelf)
+            Debogueur.SetActive(false);
         if (Debogueur.activeSelf || Erreurs.Visible())
+        {
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         else
-            Cursor.visible = true;
-    }
-    void OnGUI()
-    {
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
     public static EquipeJoueur Equipe
     {
@@ -115,10 +158,6 @@ public class DonneesJeu : MonoBehaviour
             }
         }
     }
-	public static Dictionary<int, Equipe> EquipeMonstre
-	{
-		get{ return moi._equipesMonstres; }
-	}
     private static EquipeJoueur CreerEquipe()
     {
         EquipeJoueur retrun = new EquipeJoueur();
@@ -171,6 +210,29 @@ public class DonneesJeu : MonoBehaviour
                 retrun.Add(e.Current.Key, e.Current.Value);
             }
             return retrun;
+        }
+        static public void Vider()
+        {
+            _declencheurs = new Dictionary<string, bool>();
+        }
+    }
+    public class ListeOptions
+    {
+        public bool Muet = false;
+        public bool Debogage = true;
+        public bool PleinEcran = false;
+        public string Resolution = "1280x720";
+        public ListeOptions()
+        {
+
+        }
+
+        public void Defaut()
+        {
+            Muet = false;
+            Debogage = true;
+            PleinEcran = false;
+            Resolution = "1280x720";
         }
     }
 }

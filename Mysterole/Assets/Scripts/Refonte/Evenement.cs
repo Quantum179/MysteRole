@@ -1,40 +1,104 @@
 ﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Mysterole
 {
-	public class Evenement
+	public abstract class Evenement
 	{
-		
-		//Attributs
+        protected int _id;
+        public int ID
+        {
+            get { return _id; }
+        }
+
+        protected Etape _etapeReliee;
+        public Etape EtapeReliee
+        {
+            get { return _etapeReliee; }
+        }
+
+        protected int _idQuete;
+        public int IDQuete
+        {
+            get { return _idQuete; }
+        }
+
+        protected int _idObjectif;
+        public int IDObjectif
+        {
+            get { return _idObjectif; }
+        }
+
+        protected int _indexEvenement;
+        public int IndexEvenement
+        {
+            get { return _indexEvenement; }
+        }
+
 		protected TypeEvenement _type;
-		//protected int _idQuete;
-        protected bool _estFinie;
+        public TypeEvenement Type
+        {
+            get { return _type; }
+            private set { }
+        }
+
+        protected EtatEvenement _etat;
+        public EtatEvenement Etat
+        {
+            get { return _etat; }
+            set { _etat = value; }
+        }
+
+        protected bool _peutContinuer;
+        public bool PeutContinuer
+        {
+            get { return _peutContinuer; }
+        }
+
+        //protected int _etape;
 
 
-		//Propriétés
-		public TypeEvenement Type
-		{
-			get { return _type;}
-			private set { }
-		}
-		public bool EstFinie
-		{
-			get { return _estFinie;}
-			private set { }
-		}
+        //protected int _position;
+        //public int
+
+        protected float _decompte;
+        public float Decompte
+        {
+            get { return _decompte; }
+            set { _decompte = value; }
+        }
 
 
 		public Evenement ()
 		{
-            _type = TypeEvenement.NonAssigné ;
-            _estFinie = false;
+            _type = TypeEvenement.NULL ;
+            _etat = EtatEvenement.EnAttente;
+            
 		}
 
-
-        public virtual void DeclencherEvenement()
+        public Evenement(TypeEvenement te)
         {
-            throw new Exception();
+            _type = te;
+            _etat = EtatEvenement.EnAttente;
         }
+
+        public Evenement(int id, Etape e, TypeEvenement te, bool pc)
+        {
+            _id = id;
+            _etapeReliee = e;
+            _type = te;
+            _peutContinuer = pc;
+        }
+
+        public abstract void DeclencherEvenement(Pnj pnj);
+
+        public abstract void DeclencherEvenement(JoueurMonde j);
+
+
+
+
+
 	}
 }
 

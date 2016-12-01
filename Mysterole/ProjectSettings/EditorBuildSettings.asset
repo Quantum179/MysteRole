@@ -10,8 +10,6 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Sc\xE8nes/Combat.unity"
   - enabled: 1
-    path: "Assets/Sc\xE8nes/World.unity"
-  - enabled: 1
-    path: "Assets/Sc\xE8nes/Creation_personnage.unity"
-  - enabled: 1
     path: "Assets/Sc\xE8nes/Menu_Principal.unity"
+  - enabled: 1
+    path: "Assets/Sc\xE8nes/Monde.unity"

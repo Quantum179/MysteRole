@@ -6,7 +6,8 @@ namespace Mysterole
 		Bloquee,
 		Disponible,
 		EnCours,
-		Terminee
+		Terminee,
+        NULL
 	}
 }
 

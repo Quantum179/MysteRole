@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8B753E9-64EF-AD0C-D0FC-CFB6EB614D68}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
+    <UnityVersion>5.4.1f1</UnityVersion>
+    <RootNamespace>
+    </RootNamespace>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N">
+      <HintPath>Assets\I18N.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.West">
+      <HintPath>Assets\I18N.West.dll</HintPath>
+    </Reference>
+    <Reference Include="mysql.data">
+      <HintPath>Assets\mysql.data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>Assets\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\System.Drawing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Animations\Script\CurseurAnim.cs" />
+    <Compile Include="Assets\Animations\Script\PersonnageMouvement.cs" />
+    <Compile Include="Assets\ChargerMenu.cs" />
+    <Compile Include="Assets\EventTrigger.cs" />
+    <Compile Include="Assets\ListScrollable.cs" />
+    <Compile Include="Assets\Prefab.cs" />
+    <Compile Include="Assets\Scripts\Attaques\Fleche.cs" />
+    <Compile Include="Assets\Scripts\Attaques\FlechePluis.cs" />
+    <Compile Include="Assets\Scripts\Attaques\Meteor.cs" />
+    <Compile Include="Assets\Scripts\Attaques\projectile.cs" />
+    <Compile Include="Assets\Scripts\BD\AccesBD.cs" />
+    <Compile Include="Assets\Scripts\BD\AccesBDQuantum.cs" />
+    <Compile Include="Assets\Scripts\Données\Cible.cs" />
+    <Compile Include="Assets\Scripts\Données\Competence.cs" />
+    <Compile Include="Assets\Scripts\Données\Effet.cs" />
+    <Compile Include="Assets\Scripts\Données\Equipe.cs" />
+    <Compile Include="Assets\Scripts\Données\Etat.cs" />
+    <Compile Include="Assets\Scripts\Données\Inventaire.cs" />
+    <Compile Include="Assets\Scripts\Données\Objet.cs" />
+    <Compile Include="Assets\Scripts\Données\Personnage.cs" />
+    <Compile Include="Assets\Scripts\Données\Stats.cs" />
+    <Compile Include="Assets\Scripts\Données\Zone.cs" />
+    <Compile Include="Assets\Scripts\Données\role.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\DonneesJeu.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\GestScene.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\GestTransition.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\GestionAI.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\GestionBtn.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\GestionCases.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\GestionCombat.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\GestionPersonnage.cs" />
+    <Compile Include="Assets\Scripts\Gestionnaires\Perso_Selector.cs" />
+    <Compile Include="Assets\Scripts\Interface\AffichageExp.cs" />
+    <Compile Include="Assets\Scripts\Interface\BoutonSceneDebogage.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebogueEquipesMonstre.cs" />
+    <Compile Include="Assets\Scripts\Interface\Debogueur.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugAffichageEffet.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugCompetences.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugDonnees.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugDonneesRoles.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugEffets.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugEquipe.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugEtats.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugJoueur.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugLstMonstres.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugObjets.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugPosJoueur.cs" />
+    <Compile Include="Assets\Scripts\Interface\Erreurs.cs" />
+    <Compile Include="Assets\Scripts\Interface\GenerateurGrid.cs" />
+    <Compile Include="Assets\Scripts\Interface\GestionTour.cs" />
+    <Compile Include="Assets\Scripts\Interface\JoueurExpPrefab.cs" />
+    <Compile Include="Assets\Scripts\Interface\ListeDeclencheursDebogage.cs" />
+    <Compile Include="Assets\Scripts\Interface\ListeScenesDebogueur.cs" />
+    <Compile Include="Assets\Scripts\Interface\ParamScenesDebogage.cs" />
+    <Compile Include="Assets\Scripts\Interface\PointeurMenu.cs" />
+    <Compile Include="Assets\Scripts\Interface\StatuPersonnage.cs" />
+    <Compile Include="Assets\Scripts\Interface\infoCarte.cs" />
+    <Compile Include="Assets\Scripts\Interface\infoPerso.cs" />
+    <Compile Include="Assets\Scripts\Interface\objObtenuPrefab.cs" />
+    <Compile Include="Assets\Scripts\MenuControle.cs" />
+    <Compile Include="Assets\Scripts\Menu_Jeu.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Attente.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Bandeau.cs" />
+    <Compile Include="Assets\Scripts\Refonte\CameraGlobale.cs" />
+    <Compile Include="Assets\Scripts\Refonte\CameraMonde.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Carte.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Cinematique.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Deplacement.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EcranDialogue.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EcranNotification.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EcranQuete.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Etape.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EtatCinematique.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EtatEtape.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EtatEvenement.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EtatJoueur.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EtatPnj.cs" />
+    <Compile Include="Assets\Scripts\Refonte\EtatQuete.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Evenement.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Gain.cs" />
+    <Compile Include="Assets\Scripts\Refonte\GainArgent.cs" />
+    <Compile Include="Assets\Scripts\Refonte\GainCompetence.cs" />
+    <Compile Include="Assets\Scripts\Refonte\GainExperience.cs" />
+    <Compile Include="Assets\Scripts\Refonte\GainObject.cs" />
+    <Compile Include="Assets\Scripts\Refonte\GainQuete.cs" />
+    <Compile Include="Assets\Scripts\Refonte\GestionMonde.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Instructeur.cs" />
+    <Compile Include="Assets\Scripts\Refonte\JoueurMonde.cs" />
+    <Compile Include="Assets\Scripts\Refonte\MethodesEnum.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Notification.cs" />
+    <Compile Include="Assets\Scripts\Refonte\NotificationObjectif.cs" />
+    <Compile Include="Assets\Scripts\Refonte\NotificationQuete.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Objectif.cs" />
+    <Compile Include="Assets\Scripts\Refonte\ObjectifBattre.cs" />
+    <Compile Include="Assets\Scripts\Refonte\ObjectifExplorer.cs" />
+    <Compile Include="Assets\Scripts\Refonte\ObjectifParler.cs" />
+    <Compile Include="Assets\Scripts\Refonte\ObjectifTrouver.cs" />
+    <Compile Include="Assets\Scripts\Refonte\ObjetPnj.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Pnj.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Quete.cs" />
+    <Compile Include="Assets\Scripts\Refonte\QueteParente.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Queteur.cs" />
+    <Compile Include="Assets\Scripts\Refonte\TypeEvenement.cs" />
+    <Compile Include="Assets\Scripts\Refonte\TypeGain.cs" />
+    <Compile Include="Assets\Scripts\Refonte\TypeNotification.cs" />
+    <Compile Include="Assets\Scripts\Refonte\TypeObjectif.cs" />
+    <Compile Include="Assets\Scripts\Refonte\Vendeur.cs" />
+    <Compile Include="Assets\Scripts\Refonte\ZoneCarte.cs" />
+    <Compile Include="Assets\Scripts\Tests\ErrorTests.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\GestionWorld.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\IA.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\InfosWorld.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\Npc.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\ScreenFader.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\TriggerEventWorld.cs" />
+    <Compile Include="Assets\Scripts\WorldScripts\Warp.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SpriteDepthInMap.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledInitialShaderProperties.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Animations\Effets\Effets.txt" />
+    <None Include="Assets\Images\Images.txt" />
+    <None Include="Assets\Pixies\Personnages\Personnages.txt" />
+    <None Include="Assets\Pixies\Tuiles\Tuiles.txt" />
+    <None Include="Assets\Préfabs\Cartes\Cartes.txt" />
+    <None Include="Assets\Préfabs\Objets\Objets.txt" />
+    <None Include="Assets\Préfabs\Unités\Unités.txt" />
+    <None Include="Assets\Scripts\BD\BD.txt" />
+    <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Imported\carte33.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte34.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte35.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte36.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte37.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte43.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte44.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte45.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte46.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte47.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte52.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte53.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte54.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte55.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte56.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte57.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte61.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte62.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte63.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte64.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte65.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte66.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte67.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte73.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte74.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte75.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte76.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\carte77.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite01.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite02.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite04.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite06.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite09.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite10.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite11.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite12.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite13.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite14.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite15.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite16.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite17.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite18.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite19.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite20.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite21.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite22.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite23.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite24.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite25.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite3.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite5.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite7.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\cite8.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\combat1.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\combat2.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map00.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map01.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map02.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map03.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map11.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map12.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map13.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map21.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map22.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\map23.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\License.txt" />
+    <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
+    <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
+</Project>

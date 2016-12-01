@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 
-namespace MysteClass
+namespace Mysterole
 {
-    public class GainCompetence
+    public class GainCompetence : Gain
     {
     }
 }
