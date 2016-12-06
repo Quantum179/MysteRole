@@ -49,10 +49,16 @@ namespace Mysterole
                 //Vector2 v = new Vector2(value.x - (value.x % 32), value.y - (value.y % 32));
                 _coor = value;
                 JoueurMonde.Moi.transform.position = value;
+                GestionMonde.CarteActive = GestionMonde.TrouverCarte(value);
             }
         }
 
-
+        private static List<Evenement> _evenementsCinematiques;
+        public static List<Evenement> EvenementsCinematiques
+        {
+            get { return _evenementsCinematiques; }
+            set { _evenementsCinematiques = value; }
+        }
 
         private TiledMap _carte;
 
@@ -96,6 +102,14 @@ namespace Mysterole
             get { return _evenementActuel; }
             set { _evenementActuel = value; }
         }
+        private static Dialogue _dialogueActuel;
+        public static Dialogue DialogueActuel
+        {
+            get { return _dialogueActuel; }
+            set { _dialogueActuel = value; }
+        }
+
+        int compteur = 0;
 
 
         void Awake()
@@ -121,7 +135,8 @@ namespace Mysterole
             _anim = gameObject.GetComponent<Animator>();
             _rbody = gameObject.GetComponent<Rigidbody2D>();
 
-            //_evenementsCinematique = new Dictionary<int, Dictionary<int, Evenement>>();
+            _evenementsCinematiques = AccesBD.TrouverEvenementsCinematiques(0);
+            //Debug.Log(_evenementsCinematiques.Count);
         }
 
 
@@ -130,8 +145,9 @@ namespace Mysterole
 
             if(_faitCinematique)
             {
-
-
+                if (_evenementActuel == null)
+                    return;
+                Debug.Log("joueur se deplace : " + _seDeplace);
                 if (_seDeplace)
                     EffectuerDeplacement();
 
@@ -158,18 +174,12 @@ namespace Mysterole
                         break;
                     case EtatEvenement.EnCours:
 
-                        if (_evenementActuel.PeutContinuer)
-                        {
-                            _evenementActuel.Decompte -= Time.deltaTime;
-                            if (_evenementActuel.Type != TypeEvenement.Attente && _evenementActuel.Decompte < 0)
-                                _evenementActuel.Etat = EtatEvenement.Fini;
-                        }
-                        else if (_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
+                        if (_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
                             _evenementActuel.Etat = EtatEvenement.Fini;
 
                         break;
                     case EtatEvenement.Fini:
-                        if (_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
+                        if (_evenementActuel.Type == TypeEvenement.Dialogue)
                             EcranDialogue.FermerDialogue();
 
                         break;
@@ -208,19 +218,6 @@ namespace Mysterole
                 }
 
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
 
@@ -243,7 +240,62 @@ namespace Mysterole
         }
 
 
+        public static bool ActualiserEvenement(int iq, int io, int ie)
+        {
+            foreach (Evenement e in _evenementsCinematiques)
+            {
+                if (e.IDQuete == iq && e.IDObjectif == io && e.IndexEvenement == ie)
+                {
+                    _evenementActuel = e;
+                    return true;
+                }
+            }
 
+            return false;
+        }
 
-    }
+        public static bool ActualiserEvenement(int ie)
+        {
+            foreach (Evenement e in _evenementsCinematiques)
+            {
+                if(e.IdEtape == ie)
+                {
+                    _evenementActuel = e;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool ActualiserEvenementCinematique(int id, int compteur)
+        {
+            int lcompteur = 0;
+            foreach (Evenement e in _evenementsCinematiques)
+            {
+                if (e.IdEtape == id && lcompteur == compteur)
+                {
+                    _evenementActuel = e;
+                    return true;
+                }
+                lcompteur++;
+
+            }
+
+            return false;
+        }
+        
+    //public static bool ActualiserDialogue(int ie)
+    //{
+    //    List<Evenement>
+    //    foreach (Evenement e in _evenementsCinematiques)
+    //    {
+    //        if (e.IdEtape == ie && )
+    //        {
+    //            _evenementActuel = e;
+    //        }
+    //    }
+    //}
+
+}
 }

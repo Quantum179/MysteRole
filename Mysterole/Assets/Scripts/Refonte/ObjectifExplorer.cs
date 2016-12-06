@@ -9,7 +9,7 @@ namespace Mysterole
     public class ObjectifExplorer : Objectif
     {
         private GameObject _carteAExplorer;
-        private GameObject CarteAExplorer
+        public GameObject CarteAExplorer
         {
             get { return _carteAExplorer; }
         }
@@ -27,8 +27,8 @@ namespace Mysterole
 
         public override bool ValiderObjectif()
         {
-
-            return false;
+            _estValide = true;
+            return true;
         }
     }
 }

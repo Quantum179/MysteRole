@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Données des États
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation des données sur les états existants dans le système.
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using Mysterole;

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Données de Personnage Joueur
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation des données sur un des membres de l'équipe, ou permet sa création.
+
+using UnityEngine;
 using System.Collections;
 using Mysterole;
 using UnityEngine.UI;

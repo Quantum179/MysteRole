@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage
+// Auteur : Jean-Michel Beauvais
+// Gestion des éléments de débogage possible dans le système.
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;

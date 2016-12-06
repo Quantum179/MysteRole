@@ -49,8 +49,9 @@ namespace Mysterole
 
             if(GestionMonde.FaitCinematique)
             {
-                //carte = GestionMonde.CarteActive.GetComponent<TiledMap>();
-                ////Vector3 targetCamPos = _acteurPrincipal.transform.position + offset;
+                //carte = GestionMonde.CinematiqueActuelle.Carte.GetComponent<TiledMap>();
+                //Debug.Log("Cinématique");
+                //Vector3 targetCamPos = _acteurPrincipal.transform.position + offset;
 
                 //if (_acteurPrincipal.transform.position.x <= carte.transform.position.x + cameraCurr.orthographicSize * cameraCurr.aspect)
                 //{
@@ -76,6 +77,7 @@ namespace Mysterole
             }
             else
             {
+                //Debug.Log("Monde");
                 carte = GestionMonde.CarteActive.GetComponent<TiledMap>();
                 Vector3 targetCamPos = joueurMonde.transform.position + offset;
 

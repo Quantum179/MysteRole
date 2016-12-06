@@ -65,9 +65,10 @@ namespace Mysterole
             }
         }
 
-        private int _compteur = 0;
+        private float compteur = 4f;
         private bool isSet = false;
         private float timer = 5f;
+
 
         //TODO : Faire les requêtes dans la BD pour récupérer les actions de la cinématique
         public Cinematique()
@@ -90,42 +91,55 @@ namespace Mysterole
 
         public void DeclencherCinematique()
         {
-            timer -= Time.deltaTime;
-            EcranDialogue.NouveauDialogue("Cinématique : " + _nom, "Les animations ne fonctionnent pas bien.");
+            EcranDialogue.NouveauDialogue(_nom, "Les cinématiques bug");
 
-            if (timer < 0)
-            {
-                TerminerCinematique();
-                CameraMonde.Moi.transform.position = JoueurMonde.Coor;
-                EcranDialogue.FermerDialogue();
-
-            }
-
-            CameraMonde.Moi.transform.position = new Vector3(75, -75, -10);
-
-
-            //if(!isSet)
-            //    _etapes = AccesBD.TrouverEtapes(this);
-            //List<Etape>.Enumerator enumEtape = _etapes.GetEnumerator();
-            //_etat = EtatCinematique.EnCours;
+            _etat = EtatCinematique.EnCours;
+            //_etapes = AccesBD.TrouverEtapes(this);
             //JoueurMonde.PeutAgir = false;
-            //_carte = GestionMonde.CarteActive;
+            //_carte = _etapes[0].CarteReliee;
+        }
 
-            //while (enumEtape.MoveNext())
+        public void FaireCinematique()
+        {
+            compteur -= Time.deltaTime;
+            
+            if(compteur < 0)
+            {
+                EcranDialogue.FermerDialogue();
+                TerminerCinematique();
+            }
+            //Etape e = _etapes[compteur];
+            //Debug.Log(_etapes.Count);
+            //switch (e.Etat)
             //{
+            //    case EtatEtape.EnAttente:
+            //        e.DeclencherEtape();
+            //        break;
+            //    case EtatEtape.EnCours:
+            //        e.VerifierEtape();
+            //        break;
+            //    case EtatEtape.Finie:
+            //        e.TerminerEtape();
+            //        compteur++;
+            //        if (compteur == _etapes.Count)
+            //            TerminerCinematique();
+            //        break;
+            //}
 
-            //    switch (enumEtape.Current.Etat)
+            //foreach (Etape e in _etapes)
+            //{
+            //    switch (e.Etat)
             //    {
             //        case EtatEtape.EnAttente:
-            //            enumEtape.Current.DeclencherEtape();
+            //            e.DeclencherEtape();
             //            break;
             //        case EtatEtape.EnCours:
-            //            enumEtape.Current.VerifierEtape();
+            //            e.VerifierEtape();
             //            break;
             //        case EtatEtape.Finie:
             //            _compteur++;
 
-            //            if(_compteur == _etapes.Count)
+            //            if (_compteur == _etapes.Count)
             //                TerminerCinematique();
             //            break;
             //    }
@@ -138,9 +152,9 @@ namespace Mysterole
             _etat = EtatCinematique.Terminee;
             ActualiserQuete();
             ActualiserPnjs();
-            GestionMonde.CarteActive = _carte;
+            //GestionMonde.CarteActive = _carte;
             GestionMonde.FaitCinematique = false;
-
+            JoueurMonde.PeutAgir = true;
         }
 
         private void ActualiserQuete()
@@ -149,7 +163,7 @@ namespace Mysterole
             if (q != null)
             {
                 q.Etat = MethodesEnum.ActualiserEtatQuete(q.Etat);
-                EcranNotification.NouvelleNotification(TypeNotification.Quete, "Quête : " + q.Nom + "\nMAJ cinématique");
+                EcranNotification.NouvelleNotification(q);
             }
         }
 

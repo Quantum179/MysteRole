@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Données des Objets
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation des données sur les objets existants dans le système.
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;

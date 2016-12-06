@@ -25,7 +25,7 @@ namespace Mysterole
             _type = t;
         }
         public Deplacement(int id, TypeEvenement te, int p, string param)
-            : base(id, null, te, false)
+            : base(id, 0, te, false)
         {
             string[] lst = param.Split(';');
             string[] pos = lst[0].Split(',');
@@ -34,7 +34,7 @@ namespace Mysterole
             _idObjectif = int.Parse(lst[3]);
             _indexEvenement = p;
         }
-        public Deplacement(int id, Etape e, TypeEvenement te, bool pc, string param)
+        public Deplacement(int id, int e, TypeEvenement te, bool pc, string param)
             : base(id, e, te, pc)
         {
             string[] lst = param.Split(';');

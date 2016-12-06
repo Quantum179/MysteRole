@@ -10,6 +10,7 @@ namespace Mysterole
         Inactif,
         Actif,
         Cinematique,
+        Quete,
         Pattern
     }
 }

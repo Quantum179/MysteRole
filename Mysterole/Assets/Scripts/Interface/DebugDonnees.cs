@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Données
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation des onglets de données du système sur le menu de débogage.
+
+using UnityEngine;
 using System.Collections;
 using System;
 using UnityEngine.UI;

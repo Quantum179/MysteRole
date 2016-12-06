@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Données des Équipes de Monstres
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation des données sur les équipe de monstres existants dans le système.
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;

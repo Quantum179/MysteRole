@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Gestionnaire d'Accès à la Base de Données
+// Auteur : Jean-Michel Beauvais
+// Ensemble des instructions pour la lecture et l'écriture dans la base de données.
+
+using UnityEngine;
 using System.Collections;
 using MySql.Data.MySqlClient;
 using System;

@@ -68,6 +68,7 @@ namespace Mysterole {
         {
             gameObject.name = gameObject.name.Replace("(Clone)", "");
             _nom = gameObject.name;
+            //Debug.Log(_nom);
             List<string> li = AccesBD.TrouverIdCarte(_nom);
             _id = int.Parse(li[0]);
             _estHostile = bool.Parse(li[1].ToString());

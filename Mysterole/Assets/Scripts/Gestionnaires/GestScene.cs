@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿// Programme : Gestionnaire des Scènes
+// Auteur : Jean-Michel Beauvais
+// Système gérant le changement de « scène » avec Unity.
+// « scène » : Ensemble d'éléments actifs pour l'application. Plus d'une « scène » peut être active.
+//             Les éléments d'une « scène » inactive sont détruits.
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;

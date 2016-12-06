@@ -168,7 +168,7 @@ namespace Mysterole
         public void TerminerQuete()
         {
             _etat = EtatQuete.Terminee;
-            GestionMonde.DistribuerGains(_id, _gains);
+            //GestionMonde.DistribuerGains(_id, _gains);
             //EcranNotification.NouvelleNotification(new NotificationQuete(this, _gains));
 
 

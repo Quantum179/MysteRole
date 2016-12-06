@@ -14,13 +14,13 @@ namespace Mysterole
 
         public Text ti;
         public Text des;
-        public Button val;
-        public Button refus;
+        public Text qu;
+        public Text ob;
 
         private static Text titre;
         private static Text description;
-        private static Button valider;
-        private static Button refuser;
+        private static Text quete;
+        private static Text objectif;
 
         private static bool estActif = false;
         public static bool EstActif
@@ -37,8 +37,8 @@ namespace Mysterole
 
             titre = ti;
             description = des;
-            valider = val;
-            refuser = refus;
+            quete = qu;
+            objectif = ob;
 
 
             gameObject.SetActive(false);
@@ -73,24 +73,37 @@ namespace Mysterole
             Main.gameObject.SetActive(false);
         }
 
-        public static void NouvelleNotification(TypeNotification tn, string message)
+        public static void NouvelleNotification(Quete q)
         {
             Main.gameObject.SetActive(true);
+            titre.text = "Mise à jour de quête";
+            Debug.Log(q.Nom);
+            quete.text = q.Nom;
+            
 
-            switch (tn)
+            switch (q.Etat)
             {
-                case TypeNotification.Quete:
-
-                    titre.text = "Mise à jour quête";
-
+                case EtatQuete.Disponible:
+                    description.text = "Nouvelle quête disponible : " + q.Nom + "\n\n" + q.Description;
                     break;
-                case TypeNotification.Objectif:
-                    titre.text = "Mise à jour objectif";
+                case EtatQuete.EnCours:
+                    description.text = "Nouvelle quête en cours : " + q.Nom + "\n\n" + q.Description;
+                    break;
+                case EtatQuete.Terminee:
+                    description.text = "Quête terminée : " + q.Nom + "\n\n" + q.Description + "\n\nVoir gains dans l'écran de quêtes.";
                     break;
             }
+
         }
 
-        
+        public static void NouvelleNotification(Objectif o)
+        {
+            Main.gameObject.SetActive(true);
+            titre.text = "Mise à jour d'objectif";
+
+            description.text = "Objectif mis à jour : " + o.Description;
+
+        }
 
     }
 }

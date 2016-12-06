@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Liste des Déclencheurs (Variables)
+// Auteur : Jean-Michel Beauvais
+// Actualise la liste des variables dynamiques de l'application et permet leur modification en temps réel.
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;

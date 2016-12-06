@@ -122,7 +122,6 @@ partial class AccesBD
         {
 
             GameObject c = Instantiate(Resources.Load("Prefab/cartes/" + lst["nom"]), new Vector2(int.Parse(lst["position_x"]), int.Parse(lst["position_y"])), Quaternion.identity) as GameObject;
-
             if (c == null)
             {
                 Debug.Log("carte " + lst["nom"] + " manquante");
@@ -335,48 +334,87 @@ partial class AccesBD
     }
 
     //Requêtes pour récupérer les pnjs d'une étape et ses événements 
-    private Dictionary<int, Evenement> _trouverEvenementsCinematiques(Etape e)
-    {
-        string Commande = "SELECT * FROM EvenementsCinematiques WHERE idEtapeCinematique = " + e.ID + " ORDER BY position;";
-        List<Dictionary<string, string>> result = Selectionner(Commande);
-        //List<Evenement> le = new List<Evenement>();
-        Dictionary<int, Evenement> lpe = new Dictionary<int, Evenement>();
+    //private Dictionary<int, Evenement> _trouverEvenementsCinematiques(Etape e)
+    //{
+    //    string Commande = "SELECT * FROM EvenementsCinematiques WHERE idEtapeCinematique = " + e.ID + " ORDER BY position;";
+    //    List<Dictionary<string, string>> result = Selectionner(Commande);
+    //    //List<Evenement> le = new List<Evenement>();
+    //    Dictionary<int, Evenement> lpe = new Dictionary<int, Evenement>();
 
         
 
+    //    foreach (Dictionary<string, string> lst in result)
+    //    {
+    //        int a;
+
+    //        if (lst["idPnj"] == "")
+    //            a = 0;
+    //        else
+    //            a = int.Parse(lst["idPnj"]);
+
+
+    //        TypeEvenement te = MethodesEnum.TrouverTypeEvenement(int.Parse(lst["idTypeEvenement"]));
+
+    //        switch (te)
+    //        {
+    //            case TypeEvenement.Dialogue:
+    //                Debug.Log(lst["idPnj"]);
+    //                lpe[a] = new Dialogue(int.Parse(lst["idEvenementCinematique"]), e, te, bool.Parse(lst["peutContinuer"]), lst["contenu"]);
+    //                break;
+    //            case TypeEvenement.Deplacement:
+    //                lpe[a] = new Deplacement(int.Parse(lst["idEvenementCinematique"]), e, te, bool.Parse(lst["peutContinuer"]), lst["contenu"]);
+    //                break;
+    //            case TypeEvenement.Attente:
+    //                lpe[a] = new Attente(int.Parse(lst["idEvenementCinematique"]), e, te, bool.Parse(lst["peutContinuer"]), lst["contenu"]);
+    //                break;
+    //        }
+    //    }
+
+    //    return lpe;
+    //}
+    //public static Dictionary<int, Evenement> TrouverEvenementsCinematiques(Etape e)
+    //{
+    //    return moi._trouverEvenementsCinematiques(e);
+    //}
+
+
+    private List<Evenement> _trouverEvenementsCinematiques(int id)
+    {
+        string Commande;
+        if (id == 0)
+            Commande = "SELECT * FROM EvenementsCinematiques WHERE idPnj IS NULL ORDER BY position;";
+        else
+            Commande = "SELECT * FROM EvenementsCinematiques WHERE idPnj = " + id + " ORDER BY position;";
+
+        List<Dictionary<string, string>> result = Selectionner(Commande);
+        List<Evenement> le = new List<Evenement>();
+
+
         foreach (Dictionary<string, string> lst in result)
         {
-            int a;
-
-            if (lst["idPnj"] == "")
-                a = 0;
-            else
-                a = int.Parse(lst["idPnj"]);
-
-
             TypeEvenement te = MethodesEnum.TrouverTypeEvenement(int.Parse(lst["idTypeEvenement"]));
 
             switch (te)
             {
                 case TypeEvenement.Dialogue:
-                    Debug.Log(lst["idPnj"]);
-                    lpe[a] = new Dialogue(int.Parse(lst["idEvenementCinematique"]), e, te, bool.Parse(lst["peutContinuer"]), lst["contenu"]);
+                    le.Add(new Dialogue(int.Parse(lst["idEvenementCinematique"]), int.Parse(lst["idEtapeCinematique"]), te, bool.Parse(lst["peutContinuer"]), lst["contenu"]));
                     break;
                 case TypeEvenement.Deplacement:
-                    lpe[a] = new Deplacement(int.Parse(lst["idEvenementCinematique"]), e, te, bool.Parse(lst["peutContinuer"]), lst["contenu"]);
+                    le.Add(new Deplacement(int.Parse(lst["idEvenementCinematique"]), int.Parse(lst["idEtapeCinematique"]), te, bool.Parse(lst["peutContinuer"]), lst["contenu"]));
                     break;
                 case TypeEvenement.Attente:
-                    lpe[a] = new Attente(int.Parse(lst["idEvenementCinematique"]), e, te, bool.Parse(lst["peutContinuer"]), lst["contenu"]);
+                    le.Add(new Attente(int.Parse(lst["idEvenementCinematique"]), int.Parse(lst["idEtapeCinematique"]), te, bool.Parse(lst["peutContinuer"]), lst["contenu"]));
                     break;
             }
         }
 
-        return lpe;
+        return le;
     }
-    public static Dictionary<int, Evenement> TrouverEvenementsCinematiques(Etape e)
+    public static List<Evenement> TrouverEvenementsCinematiques(int id)
     {
-        return moi._trouverEvenementsCinematiques(e);
+        return moi._trouverEvenementsCinematiques(id);
     }
+
 
     //Requêtes pour récupérer un acteur temporaire
     private GameObject _trouverActeur(int id)
@@ -424,13 +462,13 @@ partial class AccesBD
             switch (te)
             {
                 case TypeEvenement.Dialogue:
-                    e = new Dialogue(int.Parse(lst["idEvenementPassif"]), null, te, false, lst["contenu"]);
+                    e = new Dialogue(int.Parse(lst["idEvenementPassif"]), 0, te, false, lst["contenu"]);
                     break;
                 case TypeEvenement.Deplacement:
-                    e = new Deplacement(int.Parse(lst["idEvenementPassif"]), null, te, false, lst["contenu"]);
+                    e = new Deplacement(int.Parse(lst["idEvenementPassif"]), 0, te, false, lst["contenu"]);
                     break;
                 case TypeEvenement.Attente:
-                    e = new Attente(int.Parse(lst["idEvenementPassif"]), null, te, false, lst["contenu"]);
+                    e = new Attente(int.Parse(lst["idEvenementPassif"]), 0, te, false, lst["contenu"]);
                     break;
                 case TypeEvenement.NULL:
                     e = new Attente(0, te);

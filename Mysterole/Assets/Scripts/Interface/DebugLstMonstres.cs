@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Combat Manuel
+// Auteur : Jean-Michel Beauvais
+// Pour les paramètres de la « scène » de combat, permet le choix d'une équipe adverse à affronter, ou en créer une sur mesure.
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using Mysterole;

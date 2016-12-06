@@ -9,6 +9,7 @@ namespace Mysterole
     {
         Quete,
         Objectif,
+        Zone,
         Statut,
 
     }

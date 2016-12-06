@@ -118,7 +118,7 @@ namespace Mysterole
         //Méthodes
         public virtual bool ValiderObjectif()
 		{
-
+            _estValide = true;
             return true;
 
 

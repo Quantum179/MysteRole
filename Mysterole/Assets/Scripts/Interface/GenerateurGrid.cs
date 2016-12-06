@@ -18,6 +18,7 @@ public class GenerateurGrid : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		battleCam.GetComponent<AudioListener> ().enabled = !DonneesJeu.Options.Muet;
 		transform.position = new Vector3 (0, 0, 0);
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName("Combat"));
 		int carteChoisi =Random.Range(0, 2) ;

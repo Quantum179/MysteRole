@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Gestionnaire de Données
+// Auteur : Jean-Michel Beauvais
+// Système gérant les données partagées du jeu afin de conserver une cohésion entre les « scènes ».
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Liste des Scènes
+// Auteur : Jean-Michel Beauvais
+// Actualise la liste des « scènes » selon la liste dans GestScene.cs
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Paramètres de Scène
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage des éléments de la zone de paramètres de la « scène » dans le menu de débogage. 
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using Mysterole;

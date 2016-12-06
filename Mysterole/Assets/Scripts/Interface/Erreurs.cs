@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Programme : Erreurs Gérées
+// Auteur : Jean-Michel Beauvais
+// Historique affiché à l'écran des erreurs capturées et gérées par l'application.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

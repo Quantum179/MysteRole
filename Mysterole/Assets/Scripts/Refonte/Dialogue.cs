@@ -29,7 +29,7 @@ namespace Mysterole
             _type = t;
         }
         public Dialogue(int id, TypeEvenement te, int p, string param)
-            : base(id, null, te, false)
+            : base(id, 0, te, false)
         {
             string[] lst = param.Split(';');
             _message = lst[0];
@@ -37,11 +37,10 @@ namespace Mysterole
             _idObjectif = int.Parse(lst[2]);
             _indexEvenement = p;
         }
-        public Dialogue(int id, Etape e, TypeEvenement te, bool pc, string param)
+        public Dialogue(int id, int e, TypeEvenement te, bool pc, string param)
             : base(id, e, te, pc)
         {
             string[] lst = param.Split(';');
-
             _message = lst[0];
             _decompte = float.Parse(lst[1]);
             _etat = EtatEvenement.EnAttente;

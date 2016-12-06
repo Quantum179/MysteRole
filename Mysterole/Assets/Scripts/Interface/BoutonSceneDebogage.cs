@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Boutons de changement de Scène
+// Auteur : Jean-Michel Beauvais
+// Code des boutons de changement de « scène ».
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 

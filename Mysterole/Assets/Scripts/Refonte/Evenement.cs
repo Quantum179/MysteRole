@@ -12,10 +12,10 @@ namespace Mysterole
             get { return _id; }
         }
 
-        protected Etape _etapeReliee;
-        public Etape EtapeReliee
+        protected int _idEtape;
+        public int IdEtape
         {
-            get { return _etapeReliee; }
+            get { return _idEtape; }
         }
 
         protected int _idQuete;
@@ -83,10 +83,10 @@ namespace Mysterole
             _etat = EtatEvenement.EnAttente;
         }
 
-        public Evenement(int id, Etape e, TypeEvenement te, bool pc)
+        public Evenement(int id, int e, TypeEvenement te, bool pc)
         {
             _id = id;
-            _etapeReliee = e;
+            _idEtape = e;
             _type = te;
             _peutContinuer = pc;
         }

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Données des Effets
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation des données sur les effets d'une compétence ou d'un état.
+
+using UnityEngine;
 using System.Collections;
 using Mysterole;
 using System.Collections.Generic;

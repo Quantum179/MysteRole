@@ -36,7 +36,7 @@ namespace Mysterole
             _type = ty;
         }
         public Attente(int id, TypeEvenement te, int p, string param)
-            : base(id, null, te, false)
+            : base(id, 0, te, false)
         {
             string[] lst = param.Split(';');
             _direction = lst[0];
@@ -44,7 +44,7 @@ namespace Mysterole
             _decompte = float.Parse(lst[1]);
 
         }
-        public Attente(int id, Etape e, TypeEvenement te, bool pc, string param)
+        public Attente(int id, int e, TypeEvenement te, bool pc, string param)
             : base(id, e, te, pc)
         {
             string[] lst = param.Split(';');

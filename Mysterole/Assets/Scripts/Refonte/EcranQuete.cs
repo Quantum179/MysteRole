@@ -52,18 +52,18 @@ namespace Mysterole
 
 
             //AccueilQueteGauche
-            lblPrincipales = GameObject.Find("lblPrincipales").GetComponent<Image>();
-            lblAnnexes = GameObject.Find("lblAnnexes").GetComponent<Image>();
-            lblToutes = GameObject.Find("lblToutes").GetComponent<Image>();
-            lblDisponibles = GameObject.Find("lblDisponibles").GetComponent<Image>();
-            lblEnCours = GameObject.Find("lblEnCours").GetComponent<Image>();
-            lblTerminees = GameObject.Find("lblTerminees").GetComponent<Image>();
+            //lblPrincipales = GameObject.Find("lblPrincipales").GetComponent<Image>();
+            //lblAnnexes = GameObject.Find("lblAnnexes").GetComponent<Image>();
+            //lblToutes = GameObject.Find("lblToutes").GetComponent<Image>();
+            //lblDisponibles = GameObject.Find("lblDisponibles").GetComponent<Image>();
+            //lblEnCours = GameObject.Find("lblEnCours").GetComponent<Image>();
+            //lblTerminees = GameObject.Find("lblTerminees").GetComponent<Image>();
 
             lstQuetesParentes = GameObject.Find("lstQuetesParentes");
             lstQuetesEnfants = GameObject.Find("lstQuetesEnfants");
 
 
-            lblPrincipales.color = Color.yellow;
+            //lblPrincipales.color = Color.yellow;
 
 
             //AccueilQueteDroite
@@ -77,7 +77,7 @@ namespace Mysterole
             lstPrerequis = GameObject.Find("lstPrerequis");
 
 
-            lblToutes.color = Color.yellow;
+            //lblToutes.color = Color.yellow;
             gameObject.SetActive(false);
 
         }
@@ -256,8 +256,7 @@ namespace Mysterole
 
             foreach (Objectif obj in laQuete.Objectifs)
             {
-                GameObject btnObjectif = Instantiate(Resources.Load("Prefab/btnObjectif")) as GameObject;
-                btnObjectif.transform.SetParent(lstObjectifs.transform);
+                GameObject btnObjectif = Instantiate(Resources.Load("Prefab/btnObjectif"), lstObjectifs.transform) as GameObject;
                 btnObjectif.name = obj.Description;
                 btnObjectif.GetComponentInChildren<Text>().text = obj.Description;
 

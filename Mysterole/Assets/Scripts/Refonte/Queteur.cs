@@ -14,7 +14,11 @@ namespace Mysterole
             private set { }
         }
 
-
+        //private Dictionary<Quete, List<Objectif>> _evenementsQuete;
+        //public Dictionary<Quete, List<Objectif>> EvenementsQuete
+        //{
+        //    get { return _evenementsQuete; }
+        //}
 
         
         //private Dictionary<string, Dictionary<int, List<Evenement>>> _evenementsQuete;
@@ -27,7 +31,7 @@ namespace Mysterole
 
         private string robj = "";
         private Objectif obj;
-        //private bool _avanceeQuete = true;
+        private bool _avanceeQuete = true;
         private bool objvalide = false;
 
 
@@ -47,9 +51,10 @@ namespace Mysterole
         {
             base.Awake();
             _quetes = new List<Quete>();
+            //_evenementsQuete = new Dictionary<Quete, List<Objectif>>();
             //_evenementsQuete = new Dictionary<string, Dictionary<int, List<Evenement>>>();
-            _etat = EtatPnj.Pattern;
-            _seDeplace = true;
+            //_etat = EtatPnj.Pattern;
+            //_seDeplace = true;
 
         }
 
@@ -67,106 +72,79 @@ namespace Mysterole
             if ((_rbody != null) && _rbody.IsSleeping())
                 _rbody.WakeUp();
 
-            if (_etat == EtatPnj.Cinematique)
+
+
+            if(_etat == EtatPnj.Quete)
             {
-                Debug.Log("testcinematique");
-                base.Update();
-                return;
-            }
 
+                if (_seDeplace)
+                {
+                    EffectuerDeplacement();
 
+                    if ((Vector2)_rbody.transform.position == ((Deplacement)_evenementActuel).Destination)
+                    {
+                        _seDeplace = false;
+                        _anim.SetBool("isWalking", false);
+                        _evenementActuel.Etat = EtatEvenement.Fini;
+                    }
+                }
 
+                if (_faitPause)
+                {
+                    _evenementActuel.Decompte -= Time.deltaTime;
 
-            if (!ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement))
-            {
-                _etat = EtatPnj.Pattern;
+                    if (_evenementActuel.Decompte < 0)
+                        _evenementActuel.Etat = EtatEvenement.Fini;
+                }
+
+                if (_evenementActuel == null)
+                {
+                    _etat = EtatPnj.Inactif;
+                    base.Update();
+                    return;
+                }
+
+                switch (_evenementActuel.Etat)
+                {
+                    case EtatEvenement.EnAttente:
+                        _evenementActuel.DeclencherEvenement(this);
+                        break;
+                    case EtatEvenement.EnCours:
+                        if(_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetButtonUp("Accepter"))
+                        {
+                            EcranDialogue.FermerDialogue();
+                            _evenementActuel.Etat = EtatEvenement.Fini;
+                        }
+                        break;
+                    case EtatEvenement.Fini:
+                        if (_indexEvenement < 0)
+                            _indexEvenement--;
+                        else
+                            _indexEvenement++;
+                        if(!ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement))
+                        {
+                            _indexQuete = 0;
+                            _indexObjectif = 0;
+                            _indexEvenement = 0;
+
+                            _etat = EtatPnj.Inactif;
+                            JoueurMonde.PeutAgir = true;
+                            _queteEnCours = false;
+                        }
+                        else
+                        {
+                            Debug.Log(_indexQuete + "    " + _indexObjectif + _indexEvenement);
+                            _etat = EtatPnj.Pattern;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
-                //Debug.Log("testpasevent");
-
-                _etat = EtatPnj.Actif;
-                //if (_evenementActuel.Etat == EtatEvenement.Fini)
-                //    _indexEvenement++;
+                base.Update();
             }
-
-
-            base.Update();
-
-            //if (_faitPattern || _faitCinematique)
-            //{
-            //    Debug.Log("testpattern");
-            //    base.Update();
-            //}
-            //else
-            //{
-            //    if ((_rbody != null) && _rbody.IsSleeping())
-            //        _rbody.WakeUp();
-
-            //    if (_seDeplace)
-            //        EffectuerDeplacement();
-
-            //    if (_evenementActuel.Type == TypeEvenement.Deplacement && (Vector2)_rbody.transform.position == ((Deplacement)_evenementActuel).Destination)
-            //    {
-            //        _seDeplace = false;
-            //        _anim.SetBool("isWalking", false);
-            //    }
-
-
-
-            //    //S'il y a une quête en cours dans la liste des quêtes reliées au quêteur
-            //    if (_indexQuete != -1 && _avanceeQuete)
-            //    {
-
-            //        //On actualise l'événement actuel en fonction de l'actualisation des quêtes
-            //        if (!ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement))
-            //        {
-            //            JoueurMonde.PeutAgir = true;
-            //            _indexEvenement = 0;
-            //            _indexQuete = -1;
-            //            _estActif = false;
-            //            _faitPattern = true;
-            //            _peutQuete = false;
-            //        }
-
-
-
-            //        switch (_evenementActuel.Etat)
-            //        {
-            //            case EtatEvenement.EnAttente:
-            //                _evenementActuel.DeclencherEvenement(this);
-            //                break;
-            //            case EtatEvenement.EnCours:
-            //                if (Input.GetKeyDown(KeyCode.T) && _evenementActuel.Type == TypeEvenement.Dialogue || _evenementActuel.Type == TypeEvenement.Deplacement && !_seDeplace)
-            //                    _evenementActuel.Etat = EtatEvenement.Fini;
-            //                break;
-            //            case EtatEvenement.Fini:
-            //                switch (_evenementActuel.Type)
-            //                {
-            //                    case TypeEvenement.Dialogue:
-            //                        EcranDialogue.closeDialog();
-            //                        _evenementActuel = null;
-            //                        break;
-            //                    case TypeEvenement.Deplacement:
-            //                        _evenementActuel = null;
-            //                        break;
-            //                    case TypeEvenement.Attente:
-
-            //                        break;
-            //                }
-            //                _indexEvenement++;
-            //                break;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (Input.GetKeyDown(KeyCode.T) && _evenementActuel.Type == TypeEvenement.Dialogue)
-            //        {
-            //            EcranDialogue.closeDialog();
-            //            JoueurMonde.PeutAgir = true;
-            //        }
-            //    }
-            //}
         }
 
 
@@ -178,7 +156,6 @@ namespace Mysterole
         {
             //On va chercher les quêtes reliées au quéteur
             //On récupère l'énumérateur du dictionnaire de quêtes (parent)
-
             Dictionary<QueteParente, List<Quete>>.Enumerator enumQuetesP = GestionMonde.Quetes.GetEnumerator();
 
             while (enumQuetesP.MoveNext())
@@ -189,15 +166,18 @@ namespace Mysterole
                 {
                     //On vérifie si le pnj est responsable du début de la quête
                     if (enumQuetesE.Current.ResponsablePnj == _id)
+                    {
                         if (!_quetes.Contains(enumQuetesE.Current))
                         {
                             _quetes.Add(enumQuetesE.Current);
+                            //_evenementsQuete.Add(enumQuetesE.Current, new List<Objectif>());
                             continue;
                         }
+                    }
 
                     //On vérifie si le pnj est responsable d'un objectif de la quête
                     foreach (Objectif obj in enumQuetesE.Current.Objectifs)
-                    {
+                    {                        
                         //Debug.Log(obj.Responsable);
                         if (obj.Responsable == _id)
                             if (!_quetes.Contains(enumQuetesE.Current))
@@ -210,104 +190,142 @@ namespace Mysterole
 
         public void VerifierAvanceeQuete()
         {
-            //_avanceeQuete = true;
+            if (_etat == EtatPnj.Quete)
+                return;
+
+
+
             _peutQuete = false;
-            List<Quete>.Enumerator enumQuete = _quetes.GetEnumerator();
+            //List<Quete>.Enumerator enumQuete = _quetes.GetEnumerator();
             int occQuetes = 0;
 
-            while (enumQuete.MoveNext())
+            int _compteur = 0;
+            foreach(Quete q in _quetes)
             {
+                //Debug.Log(_quetes.Count);
+                //Debug.Log(q.Nom + q.Etat);
+                //Debug.Log(_etat);
+                //compteur++;
+                if (_etat == EtatPnj.Quete)
+                    break;
+
                 //TODO : Diviser tout ces blocs en switch si possible
                 //TODO : rajouter la gestion d'ordre des quêtes (bloquer les quêtes indisponibles)
 
                 //Démarrage de la quête par le responsable
-                if (enumQuete.Current.ResponsablePnj == _id && enumQuete.Current.Etat == EtatQuete.Disponible)
+                if (q.ResponsablePnj == _id && q.Etat == EtatQuete.Disponible)
                 {
                     //Démarrer la quête aussi bien dans la liste de quete que dans la gestion des événements
-                    enumQuete.Current.DemarrerQuete();
+                    q.DemarrerQuete();
                     _queteEnCours = true;
-                    EcranNotification.NouvelleNotification(TypeNotification.Quete, "Quête : " + enumQuete.Current.Nom + "\nDébut");
+                    EcranNotification.NouvelleNotification(q);
 
-                    _indexQuete = enumQuete.Current.ID;
+                    //Debug.Log("test debutquete : " + q.Nom);
+                    //TODO : gérer les événements à l'activation
+                    _indexQuete = q.ID;
                     _indexObjectif = 0;
                     _indexEvenement = 0;
 
-                    _etat = EtatPnj.Actif;
-                    //TODO : gérer les événements à l'activation
+                    ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement);
+                    Debug.Log(q.Nom + q.Etat);
+                    _etat = EtatPnj.Quete;
                     break;
                 }
 
+                Debug.Log("pasdebut" + q.Nom);
                 //Validation de l'avanceée de la quête
-                if (enumQuete.Current.Etat == EtatQuete.EnCours && _etat != EtatPnj.Actif)
+                if (q.Etat == EtatQuete.EnCours)
                 {
-                    List<Objectif>.Enumerator enumObjectif = enumQuete.Current.Objectifs.GetEnumerator();
+                    Debug.Log(q.Nom);
+
+                    //List<Objectif>.Enumerator enumObjectif = q.Objectifs.GetEnumerator();
                     int compteur = -1;
 
-                    //On actualise l'index
-                    _indexQuete = enumQuete.Current.ID;
-
+                    Debug.Log("hotfixquete" + q.Nom);
                     //On vérifie si les objectifs de la quête en cours sont validés et/ou si le queteur est responsable
-                    while (enumObjectif.MoveNext())
+                    foreach(Objectif o in q.Objectifs)
+                    //while (enumObjectif.MoveNext())
                     {
+                        Debug.Log(o.Description + "  :   " + _nom);
                         compteur++;
-                        if (enumObjectif.Current.EstValide)
+                        if (o.EstValide)
                             continue;
 
-                        if (enumObjectif.Current.Responsable == _id)
+                        if (o.Responsable == _id)
                         {
-                            //On actualiser l'index et on arrête le comportement par défaut
-                            _indexObjectif = enumObjectif.Current.ID;
-
+                            Debug.Log("ilestla" + q.Nom);
                             //On vérifie que tous les pré-requis sont validés
-                            if (enumObjectif.Current.ValiderObjectif())
+                            if (o.ValiderObjectif())
                             {
-                                //TODO : Pop-up d'objectif accompli
-                                _indexEvenement = 0;
 
-                                //On vérifie si tous les objectifs de la quête sont validés
-                                if (enumQuete.Current.ObjectifsValides == enumQuete.Current.Objectifs.Count)
+                                Debug.Log("ilestla2" + q.Nom);
+                                if (!objvalide)
                                 {
+                                    _indexQuete = q.ID;
+                                    _indexObjectif = o.ID;
+                                    _indexEvenement = 0;
+
+                                    ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement);
+                                    _etat = EtatPnj.Quete;
+
+                                    //Pop-up d'objectif validé
+                                    EcranNotification.NouvelleNotification(o);
+                                    GestionMonde.VerifierCinematiques(o.ID);
+
+                                }
+
+                                //TODO : Pop-up d'objectif accompli
+                                Debug.Log(q.Objectifs.Count);
+                                Debug.Log(q.ObjectifsValides);
+                                //On vérifie si tous les objectifs de la quête sont validés
+                                if (q.ObjectifsValides == q.Objectifs.Count)
+                                {
+
                                     _queteEnCours = false;
-
-                                    //On termine la quête : distribution des gains et pop-up de quête accomplie
-                                    enumQuete.Current.TerminerQuete();
-                                    EcranNotification.NouvelleNotification(TypeNotification.Quete, "Quête : " + enumQuete.Current.Nom + "\nFin");
-
-                                    //On vérifie si l'objectif validé déclenche une cinématique
-                                    GestionMonde.VerifierCinematiques(enumObjectif.Current.ID);
+                                    Debug.Log("jenaimarre");
+                                    q.TerminerQuete();
+                                    EcranNotification.NouvelleNotification(q);
+                                    GestionMonde.VerifierCinematiques(o.ID);
+                                    objvalide = false;
                                     break;
                                 }
 
                                 //On vérifie si le quêteur est responsable de l'objectif suivant pour le valider en même temps
-                                if (enumQuete.Current.Objectifs[compteur + 1].Responsable == _id)
+                                if (q.Objectifs[compteur + 1].Responsable == _id)
                                 {
+                                    Debug.Log("jenaimarreconnard");
+
                                     objvalide = true;
                                     continue; //TODO : vérifier s'il ne manque rien après la validation de l'objectif
                                 }
                                 else
                                 {
+                                    Debug.Log("ilestla3" + q.Nom);
                                     //Pop-up d'objectif validé
-                                    EcranNotification.NouvelleNotification(TypeNotification.Objectif, "Objectif : " + enumObjectif.Current.Description + "\n");
-                                    //On vérifie si l'objectif validé déclenche une cinématique
-                                    GestionMonde.VerifierCinematiques(enumObjectif.Current.ID);
+                                    EcranNotification.NouvelleNotification(o);
+                                    GestionMonde.VerifierCinematiques(o.ID);
+                                    objvalide = false;
                                     break;
+
+
                                 }
                             }
                             else
                             {
+                                _indexQuete = q.ID;
+                                _indexObjectif = o.ID;
                                 _indexEvenement = -1;
-                                
-                                //_evenementActuel = new Dialogue("Objectif non validé", TypeEvenement.Dialogue);
-                                //_evenementActuel.DeclencherEvenement(this);
-
-                                //Cas particulier où le pnj est responsable de l'objectif mais que le joueur ne l'a pas terminé (pas tous les prerequis)
+                                Debug.Log("jenaimarresdsqdsqdsqdsqdsq");
+                                Debug.Log(o.Description + q.Nom);
+                                ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement);
+                                _etat = EtatPnj.Quete;
                             }
                         }
                         else
                         {
                             if (objvalide)
                                 break;
-
+                            Debug.Log("jenaimarreqsdqsdsqdsqmaaaaaarre");
                             _indexQuete = -1;
                             _indexObjectif = -1;
                             _indexEvenement = 0;
@@ -321,20 +339,24 @@ namespace Mysterole
 
                     objvalide = false;
                 }
+                Debug.Log("pasencours" + q.Nom);
 
                 occQuetes++;
                 if (_queteEnCours)
+                {
+                    Debug.Log(q.Nom + "queteencours");
                     break;
+                }
             }
 
             //Comportement par défaut car aucune quête à mettre à jour
             if(occQuetes == _quetes.Count && _etat != EtatPnj.Actif)
             {
 
-                _indexQuete = -1;
-                _indexObjectif = -1;
+                _indexQuete = -0;
+                _indexObjectif = 0;
                 _indexEvenement = 0;
-
+                Debug.Log("jetetiens");
                 //Discussion par défaut ou discussion de quête par défaut
                 //TODO : Empecher le joueur de lancer la discussion pendant le déroulement d'un événement
 
@@ -358,7 +380,9 @@ namespace Mysterole
         {
             if(col.gameObject.name == JoueurMonde.Moi.gameObject.name)
                 GestionMonde.PnjProche = _nom;
-            //Debug.Log("testtrigger" + _nom);
+
+
+            Debug.Log(GestionMonde.PnjProche);
             //Debug.Log(transform.position);
         }
 
@@ -366,7 +390,10 @@ namespace Mysterole
         void OnTriggerStay2D(Collider2D col)
         {
             if (col.gameObject.name == JoueurMonde.Moi.gameObject.name)
+            {
                 _peutQuete = true;
+                GestionMonde.PnjProche = _nom;
+            }
             //Debug.Log("testtestest" + _nom + transform.position);
 
             //TODO : Faire une logique pour déclencher le base.Interagir() si toutes les quêtes sont terminées
@@ -380,6 +407,7 @@ namespace Mysterole
                 _peutQuete = false;
                 GestionMonde.PnjProche = "";
             }
+            Debug.Log(GestionMonde.PnjProche);
 
         }
         //public void DeclencherEvenementsQuete()

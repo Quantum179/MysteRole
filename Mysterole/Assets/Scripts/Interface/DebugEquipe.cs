@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Données de l'Équipe Joueur
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation des données sur l'équipe actuelle du joueur.
+
+using UnityEngine;
 using System.Collections;
 using Mysterole;
 using System.Collections.Generic;

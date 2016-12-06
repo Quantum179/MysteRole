@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using Mysterole;
 using System.Collections.Generic;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 
 public class Menu_Jeu : MonoBehaviour
 {
@@ -17,22 +17,29 @@ public class Menu_Jeu : MonoBehaviour
     public Selectable MenuP;
     public Selectable SousMenuO;
     public Selectable SousMenuQ;
+    public Selectable SousMenuPerso;
 
     public Text nomPerso;
+    public Text lvlPerso;
+    public Text PVPerso;
+    public Text PuiPerso;
+    public Text VitPerso;
 
-    
+    public string t = "";
+
+    private EventSystem EventSystem;
 
     // Use this for initialization
     public void Start()
     {
 
         //Par default
+        EventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         MenuP.Select();
         MenuJeu.SetActive(false);
         OptionsM.SetActive(false);
         QuitterM.SetActive(false);
         PersoM.SetActive(false);
-        
 
     }
 
@@ -74,20 +81,45 @@ public class Menu_Jeu : MonoBehaviour
         DonneesJeu.Vider();
     }
 
-    public void Personnage_Click()
+    public void Personnage_Click(GameObject Panel)
     {
-        //infoPerso perso;
-        //perso = DonneesJeu.Adversaires
-        //Debug.Log(perso.txtNom);
+        // On met le dernier utiliser a false
+        Panel.SetActive(false);
+
+        PersoM.SetActive(true);
+
+        // On met les données du personnage
+       nomPerso.text = DonneesJeu.Equipe.Membres[0].Nom;
+
+       lvlPerso.text = DonneesJeu.Equipe.Membres[0].NIV.ToString();
+
+       PVPerso.text = DonneesJeu.Equipe.Membres[0].PV.ToString();
+
+       PuiPerso.text = DonneesJeu.Equipe.Membres[0].PUI.ToString();
+
+       VitPerso.text = DonneesJeu.Equipe.Membres[0].VIT.ToString();
+
+        SousMenuPerso.Select();
+
+
+    }
+
+    public void OuvrirQuetes()
+    {
+        // On ferme nous meme le menu de jeu
+        MenuJeu.SetActive(false);
+
+        EcranQuete.OuvrirEcranQuete(t);
     }
 
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L))
-            {
+        if(!EventSystem.currentSelectedGameObject)
+        {
             MenuP.Select();
-            }
+        }
+        
     }
 
 }

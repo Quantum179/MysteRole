@@ -44,7 +44,12 @@ namespace Mysterole
         {
             get { return _cameraGlobale; }
         }
-
+        private GameObject _cameraCinematique;
+        public GameObject CameraCinematique
+        {
+            get { return _cameraCinematique; }
+            set { _cameraCinematique = value; }
+        }
 
         private string _zone;
         public string Zone
@@ -144,11 +149,11 @@ namespace Mysterole
             get { return _faitCinematique; }
             set { _faitCinematique = value; }
         }
-        private static int ic = 0;
-        public static int IC
+        private static int _indexCinematique = 0;
+        public static int IndexCinematique
         {
-            get { return ic; }
-            set { ic = value; }
+            get { return _indexCinematique; }
+            set { _indexCinematique = value; }
         }
 
         public bool initialisee = false;
@@ -168,6 +173,7 @@ namespace Mysterole
             //Initialisation du joueur monde
             if (JoueurMonde.Coor != Vector2.zero)
             {
+                Destroy(_joueur);
                 _joueur = Instantiate(Resources.Load("Prefab/player"), JoueurMonde.Coor, Quaternion.identity) as GameObject;
                 _joueur.name = _joueur.name.Replace("(Clone)", "");
             }
@@ -236,11 +242,14 @@ namespace Mysterole
                 _firstUpdate = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape) && JoueurMonde.PeutAgir)
+            if (Input.GetButtonUp("Accepter") && JoueurMonde.PeutAgir)
             {
                 if (pnjProche != "")
                 {
-                    GameObject.Find(pnjProche).GetComponent<Queteur>().VerifierAvanceeQuete();
+                    Queteur q = GameObject.Find(pnjProche).GetComponent<Queteur>();
+
+                    if (q.Etat != EtatPnj.Quete)
+                        q.VerifierAvanceeQuete();
                 }
             }
 
@@ -276,10 +285,12 @@ namespace Mysterole
 
             }
 
-            //if (Input.GetKeyDown(KeyCode.M))
-            //{
-            //    _faitCinematique = true;
-            //}
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                _faitCinematique = true;
+                _cinematiqueActuelle = _cinematiques[0];
+                Debug.Log(_cinematiqueActuelle.Nom);
+            }
 
             //Debug.Log(JoueurMonde.Coor);
             if (Compteur)
@@ -292,7 +303,6 @@ namespace Mysterole
 
                 if (timer < 0 && _carteActive.GetComponent<Carte>().EstHostile && !_faitCinematique)
                 {
-                    //Debug.Log(JoueurMonde.Coor);
                     JoueurMonde.PeutAgir = false;
                     LancerCombat();
                     timer = UnityEngine.Random.Range(0,15);
@@ -305,12 +315,38 @@ namespace Mysterole
             //}
 
 
-
-            if (_faitCinematique)
+            if(_cinematiqueActuelle != null && _faitCinematique)
             {
-                _cinematiques[ic].DeclencherCinematique();
 
+                _cinematiqueActuelle.DeclencherCinematique();
+                //Debug.Log(_cinematiqueActuelle.Etat);
+
+
+
+
+
+                switch (_cinematiqueActuelle.Etat)
+                {
+                    case EtatCinematique.Bloquee:
+                        break;
+                    case EtatCinematique.Disponible:
+
+
+                        _cinematiqueActuelle.DeclencherCinematique();
+                        break;
+                    case EtatCinematique.EnCours:
+                        _cinematiqueActuelle.FaireCinematique();
+                        break;
+                    case EtatCinematique.Terminee:
+                        _cinematiqueActuelle = null;
+                        break;
+                    case EtatCinematique.NULL:
+                        break;
+                    default:
+                        break;
+                }
             }
+
 
         }
 
@@ -563,6 +599,7 @@ namespace Mysterole
             return null;
         }
 
+        //
         public static GameObject TrouverCarte(Vector2 pos)
         {
             foreach (GameObject c in _cartes)
@@ -572,6 +609,35 @@ namespace Mysterole
             return null;
         }
 
+        //
+        public static List<GameObject> TrouverActeurs(int id)
+        {
+            List<GameObject> la = new List<GameObject>();
+
+            foreach (Evenement e in JoueurMonde.EvenementsCinematiques)
+            {
+                if(e.IdEtape == id)
+                {
+                    la.Add(JoueurMonde.Moi.gameObject);
+                    break;
+                }
+            }
+            foreach (GameObject p in _pnjs)
+            {
+                foreach (Evenement e in p.GetComponent<Pnj>().EvenementsCinematiques)
+                {
+                    if(e.IdEtape == id)
+                    {
+                        la.Add(p);
+                        break;
+                    }
+                }
+            }
+
+            return la;
+        }
+
+        //
         public static void Reinitialiser()
         {
             _quetes = AccesBD.TrouverToutesQuetes();
@@ -586,7 +652,29 @@ namespace Mysterole
             GestScene.ProchaineSceneTransition("Combat");
         }
 
+        public static void VerifierExplorations(GameObject c)
+        {
+            Dictionary<QueteParente, List<Quete>>.Enumerator enumQuete = _quetes.GetEnumerator();
 
+            while (enumQuete.MoveNext())
+            {
+                foreach (Quete q in enumQuete.Current.Value)
+                {
+                    int compteurc = 0;
+                    foreach (Objectif o in q.Objectifs)
+                    {
+                        if(o.Type == TypeObjectif.Explorer && c == ((ObjectifExplorer)o).CarteAExplorer && q.ObjectifsValides == compteurc)
+                        {
+                            o.ValiderObjectif();
+                            EcranNotification.NouvelleNotification(o);
+                            break;
+                        }
+                        compteurc++;
+                    }
+                }
+            }
+
+        }
     }
 }
 

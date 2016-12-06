@@ -108,6 +108,12 @@ namespace Mysterole
         {
             get { return _evenementsActifs; }
         }
+        protected List<Evenement> _evenementsCinematiques;
+        public List<Evenement> EvenementsCinematiques
+        {
+            get { return _evenementsCinematiques; }
+            set { _evenementsCinematiques = value; }
+        }
         protected Evenement _evenementActuel;
         public Evenement EvenementActuel
         {
@@ -117,7 +123,7 @@ namespace Mysterole
 
 
         private Vector2 _deplacementPattern;
-        private bool dec = false;
+        //private bool dec = false;
 
 
         private int _indexPattern = 0;
@@ -179,27 +185,20 @@ namespace Mysterole
 
             //On récupère les événements passifs du pnj dans la BD et on initialise l'événement à effectuer par défaut
             _evenementsPassifs = AccesBD.TrouverEvenementsPassifs(this);
-
-
-            if (_evenementsPassifs.Count > 0)
-                _evenementActuel = _evenementsPassifs[0];
-
-
             _evenementsActifs = AccesBD.TrouverEvenementsActifs(this);
-
+            _evenementsCinematiques = AccesBD.TrouverEvenementsCinematiques(_id);
 
             _indexQuete = 0;
             _indexObjectif = 0;
             _indexEvenement = 0;
 
-            _deplacementPattern = Vector2.zero;
             _coor = transform.position;
             _etat = EtatPnj.Pattern;
         }
 
         protected virtual void Start()
         {
-            
+            _seDeplace = false;
 
         }
 
@@ -211,6 +210,12 @@ namespace Mysterole
 
         protected virtual void Update()
         {
+            //Debug.Log("testpnj" + _nom);
+            //Debug.Log(_indexQuete);
+            //Debug.Log(_indexObjectif);
+            //Debug.Log(_indexEvenement);
+
+
 
             if (_nom != "Sage du village" && _nom != "Père")
                 return;
@@ -220,6 +225,7 @@ namespace Mysterole
 
             if (_seDeplace)
             {
+                Debug.Log("testpnj2");
                 EffectuerDeplacement();
 
 
@@ -264,7 +270,7 @@ namespace Mysterole
                             break;
                         case EtatEvenement.EnCours:
                             //Debug.Log("lol");
-                            if (Input.GetKeyDown(KeyCode.E) && _evenementActuel.Type == TypeEvenement.Dialogue)
+                            if (Input.GetButtonUp("Accepter") && _evenementActuel.Type == TypeEvenement.Dialogue)
                                 _evenementActuel.Etat = EtatEvenement.Fini;
                             break;
                         case EtatEvenement.Fini:
@@ -291,67 +297,29 @@ namespace Mysterole
 
 
 
-                    //switch (_evenementActuel.Etat)
-                    //{
-                    //    case EtatEvenement.EnAttente:
-                    //        _evenementActuel.DeclencherEvenement(this);
-                    //        break;
-                    //    case EtatEvenement.EnCours:
-                    //        if (_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
-                    //            _evenementActuel.Etat = EtatEvenement.Fini;
-                    //        break;
-                    //    case EtatEvenement.Fini:
-                    //        if(_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
-                    //            EcranDialogue.FermerDialogue();
+                    switch (_evenementActuel.Etat)
+                    {
+                        case EtatEvenement.EnAttente:
+                            _evenementActuel.DeclencherEvenement(this);
+                            break;
+                        case EtatEvenement.EnCours:
+                            if (_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
+                                _evenementActuel.Etat = EtatEvenement.Fini;
+                            break;
+                        case EtatEvenement.Fini:
+                            if (_evenementActuel.Type == TypeEvenement.Dialogue && Input.GetKeyDown(KeyCode.E))
+                                EcranDialogue.FermerDialogue();
 
-                    //        break;
-                    //    default:
-                    //        break;
-                    //}
+                            break;
+                        default:
+                            break;
+                    }
 
 
 
                     break;
                 case EtatPnj.Pattern:
 
-                    //_evenementActuel = _evenementsPassifs[_indexPattern];
-                    //Debug.Log(_evenementActuel);
-
-
-
-                    //switch (_evenementActuel.Etat)
-                    //{
-                    //    case EtatEvenement.EnAttente:
-                    //        _evenementActuel.DeclencherEvenement(this);
-                    //        break;
-                    //    case EtatEvenement.Fini:
-
-                    //        if(_evenementActuel.Type == TypeEvenement.Attente)
-                    //        {
-                    //            _faitPause = false;
-                    //            _evenementActuel.Decompte = ((Attente)_evenementActuel).Temps;
-                    //            Debug.Log("test");
-                    //        }
-                    //        //if(_evenementActuel.Type == TypeEvenement.Deplacement)
-                    //        //{
-                    //        //    _seDeplace
-                    //        //}
-
-                    //        _evenementActuel.Etat = EtatEvenement.EnAttente;
-
-                    //        if (_indexPattern == 0)
-                    //            _indexPattern = 1;
-                    //        else
-                    //            _indexPattern = 0;
-
-                    //        if (_evenementActuel.Type == TypeEvenement.Deplacement)
-                    //        {
-                    //            dec = false;
-                    //            Debug.Log("sdfdsfdsfdsfsf");
-                    //        }
-
-                    //        break;
-                    //}
                     break;
             }
         }
@@ -366,6 +334,9 @@ namespace Mysterole
         {
             //Debug.Log(_id);
             //Debug.Log(_evenementActuel);
+            Debug.Log(_evenementActuel.Type);
+
+
             Vector2 offset = new Vector2(((Deplacement)_evenementActuel).Destination.x - _rbody.position.x, ((Deplacement)_evenementActuel).Destination.y - _rbody.position.y);
 
             _anim.SetBool("isWalking", true);
@@ -373,32 +344,26 @@ namespace Mysterole
             _anim.SetFloat("input_y", offset.y);
 
 
-            if(!dec)
-            {
-                bool dx = (UnityEngine.Random.Range(0, 2) == 0);
-                bool dy = (UnityEngine.Random.Range(0, 2) == 0);
+            //if(!dec)
+            //{
+            //    bool dx = (UnityEngine.Random.Range(0, 2) == 0);
+            //    bool dy = (UnityEngine.Random.Range(0, 2) == 0);
 
 
-                float x = (dx ? UnityEngine.Random.Range(Coor.x - ((Deplacement)_evenementActuel).Destination.x, Coor.x)
-                : UnityEngine.Random.Range(Coor.x + ((Deplacement)_evenementActuel).Destination.x, Coor.x)
-                );
+            //    float x = (dx ? UnityEngine.Random.Range(Coor.x - ((Deplacement)_evenementActuel).Destination.x, Coor.x)
+            //    : UnityEngine.Random.Range(Coor.x + ((Deplacement)_evenementActuel).Destination.x, Coor.x)
+            //    );
 
-                float y = (dy ? UnityEngine.Random.Range(Coor.y - ((Deplacement)_evenementActuel).Destination.y, Coor.y)
-                : UnityEngine.Random.Range(Coor.y + ((Deplacement)_evenementActuel).Destination.y, Coor.y)
-                );
-
-
-                _deplacementPattern = new Vector2(x, y);
-                dec = true;
-            }
+            //    float y = (dy ? UnityEngine.Random.Range(Coor.y - ((Deplacement)_evenementActuel).Destination.y, Coor.y)
+            //    : UnityEngine.Random.Range(Coor.y + ((Deplacement)_evenementActuel).Destination.y, Coor.y)
+            //    );
 
 
-            if (_etat == EtatPnj.Pattern)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, _deplacementPattern, Time.deltaTime * 5);
-            }
-            else
-                transform.position = Vector3.MoveTowards(transform.position, ((Deplacement)_evenementActuel).Destination, Time.deltaTime * 5);
+            //    _deplacementPattern = new Vector2(x, y);
+            //    dec = true;
+            //}
+
+             transform.position = Vector3.MoveTowards(transform.position, ((Deplacement)_evenementActuel).Destination, Time.deltaTime * 5);
         }
 
         public void Teleporter(int id, float x, float y)
@@ -416,6 +381,23 @@ namespace Mysterole
                     _evenementActuel = e;
                     return true;
                 }
+            }
+
+            return false;
+        }
+
+        public bool ActualiserEvenementCinematique(int id, int compteur)
+        {
+            int lcompteur = 0;
+            foreach (Evenement e in _evenementsCinematiques)
+            {
+                if(e.IdEtape == id && lcompteur == compteur)
+                {
+                    _evenementActuel = e;
+                    return true;
+                }
+
+                compteur++;
             }
 
             return false;

@@ -341,7 +341,7 @@ public class GestionCombat : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		RenderSettings.fog = true;
+		
 		GetComponent<AudioSource> ().clip = Resources.Load ("Music/foretCombat") as AudioClip;
 		GetComponent<AudioSource> ().Play ();
 

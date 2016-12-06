@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Gestionnaire des transitions
+// Auteur : Jean-Michel Beauvais
+// Système gérant le fondu lors des transitions.
+
+using UnityEngine;
 using System.Collections;
 using System;
 using UnityEngine.UI;

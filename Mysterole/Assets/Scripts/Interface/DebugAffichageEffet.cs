@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿// Programme : Menu de débogage : Affichage d'un effet
+// Auteur : Jean-Michel Beauvais
+// Gère l'affichage et l'actualisation d'un seul effet dans une liste pour une compétence ou un état.
+
+using UnityEngine;
 using System.Collections;
 using System;
 using Mysterole;

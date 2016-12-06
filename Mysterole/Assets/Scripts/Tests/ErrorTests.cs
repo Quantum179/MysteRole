@@ -1,4 +1,7 @@
-﻿// Auteur : Jean-Michel
+﻿// Programme : Tests du logiciel
+// Auteur : Jean-Michel Beauvais
+// Scripts de tests pour le logiciel. Utilisé lorsque les menus actuels ne donnent pas les informations voulues ou pour forcer un évènement.
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;

@@ -42,11 +42,11 @@ namespace Mysterole
             get { return _cameraPos; }
         }
 
-        private Dictionary<int, Evenement> _evenementsCinematiques;
-        public Dictionary<int, Evenement> EvenementsCinematiques
-        {
-            get { return _evenementsCinematiques; }
-        }
+        //private Dictionary<int, Evenement> _evenementsCinematiques;
+        //public Dictionary<int, Evenement> EvenementsCinematiques
+        //{
+        //    get { return _evenementsCinematiques; }
+        //}
 
         private List<GameObject> _acteurs;
         public List<GameObject> Acteurs
@@ -71,6 +71,9 @@ namespace Mysterole
 
         private float timer;
         private bool dialogueEnCours = false;
+        private int compteur = 0;
+        int compteurp = 0;
+        int compteurj = 0;
 
 
         private GameObject _carteReliee;
@@ -97,95 +100,95 @@ namespace Mysterole
             _cinematiqueReliee = idc;
             _etat = MethodesEnum.TrouverEtatEtape(ee);
             _carteReliee = c;
+            Debug.Log(_carteReliee);
             _position = p;
             _positionJoueur = pos;
 
             _acteurs = new List<GameObject>();
             _aDetruire = new List<GameObject>();
 
-            _evenementsCinematiques = AccesBD.TrouverEvenementsCinematiques(this);
+            //_evenementsCinematiques = AccesBD.TrouverEvenementsCinematiques(this);
         }
 
         //Méthode pour déclencher les événements des acteurs
         public void DeclencherEtape()
         {
-            if (estActif)
-                return;
-            estActif = true;
-            GestionMonde.CarteActive = _carteReliee;
             RecupererActeurs();
             PlacerActeurs();
             _etat = EtatEtape.EnCours;
+            bool firstocc = true;
 
             foreach (GameObject a in _acteurs)
             {
-                if (a == JoueurMonde.Moi)
+                Debug.Log(a.gameObject.name);
+
+
+                if (firstocc)
+                {
+                    CameraMonde.ActeurPrincipal = a;
+                    firstocc = false;
+                }
+
+                if (a == JoueurMonde.Moi.gameObject)
+                {
+                    JoueurMonde.ActualiserEvenementCinematique(_id, compteurj);
                     JoueurMonde.FaitCinematique = true;
+                    compteurj++;
+                }
                 else
                 {
                     Pnj p = a.GetComponent<Pnj>();
+                    p.ActualiserEvenementCinematique(_id, compteurp);
                     p.Etat = EtatPnj.Cinematique;
+                    compteurp++;
                 }
             }
         }
 
-        //Méthode pour vérifier si tous les acteurs ont fini leur événement
+        //Méthode pour vérifier si tous les acteurs ont fini leurs événements
         public void VerifierEtape()
         {
             bool estFinie = true;
+            //compteur = 0;
 
-
-            Dictionary<int, Evenement>.Enumerator enumEvent = _evenementsCinematiques.GetEnumerator();
-
-            while (enumEvent.MoveNext())
+            foreach (GameObject a in _acteurs)
             {
-                if (enumEvent.Current.Value.Etat == EtatEvenement.Fini)
-                    continue;
-
-                switch (enumEvent.Current.Value.Etat)
+                if(a == JoueurMonde.Moi.gameObject)
                 {
-                    case EtatEvenement.EnAttente:
-
-                        foreach (GameObject p in _acteurs)
-                        {
-                            if(p == JoueurMonde.Moi)
-                            {
-                                enumEvent.Current.Value.DeclencherEvenement(JoueurMonde.Moi.GetComponent<JoueurMonde>());
-                                CameraMonde.ActeurPrincipal = p;
-
-                            }
+                    switch (JoueurMonde.EvenementActuel.Etat)
+                    {
+                        case EtatEvenement.EnAttente:
+                            estFinie = false;
+                            break;
+                        case EtatEvenement.EnCours:
+                            estFinie = false;
+                            break;
+                        case EtatEvenement.Fini:
+                            if (!JoueurMonde.ActualiserEvenementCinematique(_id, compteurj))
+                                estFinie = true;
                             else
-                            {
-                                if(p.GetComponent<Pnj>().ID == enumEvent.Current.Key)
-                                {
-                                    enumEvent.Current.Value.DeclencherEvenement(p.GetComponent<Pnj>());
-                                    CameraMonde.ActeurPrincipal = p;
-                                }
-                            }
-                        }
-
-                        if (enumEvent.Current.Value.Type == TypeEvenement.Dialogue)
-                            dialogueEnCours = true;
-
-                        break;
-                    case EtatEvenement.EnCours:
-                        if (dialogueEnCours)
-                        {
-                            enumEvent.Current.Value.Decompte -= Time.deltaTime;
-
-
-                            if (enumEvent.Current.Value.Decompte < 0)
-                            {
-                                EcranDialogue.FermerDialogue();
-                                dialogueEnCours = false;
-                                enumEvent.Current.Value.Etat = EtatEvenement.Fini;
-                            }
-                        }
-                        break;
+                                compteurj++;
+                            break;
+                        default:
+                            break;
+                    }
                 }
-
-                estFinie = false;
-                break;
+                else
+                {
+                    switch (a.GetComponent<Pnj>().EvenementActuel.Etat)
+                    {
+                        case EtatEvenement.EnAttente:
+                            estFinie = false;
+                            break;
+                        case EtatEvenement.EnCours:
+                            estFinie = false;
+                            break;
+                        case EtatEvenement.Fini:
+                            if (!a.GetComponent<Pnj>().ActualiserEvenementCinematique(_id, compteurp))
+                                estFinie = true;
+                            break;
+                    }
+                }
             }
 
             if (estFinie)
@@ -203,36 +206,21 @@ namespace Mysterole
         //Méthode pour récupérer les acteurs de l'étape
         public void RecupererActeurs()
         {
-            GameObject a;
-
-            foreach (int id in _evenementsCinematiques.Keys)
-            {
-                if (id == 0)
-                    a = JoueurMonde.Moi.gameObject;
-                else
-                {
-                    a = GestionMonde.TrouverPnj(id);
-
-                    if (a == null)
-                    {
-                        a = AccesBD.TrouverActeur(id);
-                        _aDetruire.Add(a);
-                    }
-                }
-
-                _acteurs.Add(a);
-            }
+            _acteurs = GestionMonde.TrouverActeurs(_id);
         }
 
         //Méthode pour placer les acteurs de l'étape
         public void PlacerActeurs()
         {
+            Debug.Log("hotfixcinéma");
+
             foreach (GameObject a in _acteurs)
             {
                 if (a == JoueurMonde.Moi.gameObject)
                 {
                     JoueurMonde.Coor = new Vector2(JoueurMonde.Moi.transform.position.x, JoueurMonde.Moi.transform.position.y);
                     JoueurMonde.Moi.transform.position = _positionJoueur;
+                    Debug.Log(JoueurMonde.Moi.gameObject.transform.position);
                 }
                 else
                 {
@@ -240,6 +228,8 @@ namespace Mysterole
                     a.transform.position = AccesBD.TrouverPositionActeur(a.GetComponent<Pnj>().ID, _id);
                 }
             }
+
+
         }
 
         //Méthode pour détruire les acteurs temporaires

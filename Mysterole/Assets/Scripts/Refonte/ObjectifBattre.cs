@@ -25,7 +25,8 @@ namespace Mysterole
 
         public override bool ValiderObjectif()
         {
-            return false;
+            _estValide = true;
+            return true;
         }
     }
 }

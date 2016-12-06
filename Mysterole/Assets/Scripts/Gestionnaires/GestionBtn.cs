@@ -11,11 +11,6 @@ public class GestionBtn : MonoBehaviour
     public Selectable MenuCr;
     public Selectable MenuO;
     public Selectable MenuCh;
-    public Toggle Son;
-    public Toggle debogage;
-    public Toggle PleinEcran;
-    public Dropdown Res;
-
 
     private string NavPos;
     private string Nom;
@@ -76,70 +71,7 @@ public class GestionBtn : MonoBehaviour
         MenuO.Select();
     }
 
-    public void Son_toggle()
-    {
-        if(Son.isOn == true)
-        {
-            AudioListener.volume = 1f ;
-            Debug.Log("son Actif");
-            DonneesJeu.Options.Muet = false;
-        }
-        else
-        {
-            AudioListener.volume = 0f;
-            Debug.Log("son désactivé");
-            DonneesJeu.Options.Muet = true;
-        }
-    }
-
-    public void Debug_toggle()
-    {
-        if(debogage.isOn == true)
-        {
-            DonneesJeu.Options.Debogage = true;
-            Debug.Log("débogage actif");
-        }
-        else
-        {
-            DonneesJeu.Options.Debogage = false;
-            Debug.Log("débogage inactif");
-        }
-    }
-
-    public void PleinEcran_toggle()
-    {
-        if(PleinEcran.isOn == true)
-        {
-            DonneesJeu.Options.PleinEcran = true;
-            Debug.Log("FS");
-            ChangerResolution();
-        }
-        else
-        {
-            DonneesJeu.Options.PleinEcran = false;
-            Debug.Log("NO FS");
-            ChangerResolution();
-        }
-    }
-
-    public void ChangerResolution()
-    {
-        Debug.Log(Res.value);
-        switch (Res.value)
-        {
-            case 0:
-                Screen.SetResolution(640, 480, DonneesJeu.Options.PleinEcran);
-                Debug.Log("res 640x480" + DonneesJeu.Options.PleinEcran);
-                break;
-            case 1:
-                Screen.SetResolution(1280, 720, DonneesJeu.Options.PleinEcran);
-                break;
-            case 2:
-                Screen.SetResolution(1920, 1080, DonneesJeu.Options.PleinEcran);
-                break;
-        }
-    }
-
+    
     public void QuitterBtn()
     {
         Application.Quit();

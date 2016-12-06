@@ -290,6 +290,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000011333094414
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013275481842}
+  - 65: {fileID: 65000014141799756}
+  - 114: {fileID: 114000011615718016}
+  m_Layer: 0
+  m_Name: east_ex
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011392377406
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +430,21 @@ GameObject:
   - 4: {fileID: 4000012519875208}
   m_Layer: 0
   m_Name: decors_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000012335037828
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013519996684}
+  m_Layer: 0
+  m_Name: east_arr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,7 +679,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010065170230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: -150, z: 0}
+  m_LocalPosition: {x: 85.73373, y: -268.97412, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -754,6 +786,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012434743040}
+  - {fileID: 4000013519996684}
   m_Father: {fileID: 4000011684438654}
   m_RootOrder: 9
 --- !u!4 &4000012519875208
@@ -782,6 +815,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012044846564}
+  - {fileID: 4000013275481842}
   m_Father: {fileID: 4000011684438654}
   m_RootOrder: 8
 --- !u!4 &4000012729661934
@@ -811,6 +845,32 @@ Transform:
   - {fileID: 4000011859911794}
   m_Father: {fileID: 4000011684438654}
   m_RootOrder: 0
+--- !u!4 &4000013275481842
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011333094414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 49.39, y: -18.83, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012713079550}
+  m_RootOrder: 1
+--- !u!4 &4000013519996684
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012335037828}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 44.2, y: -25.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012464117196}
+  m_RootOrder: 1
 --- !u!4 &4000013564106386
 Transform:
   m_ObjectHideFlags: 1
@@ -3302,6 +3362,18 @@ BoxCollider2D:
   m_Offset: {x: 5.0273333, y: -0.0000017881393}
   serializedVersion: 2
   m_Size: {x: 11.054714, y: 1}
+--- !u!65 &65000014141799756
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011333094414}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 13.853298, z: 1}
+  m_Center: {x: 0, y: -6.4266224, z: 0}
 --- !u!114 &114000010474547992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3443,6 +3515,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialOpacity: 1
+--- !u!114 &114000011615718016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011333094414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc07e495b1981e47ad9ebc59475283a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warpTarget: {fileID: 0}
+  perso: {fileID: 0}
 --- !u!114 &114000011639201212
 MonoBehaviour:
   m_ObjectHideFlags: 1
