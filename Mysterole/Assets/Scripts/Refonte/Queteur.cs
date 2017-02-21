@@ -14,18 +14,6 @@ namespace Mysterole
             private set { }
         }
 
-        //private Dictionary<Quete, List<Objectif>> _evenementsQuete;
-        //public Dictionary<Quete, List<Objectif>> EvenementsQuete
-        //{
-        //    get { return _evenementsQuete; }
-        //}
-
-        
-        //private Dictionary<string, Dictionary<int, List<Evenement>>> _evenementsQuete;
-
-        //private string _indexQuete = "";
-        //private int _indexQueteList = 0;
-        //private int _indexQueteEvent = 0;
         private bool _queteEnCours = false;
         private bool _peutQuete = false;
 
@@ -39,11 +27,6 @@ namespace Mysterole
 
 
 
-        //public Dictionary<string, Dictionary<int, List<Evenement>>> EvenementsQuete
-        //{
-        //    get { return _evenementsQuete; }
-        //    private set { _evenementsQuete = value; }
-        //}
 
 
 
@@ -51,11 +34,6 @@ namespace Mysterole
         {
             base.Awake();
             _quetes = new List<Quete>();
-            //_evenementsQuete = new Dictionary<Quete, List<Objectif>>();
-            //_evenementsQuete = new Dictionary<string, Dictionary<int, List<Evenement>>>();
-            //_etat = EtatPnj.Pattern;
-            //_seDeplace = true;
-
         }
 
 
@@ -202,10 +180,6 @@ namespace Mysterole
             int _compteur = 0;
             foreach(Quete q in _quetes)
             {
-                //Debug.Log(_quetes.Count);
-                //Debug.Log(q.Nom + q.Etat);
-                //Debug.Log(_etat);
-                //compteur++;
                 if (_etat == EtatPnj.Quete)
                     break;
 
@@ -220,7 +194,6 @@ namespace Mysterole
                     _queteEnCours = true;
                     EcranNotification.NouvelleNotification(q);
 
-                    //Debug.Log("test debutquete : " + q.Nom);
                     //TODO : gérer les événements à l'activation
                     _indexQuete = q.ID;
                     _indexObjectif = 0;
@@ -232,33 +205,29 @@ namespace Mysterole
                     break;
                 }
 
-                Debug.Log("pasdebut" + q.Nom);
                 //Validation de l'avanceée de la quête
                 if (q.Etat == EtatQuete.EnCours)
                 {
-                    Debug.Log(q.Nom);
 
-                    //List<Objectif>.Enumerator enumObjectif = q.Objectifs.GetEnumerator();
+
                     int compteur = -1;
 
-                    Debug.Log("hotfixquete" + q.Nom);
                     //On vérifie si les objectifs de la quête en cours sont validés et/ou si le queteur est responsable
                     foreach(Objectif o in q.Objectifs)
                     //while (enumObjectif.MoveNext())
                     {
-                        Debug.Log(o.Description + "  :   " + _nom);
+
                         compteur++;
                         if (o.EstValide)
                             continue;
 
                         if (o.Responsable == _id)
                         {
-                            Debug.Log("ilestla" + q.Nom);
+
                             //On vérifie que tous les pré-requis sont validés
                             if (o.ValiderObjectif())
                             {
 
-                                Debug.Log("ilestla2" + q.Nom);
                                 if (!objvalide)
                                 {
                                     _indexQuete = q.ID;
@@ -275,14 +244,11 @@ namespace Mysterole
                                 }
 
                                 //TODO : Pop-up d'objectif accompli
-                                Debug.Log(q.Objectifs.Count);
-                                Debug.Log(q.ObjectifsValides);
                                 //On vérifie si tous les objectifs de la quête sont validés
                                 if (q.ObjectifsValides == q.Objectifs.Count)
                                 {
 
                                     _queteEnCours = false;
-                                    Debug.Log("jenaimarre");
                                     q.TerminerQuete();
                                     EcranNotification.NouvelleNotification(q);
                                     GestionMonde.VerifierCinematiques(o.ID);
@@ -293,14 +259,12 @@ namespace Mysterole
                                 //On vérifie si le quêteur est responsable de l'objectif suivant pour le valider en même temps
                                 if (q.Objectifs[compteur + 1].Responsable == _id)
                                 {
-                                    Debug.Log("jenaimarreconnard");
 
                                     objvalide = true;
                                     continue; //TODO : vérifier s'il ne manque rien après la validation de l'objectif
                                 }
                                 else
                                 {
-                                    Debug.Log("ilestla3" + q.Nom);
                                     //Pop-up d'objectif validé
                                     EcranNotification.NouvelleNotification(o);
                                     GestionMonde.VerifierCinematiques(o.ID);
@@ -315,8 +279,6 @@ namespace Mysterole
                                 _indexQuete = q.ID;
                                 _indexObjectif = o.ID;
                                 _indexEvenement = -1;
-                                Debug.Log("jenaimarresdsqdsqdsqdsqdsq");
-                                Debug.Log(o.Description + q.Nom);
                                 ActualiserEvenement(_indexQuete, _indexObjectif, _indexEvenement);
                                 _etat = EtatPnj.Quete;
                             }
@@ -325,7 +287,7 @@ namespace Mysterole
                         {
                             if (objvalide)
                                 break;
-                            Debug.Log("jenaimarreqsdqsdsqdsqmaaaaaarre");
+
                             _indexQuete = -1;
                             _indexObjectif = -1;
                             _indexEvenement = 0;
@@ -339,7 +301,7 @@ namespace Mysterole
 
                     objvalide = false;
                 }
-                Debug.Log("pasencours" + q.Nom);
+
 
                 occQuetes++;
                 if (_queteEnCours)
@@ -356,7 +318,6 @@ namespace Mysterole
                 _indexQuete = -0;
                 _indexObjectif = 0;
                 _indexEvenement = 0;
-                Debug.Log("jetetiens");
                 //Discussion par défaut ou discussion de quête par défaut
                 //TODO : Empecher le joueur de lancer la discussion pendant le déroulement d'un événement
 
@@ -372,8 +333,7 @@ namespace Mysterole
 
         protected override void Interagir()
         {
-            // if (_indexQuete == "")
-            //     _indexQuete == ;
+
         }
 
         void OnTriggerEnter2D(Collider2D col)
@@ -381,9 +341,6 @@ namespace Mysterole
             if(col.gameObject.name == JoueurMonde.Moi.gameObject.name)
                 GestionMonde.PnjProche = _nom;
 
-
-            Debug.Log(GestionMonde.PnjProche);
-            //Debug.Log(transform.position);
         }
 
 
@@ -394,7 +351,7 @@ namespace Mysterole
                 _peutQuete = true;
                 GestionMonde.PnjProche = _nom;
             }
-            //Debug.Log("testtestest" + _nom + transform.position);
+
 
             //TODO : Faire une logique pour déclencher le base.Interagir() si toutes les quêtes sont terminées
 
@@ -407,30 +364,9 @@ namespace Mysterole
                 _peutQuete = false;
                 GestionMonde.PnjProche = "";
             }
-            Debug.Log(GestionMonde.PnjProche);
+
 
         }
-        //public void DeclencherEvenementsQuete()
-        //{
-        //    List<Evenement>.Enumerator enumEventQuete = _evenements[TypeEvenement.Quete].GetEnumerator();
-
-        //    enumEventQuete.MoveNext();
-
-
-
-
-
-
-        //    //TODO : gérer les événements à l'activation*
-
-
-        //    //ELSE : Evenements par défaut
-
-
-
-        //}
-
-
     }
 }
 
