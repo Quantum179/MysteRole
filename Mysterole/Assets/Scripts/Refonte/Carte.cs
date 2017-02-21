@@ -74,43 +74,17 @@ namespace Mysterole {
             _estHostile = bool.Parse(li[1].ToString());
 
             _cartePrefab = gameObject.GetComponent<TiledMap>();
-
-
-
-
-            //_pnjs = new List<GameObject>();
-            //_equipeMonstres = new List<Equipe>();
         }
 
         void Start()
         {
-            //Réflechir sur Awake et Start 
             _nom = gameObject.name;
-
-
-            //if (_nom == "carte00")
-            //{
-            //    GameObject unPnj = Instantiate(Resources.Load("Prefab/Pnjs/Sage du village"), new Vector2(27, -27), Quaternion.identity) as GameObject;
-            //    unPnj.name = unPnj.name.Replace("(Clone)", "");
-            //    _pnjs.Add(unPnj);
-
-            //    GameObject unPnj2 = Instantiate(Resources.Load("Prefab/Pnjs/Chef milicien"), new Vector2(40, -40), Quaternion.identity) as GameObject;
-            //    unPnj2.name = unPnj2.name.Replace("(Clone)", "");
-            //    _pnjs.Add(unPnj2);
-
-            //}
-
-
-
-
-
-
         }
 
 
         private void InitialiserPnjs()
         {
-            //_pnjs.Add(new Queteur());
+
         }
 
         private void InitialiserEquipesMonstres()
