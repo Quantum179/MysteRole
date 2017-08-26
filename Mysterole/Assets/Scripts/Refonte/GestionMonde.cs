@@ -14,9 +14,8 @@ using Tiled2Unity;
  * TODO 
  * 
  *  - Remplacer tout le hardcode par des requêtes (hot fix)
- *  - Poser des questions aux profs sur les namespaces
  *  - simplifier les enumérateurs en utilisant des foreach
- *  - Demander si c'est utile de mettre une référence du parent, exemple : Quete qui connait QueteParente
+ 
 */
 
 
@@ -167,9 +166,9 @@ namespace Mysterole
         private System.Collections.IEnumerator initialiser()
         {
             yield return new WaitForEndOfFrame();
-
-            //Initialiser les cartes et les quêtes de jeu 
+            
             _cartes = AccesBD.TrouverCartes();
+            
             //Initialisation du joueur monde
             if (JoueurMonde.Coor != Vector2.zero)
             {
@@ -182,45 +181,20 @@ namespace Mysterole
                 _joueur = Instantiate(Resources.Load("Prefab/player"), new Vector2(25, -125), Quaternion.identity) as GameObject;
                 _joueur.name = _joueur.name.Replace("(Clone)", "");
             }
-
             JoueurMonde.PeutAgir = true;
-            //_carteActive = TrouverCarte(new Vector2(_joueur.transform.position.x, Joueur.transform.position.y));
 
 
             //Initialisation de la caméra principale
             _camera = Instantiate(Resources.Load("Prefab/camera"), _joueur.transform.position, Quaternion.identity) as GameObject;
             _camera.name = _camera.name.Replace("(Clone)", "");
             _camera.transform.position = _joueur.transform.position;
-            //if(DonneesJeu.)
 
-            //Initialiser les cinématiques
+
             _cinematiques = AccesBD.TrouverCinematiques();
-
-            //Initialiser les quêtes
             _quetes = AccesBD.TrouverToutesQuetes();
-
-            //Initialiser les Pnjs
             _pnjs = AccesBD.TrouverPnjs();
 
-
             _carteActive = TrouverCarte(_joueur.transform.position);
-
-
-            //Dictionary<QueteParente, List<Quete>>.Enumerator enumq = _quetes.GetEnumerator();
-
-            //while (enumq.MoveNext())
-            //{
-            //    Debug.Log(enumq.Current.Key.Nom);
-            //    foreach (Quete q in enumq.Current.Value)
-            //    {
-            //        Debug.Log(q.Nom);
-            //    }
-
-            //}
-
-
-
-
 
             initialisee = true;
         }
@@ -291,16 +265,11 @@ namespace Mysterole
                 _cinematiqueActuelle = _cinematiques[0];
                 Debug.Log(_cinematiqueActuelle.Nom);
             }
-
-            //Debug.Log(JoueurMonde.Coor);
             if (Compteur)
                 Timer -= Time.deltaTime;
-            //Debug.Log(Timer);
+
             if (initialisee)
             {
-
-                //Debug.Log(_carteActive.GetComponent<Carte>().EstHostile.ToString());
-
                 if (timer < 0 && _carteActive.GetComponent<Carte>().EstHostile && !_faitCinematique)
                 {
                     JoueurMonde.PeutAgir = false;
@@ -309,29 +278,15 @@ namespace Mysterole
                 }
             }
 
-            //if(Input.GetKeyDown(KeyCode.J))
-            //{
-            //    //AccesBD.TrouverQuetes();
-            //}
-
-
             if(_cinematiqueActuelle != null && _faitCinematique)
             {
-
                 _cinematiqueActuelle.DeclencherCinematique();
-                //Debug.Log(_cinematiqueActuelle.Etat);
-
-
-
-
 
                 switch (_cinematiqueActuelle.Etat)
                 {
                     case EtatCinematique.Bloquee:
                         break;
                     case EtatCinematique.Disponible:
-
-
                         _cinematiqueActuelle.DeclencherCinematique();
                         break;
                     case EtatCinematique.EnCours:
@@ -380,8 +335,6 @@ namespace Mysterole
 
             //TODO : Notifier le joueur que les gains ont bien été distribués
             //TODO : Gérer le débloquement de la quête suivante si existente
-
-
         }
 
         //Méthode pour vérifier si l'objectif validé était le déclencheur d'une cinématique
