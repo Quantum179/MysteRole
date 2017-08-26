@@ -91,12 +91,7 @@ namespace Mysterole
 
         public void DeclencherCinematique()
         {
-            EcranDialogue.NouveauDialogue(_nom, "Les cinématiques bug");
-
             _etat = EtatCinematique.EnCours;
-            //_etapes = AccesBD.TrouverEtapes(this);
-            //JoueurMonde.PeutAgir = false;
-            //_carte = _etapes[0].CarteReliee;
         }
 
         public void FaireCinematique()
@@ -108,42 +103,6 @@ namespace Mysterole
                 EcranDialogue.FermerDialogue();
                 TerminerCinematique();
             }
-            //Etape e = _etapes[compteur];
-            //Debug.Log(_etapes.Count);
-            //switch (e.Etat)
-            //{
-            //    case EtatEtape.EnAttente:
-            //        e.DeclencherEtape();
-            //        break;
-            //    case EtatEtape.EnCours:
-            //        e.VerifierEtape();
-            //        break;
-            //    case EtatEtape.Finie:
-            //        e.TerminerEtape();
-            //        compteur++;
-            //        if (compteur == _etapes.Count)
-            //            TerminerCinematique();
-            //        break;
-            //}
-
-            //foreach (Etape e in _etapes)
-            //{
-            //    switch (e.Etat)
-            //    {
-            //        case EtatEtape.EnAttente:
-            //            e.DeclencherEtape();
-            //            break;
-            //        case EtatEtape.EnCours:
-            //            e.VerifierEtape();
-            //            break;
-            //        case EtatEtape.Finie:
-            //            _compteur++;
-
-            //            if (_compteur == _etapes.Count)
-            //                TerminerCinematique();
-            //            break;
-            //    }
-            //}
         }
 
 
@@ -152,7 +111,6 @@ namespace Mysterole
             _etat = EtatCinematique.Terminee;
             ActualiserQuete();
             ActualiserPnjs();
-            //GestionMonde.CarteActive = _carte;
             GestionMonde.FaitCinematique = false;
             JoueurMonde.PeutAgir = true;
         }
@@ -163,6 +121,7 @@ namespace Mysterole
             if (q != null)
             {
                 q.Etat = MethodesEnum.ActualiserEtatQuete(q.Etat);
+                //refonte : q.ActualiserEtatQuete();
                 EcranNotification.NouvelleNotification(q);
             }
         }
